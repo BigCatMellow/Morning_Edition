@@ -56,6 +56,8 @@
     .source-card .label{font-family:var(--sans);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
     .source-card .source{font-family:var(--display);font-size:1.5rem;line-height:1.15;margin:4px 0}
     .source-card .meta{font-family:var(--sans);font-size:.8rem;color:var(--muted)}
+    .country-flag{display:inline-block;position:relative;margin-right:.28em;line-height:1;vertical-align:-.08em;filter:saturate(.38) grayscale(.22);opacity:.72;text-transform:none;letter-spacing:0}
+    .country-flag::after{content:"";position:absolute;inset:0;background:rgba(244,240,231,.18);pointer-events:none}
     .story-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:17px}
     .read-link,.reader-button{font-family:var(--sans);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}
     .read-link{display:inline-block;text-decoration:none;border-bottom:1px solid currentColor}
@@ -81,6 +83,7 @@
     .worth h3{font-size:1.3rem;line-height:1.18;margin:0 0 9px}
     .worth p{color:#d9d1c4;margin:0 0 10px;font-size:.96rem;line-height:1.6}
     .worth .read-link,.worth .reader-button{color:#e1b88d}
+    .worth .country-flag::after{background:rgba(28,26,23,.18)}
     .empty{max-width:720px;margin:54px auto 90px;text-align:center;padding:44px;border:1px solid var(--rule);background:var(--card);box-shadow:var(--shadow)}
     .empty h2{font-size:2.3rem;margin:0 0 10px}
     .empty p{color:var(--muted)}
@@ -198,7 +201,48 @@
       const d = new Date(value + (String(value).length === 10 ? 'T12:00:00' : ''));
       return new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric'}).format(d);
     };
-    const meta = story => [story.type, story.source, story.country, story.published_date ? shortDate(story.published_date) : null].filter(Boolean).join(' · ');
+
+    const COUNTRY_FLAGS = {
+      'united states':'🇺🇸','usa':'🇺🇸','u.s.':'🇺🇸','united kingdom':'🇬🇧','uk':'🇬🇧','england':'🇬🇧','scotland':'🇬🇧','wales':'🇬🇧',
+      'australia':'🇦🇺','canada':'🇨🇦','ireland':'🇮🇪','france':'🇫🇷','germany':'🇩🇪','spain':'🇪🇸','portugal':'🇵🇹','italy':'🇮🇹','netherlands':'🇳🇱','belgium':'🇧🇪','switzerland':'🇨🇭','austria':'🇦🇹','poland':'🇵🇱','ukraine':'🇺🇦','russia':'🇷🇺','sweden':'🇸🇪','norway':'🇳🇴','denmark':'🇩🇰','finland':'🇫🇮','iceland':'🇮🇸','greece':'🇬🇷','turkey':'🇹🇷','türkiye':'🇹🇷','czech republic':'🇨🇿','czechia':'🇨🇿','hungary':'🇭🇺','romania':'🇷🇴','serbia':'🇷🇸','croatia':'🇭🇷',
+      'china':'🇨🇳','japan':'🇯🇵','south korea':'🇰🇷','korea':'🇰🇷','taiwan':'🇹🇼','hong kong':'🇭🇰','india':'🇮🇳','pakistan':'🇵🇰','bangladesh':'🇧🇩','sri lanka':'🇱🇰','nepal':'🇳🇵','indonesia':'🇮🇩','malaysia':'🇲🇾','singapore':'🇸🇬','philippines':'🇵🇭','vietnam':'🇻🇳','thailand':'🇹🇭','myanmar':'🇲🇲','cambodia':'🇰🇭','new zealand':'🇳🇿',
+      'iran':'🇮🇷','iraq':'🇮🇶','israel':'🇮🇱','palestine':'🇵🇸','lebanon':'🇱🇧','jordan':'🇯🇴','syria':'🇸🇾','saudi arabia':'🇸🇦','united arab emirates':'🇦🇪','uae':'🇦🇪','qatar':'🇶🇦','egypt':'🇪🇬','morocco':'🇲🇦','algeria':'🇩🇿','tunisia':'🇹🇳',
+      'south africa':'🇿🇦','nigeria':'🇳🇬','kenya':'🇰🇪','ethiopia':'🇪🇹','ghana':'🇬🇭','uganda':'🇺🇬','tanzania':'🇹🇿','senegal':'🇸🇳','rwanda':'🇷🇼','sudan':'🇸🇩','democratic republic of the congo':'🇨🇩','dr congo':'🇨🇩','congo':'🇨🇩',
+      'mexico':'🇲🇽','brazil':'🇧🇷','argentina':'🇦🇷','chile':'🇨🇱','colombia':'🇨🇴','peru':'🇵🇪','venezuela':'🇻🇪','uruguay':'🇺🇾','paraguay':'🇵🇾','bolivia':'🇧🇴','ecuador':'🇪🇨','costa rica':'🇨🇷','cuba':'🇨🇺','dominican republic':'🇩🇴','jamaica':'🇯🇲','haiti':'🇭🇹'
+    };
+
+    function flagForCountry(country){
+      if (!country) return '';
+      const normalized = String(country).toLowerCase().trim();
+      const exact = COUNTRY_FLAGS[normalized];
+      if (exact) return exact;
+      const match = Object.keys(COUNTRY_FLAGS).sort((a,b)=>b.length-a.length).find(name => normalized.includes(name));
+      return match ? COUNTRY_FLAGS[match] : '';
+    }
+
+    function countryHtml(country){
+      if (!country) return '';
+      const flag = flagForCountry(country);
+      return `${flag ? `<span class="country-flag" aria-hidden="true">${flag}</span>` : ''}${esc(country)}`;
+    }
+
+    function storyMetaHtml(story){
+      const parts = [];
+      if (story.type) parts.push(esc(story.type));
+      if (story.source) parts.push(esc(story.source));
+      if (story.country) parts.push(countryHtml(story.country));
+      if (story.published_date) parts.push(esc(shortDate(story.published_date)));
+      return parts.join(' · ');
+    }
+
+    function leadMetaHtml(story){
+      const parts = [];
+      if (story.country) parts.push(countryHtml(story.country));
+      if (story.type) parts.push(esc(story.type));
+      if (story.published_date) parts.push(esc(shortDate(story.published_date)));
+      return parts.join(' · ');
+    }
+
     const sourceLink = story => story.url ? `<a class="read-link" href="${esc(story.url)}" target="_blank" rel="noopener">Read source →</a>` : '';
     const why = story => story.why_it_matters ? `<div class="why"><strong>Why it matters</strong><br>${esc(story.why_it_matters)}</div>` : '';
 
@@ -236,7 +280,7 @@
 
     function storyCard(story){
       return `<article class="story">
-        <div class="meta">${esc(meta(story))}</div>
+        <div class="meta">${storyMetaHtml(story)}</div>
         <h3>${esc(story.headline || 'Untitled')}</h3>
         ${story.summary ? `<p>${esc(story.summary)}</p>` : ''}
         ${why(story)}
@@ -246,7 +290,7 @@
 
     function worthCard(story){
       return `<article>
-        <div class="meta">${esc(meta(story))}</div>
+        <div class="meta">${storyMetaHtml(story)}</div>
         <h3>${esc(story.headline || 'Untitled')}</h3>
         ${story.summary ? `<p>${esc(story.summary)}</p>` : ''}
         ${actions(story)}
@@ -295,7 +339,7 @@
           <aside class="source-card">
             <div class="label">Source</div>
             <div class="source">${esc(lead.source || '—')}</div>
-            <div class="meta">${esc([lead.country,lead.type,lead.published_date ? shortDate(lead.published_date) : null].filter(Boolean).join(' · '))}</div>
+            <div class="meta">${leadMetaHtml(lead)}</div>
             ${actions(lead)}
           </aside>
         </section>`;
@@ -332,7 +376,7 @@
       const context = reader.context || reader.background || '';
       const watch = reader.what_to_watch || '';
       const standfirst = reader.standfirst || '';
-      let html = `<div class="reader-meta">${esc(meta(story))}</div><h1>${esc(story.headline || 'Untitled')}</h1>`;
+      let html = `<div class="reader-meta">${storyMetaHtml(story)}</div><h1>${esc(story.headline || 'Untitled')}</h1>`;
       if (standfirst) html += `<p class="reader-standfirst">${esc(standfirst)}</p>`;
       if (paragraphs.length) html += '<h2>The story</h2>' + paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
       if (context) html += `<h2>Context</h2><p>${esc(context)}</p>`;
