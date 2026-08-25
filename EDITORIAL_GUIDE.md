@@ -22,7 +22,8 @@ Foreign Affairs should receive special attention for worthwhile analysis, but th
 ## Source principles
 
 - Prefer original reporting and reputable international outlets.
-- Prefer non-U.S. sources when quality is comparable.
+- Prefer non-U.S. sources when quality is comparable, but **do not treat English-language UK, Australian, Canadian, or other Anglosphere outlets as sufficient international diversity by themselves**.
+- Deliberately search reporting produced in the country or region being covered, including reputable publications whose original language is not English.
 - Include important U.S. reporting when the story warrants it.
 - For local and small-town stories, strongly prefer the original local newspaper, public broadcaster, community outlet, or regional publication rather than a national aggregation of the story.
 - Do not repeat the same event several times unless different sources provide meaningfully different perspectives.
@@ -31,6 +32,35 @@ Foreign Affairs should receive special attention for worthwhile analysis, but th
 - Clearly label reporting, analysis, opinion, essay, research, history feature, local reporting, or other useful type.
 - Include the publication's country or region when useful for understanding perspective.
 - Include the original publication date for every story whenever it can be established reliably.
+- Record the source's original language when it is not English.
+
+## Geographic and language diversity
+
+Morning Edition should be genuinely international, not merely American news viewed through British and Australian publications.
+
+For each daily edition:
+
+- Search across **multiple geographic regions** before selecting the final stories. As a practical target, the current-news core should normally draw from at least **four regions outside the United States**, when the news supports it: Europe, East Asia, South Asia, Southeast Asia, the Middle East/North Africa, sub-Saharan Africa, Latin America/Caribbean, Oceania, and other relevant regions.
+- Aim to include at least **two strong stories sourced directly from publications whose original reporting is in a language other than English** when credible and accessible material is available. This is a discovery target, not a requirement to include weak material merely to fill a quota.
+- Avoid allowing one publication or one country of publication to dominate the edition. Normally use no more than **two stories from the same outlet in the current-news core**, and avoid letting any single publication country account for more than roughly **one quarter to one third** of the core unless an extraordinary news event clearly justifies it.
+- When covering a country or region, first look for credible **local or regional reporting** before defaulting to Reuters, AP, BBC, The Guardian, ABC Australia, or another large English-language outlet. Wire services and major international publications remain useful for verification and for stories where local sourcing is unsafe, inaccessible, unreliable, or unavailable.
+- Seek different media ecosystems, not simply different domains. Five English-language publications based in London or Sydney do not count as five meaningfully different perspectives.
+- Periodically rotate source discovery so recurring editions do not settle into the same small group of convenient publishers.
+
+Useful source ecosystems to search may include reputable national newspapers, public broadcasters, magazines, investigative organizations, scientific publications, and regional outlets in Spanish, Portuguese, French, German, Italian, Dutch, Polish, Ukrainian, Russian, Arabic, Hebrew, Persian, Turkish, Hindi and other South Asian languages, Mandarin Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Thai, and languages used across Africa and other regions. This is not a whitelist; quality, independence, relevance, and factual reliability matter more than language or country.
+
+### Translation policy
+
+Non-English reporting is welcome. Language must not be a reason to discard a strong source.
+
+- Read and synthesize the original-language article when it is accessible, translating the relevant information into clear English for Morning Edition.
+- Translate **meaning rather than sentence structure**. Headlines and summaries should sound natural in English while preserving the source's claims, uncertainty, tone, names, numbers, and distinctions.
+- Do not present a translated headline as an exact quotation unless it is actually a faithful short quotation and quotation is necessary.
+- When a story's `original_language` is not English, the interface may label it as **Translated from [language]**.
+- If an important detail is ambiguous in translation, cross-check it against another reliable source, an official document, or an authoritative English-language account before publication.
+- Machine-translated search snippets can help discover a story but should not be the sole basis for important factual claims when the underlying article can be inspected.
+- Preserve the original article URL even when Morning Edition presents an English synthesis.
+- Never infer that an outlet is independent, trustworthy, or representative merely because it is local. Apply the same source-quality checks used for English-language publications, and be especially clear when using state-controlled media or strongly partisan outlets.
 
 ## Recency and age rules
 
@@ -63,7 +93,7 @@ Long reads do **not** need to be recent unless their value depends on current ev
 
 Include **one Small & Fun News item each day when a good one can be found**.
 
-The goal is to provide a human-scale counterweight to national and international news. Look deliberately in local and regional papers, including publications outside the United States.
+The goal is to provide a human-scale counterweight to national and international news. Look deliberately in local and regional papers, including publications outside the United States and publications written in languages other than English.
 
 Good examples include:
 
@@ -128,6 +158,7 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
     "why_it_matters": "...",
     "source": "...",
     "country": "...",
+    "original_language": "English",
     "published_date": "YYYY-MM-DD",
     "url": "https://...",
     "type": "reporting",
@@ -150,6 +181,7 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
           "why_it_matters": "...",
           "source": "...",
           "country": "...",
+          "original_language": "Spanish",
           "published_date": "YYYY-MM-DD",
           "url": "https://...",
           "type": "analysis",
@@ -167,6 +199,8 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
   "worth_your_time": []
 }
 ```
+
+`original_language` should contain the publication language of the specific article, such as `English`, `Spanish`, `French`, `Arabic`, `Mandarin Chinese`, or `Japanese`. It is optional for older archived editions, but new editions should populate it whenever it can be established reliably.
 
 Recommended section IDs for the additional sections are:
 
