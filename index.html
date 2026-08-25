@@ -8,7 +8,7 @@
   <style>
     :root {
       --paper:#f4f0e7;
-      --paper-2:#ede7db;
+      --paper-2:#eeeae0ff;
       --header-surface:#fffdf8;
       --ink:#1c1a17;
       --muted:#6d665c;
@@ -136,7 +136,7 @@
     const latestPath = 'data/latest.json';
     const el = id => document.getElementById(id);
 
-    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
     const prettyDate = value => {
       if (!value) return '—';
       const d = new Date(value + (value.length === 10 ? 'T12:00:00' : ''));
