@@ -142,7 +142,12 @@
       const d = new Date(value + (value.length === 10 ? 'T12:00:00' : ''));
       return new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(d);
     };
-    const meta = story => [story.type, story.source, story.country].filter(Boolean).join(' · ');
+    const shortDate = value => {
+      if (!value) return null;
+      const d = new Date(value + (String(value).length === 10 ? 'T12:00:00' : ''));
+      return new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric'}).format(d);
+    };
+    const meta = story => [story.type, story.source, story.country, story.published_date ? shortDate(story.published_date) : null].filter(Boolean).join(' · ');
     const link = story => story.url ? `<a class="read-link" href="${esc(story.url)}" target="_blank" rel="noopener">Read source →</a>` : '';
     const why = story => story.why_it_matters ? `<div class="why"><strong>Why it matters</strong><br>${esc(story.why_it_matters)}</div>` : '';
 
@@ -174,7 +179,7 @@
           <aside class="source-card">
             <div class="label">Source</div>
             <div class="source">${esc(lead.source || '—')}</div>
-            <div class="meta">${esc([lead.country,lead.type].filter(Boolean).join(' · '))}</div>
+            <div class="meta">${esc([lead.country,lead.type,lead.published_date ? shortDate(lead.published_date) : null].filter(Boolean).join(' · '))}</div>
             ${link(lead)}
           </aside>
         </section>`;
