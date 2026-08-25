@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Morning Edition</title>
+  <rect width="128" height="128" rx="26" fill="#fffaf0"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M42 49a22 22 0 0 1 44 0" fill="#c96742" stroke="#c96742"/>
+    <path d="M64 20v8M39 29l6 6M89 29l-6 6M27 46h9M92 46h9" stroke="#c96742" stroke-width="5"/>
+    <path d="M30 57h66v42H39c-7 0-12-5-12-12V66c0-5 3-9 8-9h61" stroke="#25282b" stroke-width="7"/>
+    <path d="M39 69v22c0 5-3 8-7 8" stroke="#25282b" stroke-width="7"/>
+    <rect x="48" y="70" width="14" height="14" rx="1" fill="#25282b" stroke="none"/>
+    <path d="M70 72h16M70 79h16M70 86h16M48 91h38" stroke="#25282b" stroke-width="4"/>
+  </g>
+</svg>
