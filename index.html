@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f4f0e7">
+  <link rel="icon" href="assets/ME.svg" type="image/svg+xml">
   <title>Morning Edition</title>
   <style>
     :root {
@@ -32,7 +33,8 @@
     .brand-small{font-weight:800;letter-spacing:.13em}
     .top-actions{display:flex;align-items:center;gap:10px}
     .archive-button{border:1px solid var(--rule);background:transparent;padding:7px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem}
-    .masthead{text-align:center;padding:34px 18px 21px;margin:0 -18px;border-bottom:4px double var(--ink);background:var(--header-surface)}
+    .masthead{text-align:center;padding:26px 18px 21px;margin:0 -18px;border-bottom:4px double var(--ink);background:var(--header-surface)}
+    .masthead-mark{display:block;height:68px;width:auto;margin:0 auto 10px}
     .masthead h1{font-size:clamp(3rem,8vw,6.8rem);line-height:.82;margin:0;font-weight:700;letter-spacing:-.055em}
     .masthead .sub{font-family:var(--sans);margin-top:14px;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em}
     .datebar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:10px 0;border-bottom:1px solid var(--ink);font-family:var(--sans);font-size:.78rem}
@@ -114,7 +116,7 @@
       .datebar{grid-template-columns:1fr auto}.datebar .right{display:none}
     }
     @media(max-width:540px){
-      .shell{width:min(100% - 22px,1180px)}.masthead{padding-top:27px;margin-left:-11px;margin-right:-11px}.masthead h1{font-size:3.25rem}.lede{padding-top:24px}.lede h2{font-size:2.45rem}.worth{margin-left:-11px;margin-right:-11px;padding:28px 20px}.topbar .brand-small{display:none}.section-head{margin-left:-11px;margin-right:-11px;padding-left:14px;padding-right:14px}.section-head h2{font-size:1.72rem}
+      .shell{width:min(100% - 22px,1180px)}.masthead{padding-top:23px;margin-left:-11px;margin-right:-11px}.masthead-mark{height:58px;margin-bottom:9px}.masthead h1{font-size:3.25rem}.lede{padding-top:24px}.lede h2{font-size:2.45rem}.worth{margin-left:-11px;margin-right:-11px;padding:28px 20px}.topbar .brand-small{display:none}.section-head{margin-left:-11px;margin-right:-11px;padding-left:14px;padding-right:14px}.section-head h2{font-size:1.72rem}
       .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:34px 22px 58px}.reader-content h1{font-size:2.45rem}.reader-standfirst{font-size:1.12rem}.reader-content p{font-size:1.04rem;line-height:1.72}
     }
   </style>
@@ -130,6 +132,7 @@
 
   <main class="shell">
     <header class="masthead">
+      <img class="masthead-mark" src="assets/ME.svg" alt="" aria-hidden="true">
       <h1>Morning Edition</h1>
       <div class="sub">World affairs · science · ideas · culture · long reads</div>
     </header>
