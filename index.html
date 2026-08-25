@@ -164,7 +164,7 @@
   <section id="readerModal" class="reader-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Morning Edition Reader">
     <div class="reader-frame">
       <div class="reader-top">
-        <div class="reader-label">Morning Edition Reader</div>
+        <div class="reader-label">Morning Edition Deep Read</div>
         <button id="readerClose" class="reader-close" type="button" aria-label="Close reader">×</button>
       </div>
       <article id="readerContent" class="reader-content"></article>
@@ -193,6 +193,22 @@
     const sourceLink = story => story.url ? `<a class="read-link" href="${esc(story.url)}" target="_blank" rel="noopener">Read source →</a>` : '';
     const why = story => story.why_it_matters ? `<div class="why"><strong>Why it matters</strong><br>${esc(story.why_it_matters)}</div>` : '';
 
+    function readerParagraphs(reader){
+      if (!reader) return [];
+      if (Array.isArray(reader.body)) return reader.body.filter(Boolean);
+      if (typeof reader.body === 'string' && reader.body.trim()) return reader.body.split(/\n\s*\n/).filter(Boolean);
+      if (Array.isArray(reader.paragraphs)) return reader.paragraphs.filter(Boolean);
+      return [];
+    }
+
+    function hasExpandedReader(story){
+      if (!story || !story.reader) return false;
+      const reader = story.reader;
+      const paragraphs = readerParagraphs(reader);
+      const keyPoints = Array.isArray(reader.key_points) ? reader.key_points.filter(Boolean) : [];
+      return paragraphs.length >= 2 || Boolean(reader.context || reader.background || reader.what_to_watch || keyPoints.length >= 2);
+    }
+
     function registerReader(story){
       const id = `reader-${++readerCounter}`;
       readerStories.set(id, story);
@@ -200,8 +216,13 @@
     }
 
     function actions(story){
-      const id = registerReader(story);
-      return `<div class="story-actions"><button class="reader-button" type="button" data-reader-id="${id}">Continue reading</button>${sourceLink(story)}</div>`;
+      const parts = [];
+      if (hasExpandedReader(story)) {
+        const id = registerReader(story);
+        parts.push(`<button class="reader-button" type="button" data-reader-id="${id}">Continue reading</button>`);
+      }
+      if (story.url) parts.push(sourceLink(story));
+      return parts.length ? `<div class="story-actions">${parts.join('')}</div>` : '';
     }
 
     function storyCard(story){
@@ -221,6 +242,28 @@
         ${story.summary ? `<p>${esc(story.summary)}</p>` : ''}
         ${actions(story)}
       </article>`;
+    }
+
+    function applyReaderPack(edition, pack){
+      const readers = pack && pack.readers ? pack.readers : {};
+      const apply = story => {
+        if (!story || hasExpandedReader(story) || !story.url) return;
+        if (readers[story.url]) story.reader = readers[story.url];
+      };
+      apply(edition.lead_story);
+      for (const section of (edition.sections || [])) for (const story of (section.items || [])) apply(story);
+      for (const story of (edition.worth_your_time || [])) apply(story);
+      return edition;
+    }
+
+    async function attachReaderPack(edition){
+      if (!edition || !edition.date) return edition;
+      try {
+        const pack = await loadJson(`data/readers/${edition.date}.json`);
+        return applyReaderPack(edition, pack);
+      } catch {
+        return edition;
+      }
     }
 
     function render(edition){
@@ -269,40 +312,24 @@
       window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    function readerParagraphs(reader){
-      if (!reader) return [];
-      if (Array.isArray(reader.body)) return reader.body.filter(Boolean);
-      if (typeof reader.body === 'string' && reader.body.trim()) return reader.body.split(/\n\s*\n/).filter(Boolean);
-      if (Array.isArray(reader.paragraphs)) return reader.paragraphs.filter(Boolean);
-      return [];
-    }
-
     function openReader(story){
-      const reader = story.reader || {};
+      if (!hasExpandedReader(story)) return;
+      const reader = story.reader;
       const paragraphs = readerParagraphs(reader);
       const keyPoints = Array.isArray(reader.key_points) ? reader.key_points.filter(Boolean) : [];
       const context = reader.context || reader.background || '';
       const watch = reader.what_to_watch || '';
-      const hasExpandedReader = Boolean(paragraphs.length || context || keyPoints.length || watch);
-      const standfirst = reader.standfirst || (hasExpandedReader ? (story.summary || '') : '');
+      const standfirst = reader.standfirst || '';
       let html = `<div class="reader-meta">${esc(meta(story))}</div><h1>${esc(story.headline || 'Untitled')}</h1>`;
       if (standfirst) html += `<p class="reader-standfirst">${esc(standfirst)}</p>`;
-
-      if (paragraphs.length) {
-        html += '<h2>The story</h2>' + paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
-      } else if (story.summary) {
-        html += `<h2>The story</h2><p>${esc(story.summary)}</p>`;
-      }
-
+      if (paragraphs.length) html += '<h2>The story</h2>' + paragraphs.map(p => `<p>${esc(p)}</p>`).join('');
       if (context) html += `<h2>Context</h2><p>${esc(context)}</p>`;
       if (keyPoints.length) html += `<h2>Key points</h2><ul>${keyPoints.map(point => `<li>${esc(point)}</li>`).join('')}</ul>`;
       if (story.why_it_matters) html += `<div class="reader-why"><h2>Why it matters</h2><p>${esc(story.why_it_matters)}</p></div>`;
       if (watch) html += `<h2>What to watch</h2><p>${esc(watch)}</p>`;
-
       html += `<div class="reader-source-box"><p><strong>${esc(story.source || 'Original source')}</strong>${story.published_date ? ` · ${esc(shortDate(story.published_date))}` : ''}</p>`;
-      if (story.url) html += `<a href="${esc(story.url)}" target="_blank" rel="noopener">Open original article →</a><p class="reader-note">Opening the original article leaves Morning Edition and connects your browser to the publisher's site. This clean reader does not load the publisher page.</p>`;
+      if (story.url) html += `<a href="${esc(story.url)}" target="_blank" rel="noopener">Open original article →</a><p class="reader-note">This is a Morning Edition synthesis, not a copy of the source article. Opening the original article leaves Morning Edition and connects your browser to the publisher's site.</p>`;
       html += '</div>';
-
       el('readerContent').innerHTML = html;
       el('readerModal').classList.add('open');
       el('readerBackdrop').classList.add('open');
@@ -334,6 +361,7 @@
     async function loadLatest(){
       try {
         const edition = await loadJson(latestPath);
+        await attachReaderPack(edition);
         render(edition);
       } catch (err) {
         el('status').textContent = 'First edition not published yet';
@@ -353,8 +381,12 @@
           return `<button class="archive-item" data-path="data/archive/${esc(file.name)}"><strong>${esc(prettyDate(date))}</strong><span>${esc(date)}</span></button>`;
         }).join('');
         list.querySelectorAll('.archive-item').forEach(btn => btn.addEventListener('click', async () => {
-          try { render(await loadJson(btn.dataset.path)); closeArchive(); }
-          catch { alert('That edition could not be loaded.'); }
+          try {
+            const edition = await loadJson(btn.dataset.path);
+            await attachReaderPack(edition);
+            render(edition);
+            closeArchive();
+          } catch { alert('That edition could not be loaded.'); }
         }));
       } catch {
         list.innerHTML = '<p class="status">No archived editions yet. They will appear here automatically after publication.</p>';
