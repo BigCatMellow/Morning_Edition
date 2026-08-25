@@ -2,6 +2,7 @@
   const ENDPOINT = 'https://wesrdkorcqheijqkcqfv.supabase.co/functions/v1/morning-edition-subscribe';
 
   const css = `
+    footer{flex-wrap:wrap;align-items:center}
     .subscribe-button{border:1px solid var(--rule);background:transparent;color:var(--ink);padding:8px 12px;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem;font-weight:700}
     .subscribe-button:hover{border-color:var(--ink)}
     .subscribe-backdrop{position:fixed;inset:0;background:rgba(27,23,19,.56);opacity:0;pointer-events:none;transition:opacity .18s;z-index:60}
@@ -23,7 +24,7 @@
     .subscribe-message{min-height:1.4em;margin-top:13px!important;font-size:.87rem!important;color:var(--muted)!important}
     .subscribe-message.error{color:var(--accent)!important}
     .subscribe-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
-    @media(max-width:540px){.subscribe-card{padding:24px 20px}.subscribe-head h2{font-size:1.8rem}footer{align-items:center}.subscribe-button{padding:8px 10px}}
+    @media(max-width:540px){.subscribe-card{padding:24px 20px}.subscribe-head h2{font-size:1.8rem}.subscribe-button{padding:8px 10px}}
   `;
 
   const style = document.createElement('style');
