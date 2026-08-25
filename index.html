@@ -125,7 +125,7 @@
       .datebar{grid-template-columns:1fr auto}.datebar .right{display:none}
     }
     @media(max-width:540px){
-      .shell{width:min(100% - 22px,1180px)}.masthead{padding-top:18px;margin-left:-11px;margin-right:-11px}.masthead-title{gap:12px;font-size:3.25rem;align-items:flex-end}.masthead-mark{height:1.4em;margin-bottom:.01em}.masthead h1{font-size:1em}.lede{padding-top:24px}.lede h2{font-size:2.35rem;line-height:1.02}.lede-summary{font-size:1.05rem}.worth{margin-left:-11px;margin-right:-11px;padding:28px 20px}.topbar .brand-small{display:none}.section-head{margin-left:-11px;margin-right:-11px;padding-left:14px;padding-right:14px}.section-head h2{font-size:1.72rem}.story h3{font-size:1.38rem}.story p{font-size:1rem;line-height:1.65}
+      .shell{width:min(100% - 22px,1180px)}.masthead{padding-top:18px;margin-left:-11px;margin-right:-11px}.masthead-title{gap:16px;font-size:3.05rem;align-items:center;justify-content:center}.masthead-mark{height:2.1em;margin-bottom:0}.masthead h1{font-size:1em;text-align:center}.lede{padding-top:24px}.lede h2{font-size:2.35rem;line-height:1.02}.lede-summary{font-size:1.05rem}.worth{margin-left:-11px;margin-right:-11px;padding:28px 20px}.topbar .brand-small{display:none}.section-head{margin-left:-11px;margin-right:-11px;padding-left:14px;padding-right:14px}.section-head h2{font-size:1.72rem}.story h3{font-size:1.38rem}.story p{font-size:1rem;line-height:1.65}
       .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:34px 22px 58px}.reader-content h1{font-size:2.35rem;line-height:1.04}.reader-standfirst{font-size:1.1rem}.reader-content p{font-size:1.05rem;line-height:1.74}
     }
   </style>
@@ -190,7 +190,7 @@
     let readerStories = new Map();
     let readerCounter = 0;
 
-    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch]));
     const prettyDate = value => {
       if (!value) return '—';
       const d = new Date(value + (value.length === 10 ? 'T12:00:00' : ''));
@@ -277,7 +277,6 @@
       if (story.url) parts.push(sourceLink(story));
       return parts.length ? `<div class="story-actions">${parts.join('')}</div>` : '';
     }
-
     function storyCard(story){
       return `<article class="story">
         <div class="meta">${storyMetaHtml(story)}</div>
