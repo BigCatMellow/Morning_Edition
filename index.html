@@ -281,9 +281,10 @@
       const reader = story.reader || {};
       const paragraphs = readerParagraphs(reader);
       const keyPoints = Array.isArray(reader.key_points) ? reader.key_points.filter(Boolean) : [];
-      const standfirst = reader.standfirst || story.summary || '';
       const context = reader.context || reader.background || '';
       const watch = reader.what_to_watch || '';
+      const hasExpandedReader = Boolean(paragraphs.length || context || keyPoints.length || watch);
+      const standfirst = reader.standfirst || (hasExpandedReader ? (story.summary || '') : '');
       let html = `<div class="reader-meta">${esc(meta(story))}</div><h1>${esc(story.headline || 'Untitled')}</h1>`;
       if (standfirst) html += `<p class="reader-standfirst">${esc(standfirst)}</p>`;
 
