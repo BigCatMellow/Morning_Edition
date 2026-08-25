@@ -76,6 +76,26 @@ Good examples include:
 
 Avoid turning serious crime, tragedy, poverty, disability, or personal misfortune into entertainment. The section should feel genuinely light, humane, funny, or pleasant rather than merely bizarre.
 
+## Internal Reader
+
+Morning Edition has a built-in **Continue Reading** reader modal. The goal is to let the reader understand a story in a clean, distraction-free format without loading the publisher's website unless they deliberately choose to open the original source.
+
+For every story, generate an optional `reader` object that gives a fuller Morning Edition treatment of the piece. This is **not** a reproduction of the original article. It should be newly written synthesis based on verified reporting and should avoid copying substantial passages from copyrighted sources.
+
+Recommended reader content:
+
+- `standfirst`: a one- or two-sentence orientation to the story;
+- `body`: 3–7 short paragraphs giving a fuller explanation than the front-page summary;
+- `context`: concise background needed to understand the event or idea;
+- `key_points`: 2–5 important facts, arguments, implications, or takeaways;
+- `what_to_watch`: what could happen next, when that is meaningful.
+
+The reader should favor clarity and synthesis over length. It may combine context from more than one verified source when useful, but the displayed source remains the primary article being recommended.
+
+Do not paste full copyrighted articles into `reader.body`. Brief quotations may be used only when genuinely useful and should remain short. Public-domain, Creative Commons, government, or otherwise explicitly reusable material may be handled more liberally when its license permits it, but Morning Edition should still prefer a concise readable synthesis by default.
+
+The original source URL remains available separately. Opening the internal reader must not require loading the publisher's page.
+
 ## Daily structure
 
 The exact mix may change with the news, but a typical edition should contain:
@@ -110,7 +130,14 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
     "country": "...",
     "published_date": "YYYY-MM-DD",
     "url": "https://...",
-    "type": "reporting"
+    "type": "reporting",
+    "reader": {
+      "standfirst": "...",
+      "body": ["Paragraph one...", "Paragraph two..."],
+      "context": "...",
+      "key_points": ["...", "..."],
+      "what_to_watch": "..."
+    }
   },
   "sections": [
     {
@@ -125,7 +152,14 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
           "country": "...",
           "published_date": "YYYY-MM-DD",
           "url": "https://...",
-          "type": "analysis"
+          "type": "analysis",
+          "reader": {
+            "standfirst": "...",
+            "body": ["..."],
+            "context": "...",
+            "key_points": ["..."],
+            "what_to_watch": "..."
+          }
         }
       ]
     }
