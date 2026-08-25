@@ -117,7 +117,7 @@
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
+        headers: {'Content-Type':'text/plain;charset=UTF-8'},
         body: JSON.stringify({ email, consent, website: form.website.value || '' })
       });
       const data = await res.json().catch(() => ({}));
