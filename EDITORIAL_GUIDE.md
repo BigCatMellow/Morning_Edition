@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Morning Edition is a personal daily newspaper designed to broaden perspective rather than reproduce a U.S.-centric headline feed.
+Morning Edition is a personal daily newspaper designed to broaden perspective rather than reproduce a U.S.-centric headline feed. It should keep the reader informed about the present while also surfacing older reporting, essays, local stories, and ideas that remain worth reading after the immediate news cycle has moved on.
 
 ## Editorial priorities
 
@@ -12,8 +12,10 @@ Morning Edition is a personal daily newspaper designed to broaden perspective ra
 4. History, culture, psychology and human behavior.
 5. Philosophy, political thought, social theory and other intellectually serious think pieces.
 6. Under-covered stories that are important or unusually revealing.
-7. Long-form journalism and essays worth reading in full.
-8. Interesting discoveries or stories that are valuable even when they are not conventionally important news.
+7. Long-form journalism and essays worth reading in full, including older evergreen work.
+8. Important or unusually interesting stories from recent weeks that may have been missed during the daily news cycle.
+9. Human-scale local reporting: funny, warm, strange, charming, community-minded, or simply interesting stories that would never become national news.
+10. Interesting discoveries or stories that are valuable even when they are not conventionally important news.
 
 Foreign Affairs should receive special attention for worthwhile analysis, but the edition should maintain a broad international source mix.
 
@@ -22,11 +24,57 @@ Foreign Affairs should receive special attention for worthwhile analysis, but th
 - Prefer original reporting and reputable international outlets.
 - Prefer non-U.S. sources when quality is comparable.
 - Include important U.S. reporting when the story warrants it.
+- For local and small-town stories, strongly prefer the original local newspaper, public broadcaster, community outlet, or regional publication rather than a national aggregation of the story.
 - Do not repeat the same event several times unless different sources provide meaningfully different perspectives.
 - Verify material claims before publication.
 - Use the real article URL, not a publication homepage or search page.
-- Clearly label reporting, analysis, opinion, essay, or research.
+- Clearly label reporting, analysis, opinion, essay, research, history feature, local reporting, or other useful type.
 - Include the publication's country or region when useful for understanding perspective.
+- Include the original publication date for every story whenever it can be established reliably.
+
+## Recency and age rules
+
+Morning Edition is not restricted to articles published today.
+
+### Current news
+
+The main World, Science & Technology, and other news sections should generally prioritize developments from the last 24–72 hours, while using older context when it materially improves understanding.
+
+### In Case You Missed It
+
+Include a dedicated **In Case You Missed It** section with 1–3 stories that remain important, revealing, or unusually interesting despite no longer being fresh headlines.
+
+- Look mainly across the previous **2–8 weeks**.
+- Stories from roughly the last **one to two months** are fully acceptable when their significance outlasted their initial news cycle.
+- Do not use this section merely to recycle famous stories that were already unavoidable. Prefer consequential stories that were easy to miss, received limited U.S. attention, or became more meaningful with hindsight.
+- Explain briefly why the story is still worth knowing now.
+
+### Worth Your Time / long reads
+
+Long reads do **not** need to be recent unless their value depends on current events.
+
+- Current-affairs analysis can come from the last several weeks or months if it remains accurate and useful.
+- Science, history, culture, psychology, technology, and institutional analysis may be several months old.
+- Philosophy, political thought, intellectual history, literary essays, and other genuinely evergreen pieces may be **a year old or substantially older** when the argument remains useful.
+- Never reject an exceptional essay solely because it is old.
+- When recommending an older piece, its publication date must be visible so the reader understands that it is an intentional archive recommendation rather than current reporting.
+
+## Small & Fun News
+
+Include **one Small & Fun News item each day when a good one can be found**.
+
+The goal is to provide a human-scale counterweight to national and international news. Look deliberately in local and regional papers, including publications outside the United States.
+
+Good examples include:
+
+- a missing sheep turning up several farms away after nearly two weeks;
+- a town recovering an unusual lost object;
+- a local volunteer, librarian, teacher, shopkeeper, farmer, or neighborhood group doing something delightful;
+- a strange but harmless civic problem;
+- an animal, weather, garden, festival, school, transport, sports, or community story that is funny or unexpectedly charming;
+- small acts of competence, generosity, persistence, or community life that are meaningful locally even though they have no national importance.
+
+Avoid turning serious crime, tragedy, poverty, disability, or personal misfortune into entertainment. The section should feel genuinely light, humane, funny, or pleasant rather than merely bizarre.
 
 ## Daily structure
 
@@ -37,10 +85,12 @@ The exact mix may change with the news, but a typical edition should contain:
 - Science & Technology
 - Culture & History
 - Ideas & Think Pieces
+- In Case You Missed It
+- Small & Fun News
 - Something I Didn't Know Yesterday
 - Worth Your Time
 
-A reasonable target is roughly 40% world affairs, 20% science/technology, 20% ideas/philosophy, 10% culture/history, and 10% unusual or unexpectedly interesting material. Quality matters more than filling quotas.
+A reasonable target for the current-news core is roughly 40% world affairs, 20% science/technology, 20% ideas/philosophy, 10% culture/history, and 10% unusual or unexpectedly interesting material. The retrospective, fun/local, and long-read sections sit alongside that core rather than needing to fit the percentages exactly. Quality matters more than filling quotas.
 
 ## JSON format
 
@@ -58,6 +108,7 @@ A reasonable target is roughly 40% world affairs, 20% science/technology, 20% id
     "why_it_matters": "...",
     "source": "...",
     "country": "...",
+    "published_date": "YYYY-MM-DD",
     "url": "https://...",
     "type": "reporting"
   },
@@ -72,6 +123,7 @@ A reasonable target is roughly 40% world affairs, 20% science/technology, 20% id
           "why_it_matters": "...",
           "source": "...",
           "country": "...",
+          "published_date": "YYYY-MM-DD",
           "url": "https://...",
           "type": "analysis"
         }
@@ -81,6 +133,12 @@ A reasonable target is roughly 40% world affairs, 20% science/technology, 20% id
   "worth_your_time": []
 }
 ```
+
+Recommended section IDs for the additional sections are:
+
+- `in-case-you-missed-it`
+- `small-fun-news`
+- `something-new`
 
 ## Repository outputs
 
