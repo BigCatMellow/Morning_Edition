@@ -2,37 +2,165 @@
 
 ## Purpose
 
-Morning Edition is a personal daily newspaper designed to broaden perspective rather than reproduce a U.S.-centric headline feed. It should keep the reader informed about the present while also surfacing older reporting, essays, local stories, and ideas that remain worth reading after the immediate news cycle has moved on.
+Morning Edition is a personal daily newspaper assembled for one thoughtful reader. It is not an RSS dump, a generic AI news summary, or a list of whatever is trending.
+
+Each edition should answer three questions:
+
+> **What happened that is worth knowing, what is worth thinking about, and what might I be glad I discovered?**
+
+The goal is a better-informed and more intellectually curious reader, not maximum news consumption. Signal matters more than volume.
+
+Morning Edition should combine consequential current events with science, history, culture, psychology, technology, ideas, long-form journalism, and deliberate discovery outside the reader's established interests.
+
+## Editorial north star
+
+A good edition should feel edited rather than accumulated.
+
+Prefer:
+
+- one excellent story over five mediocre ones;
+- original reporting over rewrites and aggregation;
+- analysis and explanation over outrage;
+- primary sources and research papers when appropriate;
+- surprising but consequential stories over viral stories;
+- strong local or regional reporting when covering another country;
+- a useful older essay over a weak article published this morning;
+- leaving a section out over filling it with filler.
+
+Avoid:
+
+- celebrity news unless it has unusual cultural or institutional significance;
+- routine political horse-race coverage;
+- outrage bait and culture-war churn;
+- trivial product announcements;
+- SEO content and press-release rewrites;
+- multiple stories that are essentially the same event;
+- generic "AI is changing everything" pieces;
+- stories selected mainly because they are popular;
+- false balance when the underlying evidence is not balanced;
+- forced conclusions when an unresolved question is more intellectually useful.
 
 ## Editorial priorities
 
-1. Major world developments that materially affect people, institutions, economies, science, or international relations.
-2. Reporting and perspectives from outside the United States whenever strong sources are available.
-3. Science, technology and AI developments with real significance rather than product-release churn.
-4. History, culture, psychology and human behavior.
-5. Philosophy, political thought, social theory and other intellectually serious think pieces.
-6. Under-covered stories that are important or unusually revealing.
-7. Long-form journalism and essays worth reading in full, including older evergreen work.
-8. Important or unusually interesting stories from recent weeks that may have been missed during the daily news cycle.
-9. Human-scale local reporting: funny, warm, strange, charming, community-minded, or simply interesting stories that would never become national news.
-10. Interesting discoveries or stories that are valuable even when they are not conventionally important news.
+Priority subjects include:
 
-Foreign Affairs should receive special attention for worthwhile analysis, but the edition should maintain a broad international source mix.
+1. World affairs, geopolitics, diplomacy, conflict, institutions, trade, migration, and international relations.
+2. U.S. news when genuinely consequential.
+3. Science and scientific research, including medicine, biology, physics, space, climate, environment, archaeology, and emerging fields.
+4. History and archaeology.
+5. Psychology and human behavior.
+6. Society, economics, institutions, demographics, education, work, and cultural change.
+7. Technology and AI, especially computing, open source, cybersecurity, infrastructure, and the internet when the development has broad significance.
+8. Philosophy, political thought, social theory, and questions worth thinking about.
+9. Books, essays, criticism, art, language, media, and intellectual culture.
+10. Interesting developments outside the normal news cycle.
+11. Exceptional long-form journalism.
+12. Strange, delightful, overlooked, or human-scale stories that add texture to the day.
+
+Foreign Affairs is especially aligned with the desired style of international analysis and deserves regular attention, but no publication should dominate the edition.
+
+Useful source ecosystems include serious newspapers and magazines, academic and research institutions, journals, public broadcasters, investigative organizations, The Conversation, Aeon, Psyche, 3 Quarks Daily, Arts & Letters Daily, MIT Technology Review, Knowable Magazine, and high-quality independent publications. This is not a whitelist.
+
+## Personalization without a filter bubble
+
+The edition should be approximately **70–80% high-confidence relevance and 20–30% intelligent exploration**.
+
+Before researching a new edition, inspect recent archived editions—normally the previous 7–14 days when available—and look for:
+
+- topics repeatedly selected;
+- sources that appear too frequently;
+- repeated story frames or events;
+- emerging interests;
+- areas that have been neglected;
+- discoveries that broadened the paper rather than merely matching known interests.
+
+Use explicit reader feedback when it exists. Do **not** pretend to know which stories the reader skipped unless actual feedback or telemetry exists. Publication history is evidence of what Morning Edition selected, not proof of what the reader liked.
+
+Avoid overfitting. A subject appearing several times may reflect an important news cycle rather than a permanent preference.
+
+## Daily research and selection process
+
+The generator should use this sequence each day.
+
+### 1. Read the recent paper before reading today's news
+
+Inspect the most recent archives and their `editorial_review` objects. Note recent topics, countries, sources, recurring frames, and long-read selections so today's edition does not unconsciously reproduce yesterday's.
+
+### 2. Research broadly before selecting narrowly
+
+Search across multiple source ecosystems and geographic regions before choosing final stories. Build a sufficiently broad candidate pool to allow real editorial choice rather than accepting the first plausible results.
+
+Search deliberately for:
+
+- consequential developments;
+- under-covered international stories;
+- original reporting from the place being covered;
+- primary research or authoritative scientific coverage;
+- serious analysis and essays;
+- older work whose value outlasts the news cycle;
+- one or more candidates outside established interests;
+- local, human-scale, or delightful reporting.
+
+### 3. Judge candidates on value, not category quotas
+
+For each serious candidate, ask:
+
+- **Consequence:** Does this materially affect people, institutions, knowledge, economies, policy, culture, or the future?
+- **Explanatory value:** Will understanding it help make sense of other events or ideas?
+- **Evidence:** Is the central claim well-supported, or is uncertainty clearly stated?
+- **Source quality:** Is this original reporting, primary research, or a strong synthesis?
+- **Novelty:** Does it add something not already represented in recent editions?
+- **Discovery value:** Might the reader be glad to have encountered this even if he would not have searched for it?
+- **Shelf life:** Is this worth knowing tomorrow, next week, or next month?
+
+A story does not need to score highly on every dimension. It should, however, have a clear reason to exist in the paper.
+
+### 4. Rank the Front Page first
+
+Choose the 3–5 stories most worth knowing today before filling subject sections. The Front Page is a ranking of importance and value, not a sampling quota.
+
+One story is the lead. The remaining 2–4 are secondary Front Page stories.
+
+Do not repeat those same story objects later merely to fill a section.
+
+### 5. Build sections only from stories that clear the bar
+
+Sections are containers, not obligations. A weak Science story should not be included merely because Science is usually present. A strong edition may have uneven section sizes or omit a section entirely.
+
+### 6. Perform an edition-level diversity check
+
+Before publication, check the paper as a whole for:
+
+- too many stories about the same event or theme;
+- excessive concentration in one country or region;
+- excessive concentration in one publication or media ecosystem;
+- too much U.S./Western-European coverage;
+- too much AI or technology relative to the rest of the world;
+- a lack of genuine discovery;
+- a lack of long-form reading;
+- an Ideas section that is actually just opinion news;
+- a paper that looks substantially identical to yesterday without a compelling news reason.
+
+### 7. Run the final quality gate
+
+Every included story should have a defensible answer to **"Why is this in Morning Edition?"**
+
+If the answer is vague, remove it.
 
 ## Source principles
 
-- Prefer original reporting and reputable international outlets.
-- Prefer non-U.S. sources when quality is comparable, but **do not treat English-language UK, Australian, Canadian, or other Anglosphere outlets as sufficient international diversity by themselves**.
-- Deliberately search reporting produced in the country or region being covered, including reputable publications whose original language is not English.
-- Include important U.S. reporting when the story warrants it.
-- For local and small-town stories, strongly prefer the original local newspaper, public broadcaster, community outlet, or regional publication rather than a national aggregation of the story.
-- Do not repeat the same event several times unless different sources provide meaningfully different perspectives.
-- Verify material claims before publication.
-- Use the real article URL, not a publication homepage or search page.
-- Clearly label reporting, analysis, opinion, essay, research, history feature, local reporting, or other useful type.
+- Every factual story must link to a real source.
+- Prefer original reporting and primary research over rewrites.
+- For major breaking stories, consult multiple reputable sources even when one source is displayed as primary.
+- Use the real article URL, not a homepage, search page, or invented link.
+- Never invent links, quotes, statistics, paper titles, dates, or article details.
+- If an important claim cannot be verified, omit it.
+- Clearly distinguish reporting, analysis, opinion, essay, research, review, history feature, local reporting, and other useful types.
 - Include the publication's country or region when useful for understanding perspective.
-- Include the original publication date for every story whenever it can be established reliably.
-- Record the source's original language when it is not English.
+- Include the original publication date whenever it can be established reliably.
+- Record the article's original language whenever it can be established reliably.
+- For scientific work, distinguish preliminary evidence, preprints, observational findings, animal studies, small trials, and stronger replicated or consensus evidence when that distinction matters.
+- Treat institutional press releases as leads to investigate, not automatically as sufficient journalism.
 
 ## Geographic and language diversity
 
@@ -40,27 +168,29 @@ Morning Edition should be genuinely international, not merely American news view
 
 For each daily edition:
 
-- Search across **multiple geographic regions** before selecting the final stories. As a practical target, the current-news core should normally draw from at least **four regions outside the United States**, when the news supports it: Europe, East Asia, South Asia, Southeast Asia, the Middle East/North Africa, sub-Saharan Africa, Latin America/Caribbean, Oceania, and other relevant regions.
-- Aim to include at least **two strong stories sourced directly from publications whose original reporting is in a language other than English** when credible and accessible material is available. This is a discovery target, not a requirement to include weak material merely to fill a quota.
-- Avoid allowing one publication or one country of publication to dominate the edition. Normally use no more than **two stories from the same outlet in the current-news core**, and avoid letting any single publication country account for more than roughly **one quarter to one third** of the core unless an extraordinary news event clearly justifies it.
-- When covering a country or region, first look for credible **local or regional reporting** before defaulting to Reuters, AP, BBC, The Guardian, ABC Australia, or another large English-language outlet. Wire services and major international publications remain useful for verification and for stories where local sourcing is unsafe, inaccessible, unreliable, or unavailable.
-- Seek different media ecosystems, not simply different domains. Five English-language publications based in London or Sydney do not count as five meaningfully different perspectives.
-- Periodically rotate source discovery so recurring editions do not settle into the same small group of convenient publishers.
+- Search across multiple geographic regions before final selection. As a practical target, the current-news core should normally draw from at least **four regions outside the United States** when the news supports it: Europe, East Asia, South Asia, Southeast Asia, the Middle East/North Africa, sub-Saharan Africa, Latin America/Caribbean, Oceania, and other relevant regions.
+- Aim to include at least **two strong stories sourced directly from publications whose original reporting is in a language other than English** when credible and accessible material exists. This is a discovery target, not a quota that justifies weak material.
+- Normally use no more than **two current-news-core stories from the same outlet**.
+- Avoid letting a single publication country account for more than roughly **one quarter to one third** of the current-news core unless an extraordinary event clearly justifies it.
+- When covering a country or region, first look for credible local or regional reporting before defaulting to Reuters, AP, BBC, The Guardian, ABC Australia, or another large English-language outlet.
+- Wire services and major international publications remain valuable for verification and for stories where local reporting is unsafe, inaccessible, unreliable, or unavailable.
+- Seek different media ecosystems, not merely different domain names.
+- Periodically rotate source discovery so the edition does not settle into a small convenience set.
 
-Useful source ecosystems to search may include reputable national newspapers, public broadcasters, magazines, investigative organizations, scientific publications, and regional outlets in Spanish, Portuguese, French, German, Italian, Dutch, Polish, Ukrainian, Russian, Arabic, Hebrew, Persian, Turkish, Hindi and other South Asian languages, Mandarin Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Thai, and languages used across Africa and other regions. This is not a whitelist; quality, independence, relevance, and factual reliability matter more than language or country.
+Useful language ecosystems may include Spanish, Portuguese, French, German, Italian, Dutch, Polish, Ukrainian, Russian, Arabic, Hebrew, Persian, Turkish, Hindi and other South Asian languages, Mandarin Chinese, Japanese, Korean, Indonesian, Malay, Vietnamese, Thai, and languages used across Africa and other regions. Quality and independence matter more than language or location.
 
 ### Translation policy
 
 Non-English reporting is welcome. Language must not be a reason to discard a strong source.
 
-- Read and synthesize the original-language article when it is accessible, translating the relevant information into clear English for Morning Edition.
-- Translate **meaning rather than sentence structure**. Headlines and summaries should sound natural in English while preserving the source's claims, uncertainty, tone, names, numbers, and distinctions.
-- Do not present a translated headline as an exact quotation unless it is actually a faithful short quotation and quotation is necessary.
-- When a story's `original_language` is not English, the interface may label it as **Translated from [language]**.
-- If an important detail is ambiguous in translation, cross-check it against another reliable source, an official document, or an authoritative English-language account before publication.
-- Machine-translated search snippets can help discover a story but should not be the sole basis for important factual claims when the underlying article can be inspected.
-- Preserve the original article URL even when Morning Edition presents an English synthesis.
-- Never infer that an outlet is independent, trustworthy, or representative merely because it is local. Apply the same source-quality checks used for English-language publications, and be especially clear when using state-controlled media or strongly partisan outlets.
+- Read and synthesize the original-language article when accessible.
+- Translate meaning rather than sentence structure.
+- Preserve names, numbers, uncertainty, distinctions, and the source's actual claims.
+- Do not present a translated headline as an exact quotation unless it truly is one.
+- Machine-translated snippets may assist discovery but should not be the sole basis for consequential claims when the underlying article can be inspected.
+- Cross-check ambiguous translations or consequential details against another reliable source, official document, or authoritative account.
+- Preserve the original article URL.
+- Do not assume a local outlet is independent or trustworthy merely because it is local. Clearly recognize state-controlled or strongly partisan sources when relevant.
 
 ## Recency and age rules
 
@@ -68,83 +198,192 @@ Morning Edition is not restricted to articles published today.
 
 ### Current news
 
-The main World, Science & Technology, and other news sections should generally prioritize developments from the last 24–72 hours, while using older context when it materially improves understanding.
+Front Page, World, Science, Society, Technology, and other current-news sections should generally prioritize developments from roughly the last **24–72 hours**, while using older context when needed.
 
 ### In Case You Missed It
 
-Include a dedicated **In Case You Missed It** section with 1–3 stories that remain important, revealing, or unusually interesting despite no longer being fresh headlines.
+An optional **In Case You Missed It** section may contain 1–3 stories that remain important, revealing, or unusually interesting despite no longer being fresh headlines.
 
 - Look mainly across the previous **2–8 weeks**.
-- Stories from roughly the last **one to two months** are fully acceptable when their significance outlasted their initial news cycle.
-- Do not use this section merely to recycle famous stories that were already unavoidable. Prefer consequential stories that were easy to miss, received limited U.S. attention, or became more meaningful with hindsight.
-- Explain briefly why the story is still worth knowing now.
+- Stories from roughly the last one to two months are acceptable when their significance outlasted the initial news cycle.
+- Prefer consequential stories that were easy to miss, received limited U.S. attention, or became more meaningful with hindsight.
+- Do not recycle unavoidable headlines merely because they are still recent.
 
-### Worth Your Time / long reads
+### The Long Read
 
-Long reads do **not** need to be recent unless their value depends on current events.
+Long reads do **not** need to be recent unless their usefulness depends on current conditions.
 
-- Current-affairs analysis can come from the last several weeks or months if it remains accurate and useful.
+- Current-affairs analysis may be weeks or months old if still accurate.
 - Science, history, culture, psychology, technology, and institutional analysis may be several months old.
-- Philosophy, political thought, intellectual history, literary essays, and other genuinely evergreen pieces may be **a year old or substantially older** when the argument remains useful.
+- Philosophy, political thought, intellectual history, literary essays, and genuinely evergreen work may be a year old or substantially older when the argument remains useful.
 - Never reject an exceptional essay solely because it is old.
-- When recommending an older piece, its publication date must be visible so the reader understands that it is an intentional archive recommendation rather than current reporting.
+- Always show the publication date so archive selections are clearly intentional.
 
-## Small & Fun News
+## Newspaper structure
 
-Include **one Small & Fun News item each day when a good one can be found**.
+The exact mix should vary with the material. Recommended sections follow.
 
-The goal is to provide a human-scale counterweight to national and international news. Look deliberately in local and regional papers, including publications outside the United States and publications written in languages other than English.
+### Front Page
 
-Good examples include:
+The **3–5 stories most worth knowing today**.
 
-- a missing sheep turning up several farms away after nearly two weeks;
-- a town recovering an unusual lost object;
-- a local volunteer, librarian, teacher, shopkeeper, farmer, or neighborhood group doing something delightful;
-- a strange but harmless civic problem;
-- an animal, weather, garden, festival, school, transport, sports, or community story that is funny or unexpectedly charming;
-- small acts of competence, generosity, persistence, or community life that are meaningful locally even though they have no national importance.
+The lead story lives in `lead_story`. The other 2–4 Front Page stories live in the optional top-level `front_page` array.
 
-Avoid turning serious crime, tragedy, poverty, disability, or personal misfortune into entertainment. The section should feel genuinely light, humane, funny, or pleasant rather than merely bizarre.
+Each should make clear:
 
-## Internal Reader
+- what happened;
+- why it matters;
+- useful context;
+- the source.
 
-Morning Edition has a built-in **Continue Reading** reader modal. The goal is to let the reader understand a story in a clean, distraction-free format without loading the publisher's website unless they deliberately choose to open the original source.
+Front Page stories should not be duplicated in later sections.
 
-For every story, generate an optional `reader` object that gives a fuller Morning Edition treatment of the piece. This is **not** a reproduction of the original article. It should be newly written synthesis based on verified reporting and should avoid copying substantial passages from copyrighted sources.
+### World
 
-Recommended reader content:
+Important international developments, including stories receiving insufficient U.S. attention. Look beyond the United States and Western Europe.
 
-- `standfirst`: a one- or two-sentence orientation to the story;
-- `body`: 3–7 short paragraphs giving a fuller explanation than the front-page summary;
-- `context`: concise background needed to understand the event or idea;
+### Science
+
+Research, discoveries, medicine, space, biology, physics, environment, archaeology, and related fields. Explain the strength and limits of evidence when relevant.
+
+### Society & Human Behavior
+
+Psychology, economics, institutions, demographics, education, work, social behavior, and cultural change.
+
+### Technology
+
+Important developments in computing, AI, open source, cybersecurity, infrastructure, and the internet. Keep this section broad and consequential; highly technical hobbyist material belongs in a separate Tech Edition rather than dominating Morning Edition.
+
+### History & Culture
+
+History, archaeology, books, art, language, media, cultural criticism, intellectual history, and useful historical parallels.
+
+### Ideas
+
+Essays, philosophical questions, intellectual debates, social theory, and serious think pieces. This section should contain ideas rather than ordinary opinion-news commentary.
+
+It may intentionally leave a question unresolved when doing so is more useful than forcing a conclusion.
+
+### The Long Read
+
+Select **1–3 exceptional pieces** worth spending real time with. Explain specifically why each deserves the reader's time rather than merely summarizing it.
+
+The data field remains `worth_your_time` for backward compatibility with existing archives and interfaces, but the editorial name is **The Long Read**.
+
+### Outside the Bubble
+
+Deliberately find something the reader probably would not have searched for himself but has a reasonable chance of finding fascinating.
+
+This is a core discovery function, not a novelty slot.
+
+Good candidates may come from:
+
+- obscure scientific fields;
+- infrastructure;
+- anthropology;
+- industrial design;
+- linguistics;
+- unusual engineering;
+- forgotten history;
+- an unfamiliar country;
+- niche art or craft;
+- an unexpected subculture;
+- a new research area.
+
+Do not confuse unexpected with random. The selection should still have intellectual substance, explanatory value, beauty, ingenuity, or human interest.
+
+Recommended section id: `outside-the-bubble`.
+
+### Small Things Worth Knowing
+
+A small number of concise discoveries: facts, tools, maps, papers, visualizations, archives, museum collections, datasets, unusual local stories, or other things that are worth encountering but do not need a full article treatment.
+
+This section may absorb the spirit of the older `Small & Fun News` and `Something I Didn't Know Yesterday` sections when that produces a cleaner edition. Those older section IDs remain valid for archived or occasional use.
+
+Recommended section id: `small-things`.
+
+### One Thing to Think About
+
+End the editorial sequence with one question, argument, paradox, historical comparison, or philosophical problem worth carrying through the day.
+
+Do not use a motivational quote.
+
+This item may be original Morning Edition framing rather than a conventional article. If it relies on factual or historical claims, cite the source material.
+
+Recommended section id: `one-thing-to-think-about`.
+
+## Internal reader
+
+Morning Edition has a built-in **Continue Reading** modal. The reader should provide a fuller Morning Edition treatment without reproducing copyrighted articles.
+
+Recommended reader fields:
+
+- `standfirst`: one or two sentences orienting the reader;
+- `body`: 3–7 short explanatory paragraphs;
+- `context`: concise background needed to understand the subject;
 - `key_points`: 2–5 important facts, arguments, implications, or takeaways;
-- `what_to_watch`: what could happen next, when that is meaningful.
+- `what_to_watch`: what could happen next when meaningful.
 
-The reader should favor clarity and synthesis over length. It may combine context from more than one verified source when useful, but the displayed source remains the primary article being recommended.
+The reader is newly written synthesis based on verified reporting. It may combine context from multiple verified sources, but the displayed source remains the primary article being recommended.
 
-Do not paste full copyrighted articles into `reader.body`. Brief quotations may be used only when genuinely useful and should remain short. Public-domain, Creative Commons, government, or otherwise explicitly reusable material may be handled more liberally when its license permits it, but Morning Edition should still prefer a concise readable synthesis by default.
+Do not paste full copyrighted articles or substantial passages into the reader. Brief quotations should be rare and short.
 
-The original source URL remains available separately. Opening the internal reader must not require loading the publisher's page.
+### Reader-pack storage
 
-## Daily structure
+The live site already supports a separate reader pack, and new editions should normally use it to keep the primary edition JSON compact.
 
-The exact mix may change with the news, but a typical edition should contain:
+Create:
 
-- The Big Story
-- World
-- Science & Technology
-- Culture & History
-- Ideas & Think Pieces
-- In Case You Missed It
-- Small & Fun News
-- Something I Didn't Know Yesterday
-- Worth Your Time
+`data/readers/YYYY-MM-DD.json`
 
-A reasonable target for the current-news core is roughly 40% world affairs, 20% science/technology, 20% ideas/philosophy, 10% culture/history, and 10% unusual or unexpectedly interesting material. The retrospective, fun/local, and long-read sections sit alongside that core rather than needing to fit the percentages exactly. Quality matters more than filling quotas.
+using this shape:
 
-## JSON format
+```json
+{
+  "date": "YYYY-MM-DD",
+  "readers": {
+    "https://original-article-url.example/story": {
+      "standfirst": "...",
+      "body": ["...", "..."],
+      "context": "...",
+      "key_points": ["...", "..."],
+      "what_to_watch": "..."
+    }
+  }
+}
+```
 
-`data/latest.json` and archived JSON editions use this shape:
+The source URL is the key. Inline `reader` objects remain valid for backward compatibility, but the separate reader pack is preferred for new editions because `index.html` automatically attaches it when available.
+
+## Story data format
+
+A standard story object may use:
+
+```json
+{
+  "headline": "...",
+  "summary": "...",
+  "why_it_matters": "...",
+  "source": "...",
+  "country": "...",
+  "original_language": "English",
+  "published_date": "YYYY-MM-DD",
+  "url": "https://...",
+  "type": "reporting",
+  "topics": ["geopolitics", "trade"],
+  "selection_lane": "core"
+}
+```
+
+`topics` is optional but useful for detecting repetition across recent editions.
+
+`selection_lane` is optional and should be either `core` or `exploration`. It exists for editorial review, not for display. Across the edition, intelligent exploration should normally account for roughly 20–30% of selections, but quality overrides arithmetic.
+
+`original_language` should contain the language of the specific article, such as `English`, `Spanish`, `French`, `Arabic`, `Mandarin Chinese`, or `Japanese`.
+
+## Edition JSON format
+
+`data/latest.json` and archived editions use this top-level structure:
 
 ```json
 {
@@ -152,61 +391,50 @@ A reasonable target for the current-news core is roughly 40% world affairs, 20% 
   "generated_at": "ISO-8601 timestamp",
   "title": "Morning Edition",
   "dek": "One-line description of today's edition.",
-  "lead_story": {
-    "headline": "...",
-    "summary": "...",
-    "why_it_matters": "...",
-    "source": "...",
-    "country": "...",
-    "original_language": "English",
-    "published_date": "YYYY-MM-DD",
-    "url": "https://...",
-    "type": "reporting",
-    "reader": {
-      "standfirst": "...",
-      "body": ["Paragraph one...", "Paragraph two..."],
-      "context": "...",
-      "key_points": ["...", "..."],
-      "what_to_watch": "..."
-    }
-  },
+  "lead_story": { "headline": "..." },
+  "front_page": [
+    { "headline": "..." },
+    { "headline": "..." }
+  ],
   "sections": [
     {
       "id": "world",
       "title": "World",
-      "items": [
-        {
-          "headline": "...",
-          "summary": "...",
-          "why_it_matters": "...",
-          "source": "...",
-          "country": "...",
-          "original_language": "Spanish",
-          "published_date": "YYYY-MM-DD",
-          "url": "https://...",
-          "type": "analysis",
-          "reader": {
-            "standfirst": "...",
-            "body": ["..."],
-            "context": "...",
-            "key_points": ["..."],
-            "what_to_watch": "..."
-          }
-        }
-      ]
+      "items": []
     }
   ],
-  "worth_your_time": []
+  "worth_your_time": [],
+  "editorial_review": {
+    "filler_check": "pass",
+    "repetition_check": "pass",
+    "geographic_check": "pass",
+    "discovery_check": "pass",
+    "long_read_check": "pass",
+    "ideas_check": "pass",
+    "difference_from_recent": "Brief note on how this edition differs from recent editions.",
+    "notes_for_next_edition": ["..."]
+  }
 }
 ```
 
-`original_language` should contain the publication language of the specific article, such as `English`, `Spanish`, `French`, `Arabic`, `Mandarin Chinese`, or `Japanese`. It is optional for older archived editions, but new editions should populate it whenever it can be established reliably.
+Unknown optional metadata fields should be ignored by the interface and email renderer.
 
-Recommended section IDs for the additional sections are:
+### Editorial review
 
-- `in-case-you-missed-it`
-- `small-fun-news`
-- `something-new`
+After assembling each edition, silently evaluate:
+
+1. Which selections were genuinely valuable?
+2. Which selections are at risk of being filler?
+3. Are too many stories about the same subject?
+4. Is geographic coverage too narrow?
+5. Does the edition contain real discovery?
+6. Is there enough worthwhile long-form material?
+7. Does Ideas contain actual ideas rather than opinion news?
+8. Does today's paper differ meaningfully from recent editions where appropriate?
+
+Persist a concise `editorial_review` in the archived edition and `latest.json`. Future runs should read recent reviews before selecting new stories.
+
+The review is an editorial process aid, not a claim about actual reader behavior.
 
 ## Repository outputs
 
@@ -214,6 +442,26 @@ Every successful daily publication should create or update:
 
 - `data/latest.json`
 - `data/archive/YYYY-MM-DD.json`
+- `data/readers/YYYY-MM-DD.json`
 - `editions/YYYY-MM-DD.md`
 
-The dated files are permanent archives. `data/latest.json` is the stable endpoint for interfaces and email delivery.
+The dated archive files are permanent. `data/latest.json` is the stable endpoint for the website and email delivery. The reader pack supplies expanded Continue Reading content.
+
+Do not overwrite an existing dated archive with a substantially different edition unless correcting a clear publication error.
+
+Only after all Morning Edition publication files are successfully written should the external email trigger be updated.
+
+## Writing style
+
+Write like an intelligent newspaper editor.
+
+- Use clear language and assume the reader may know nothing about the specific subject.
+- Explain necessary context without bloating the piece.
+- Define specialized terms when they are necessary.
+- Distinguish fact, inference, uncertainty, and argument.
+- Explain why a story matters rather than merely restating the article.
+- Avoid hype words such as `game-changing`, `groundbreaking`, `massive`, or `incredible` unless objectively warranted.
+- Keep headlines concise and informative rather than click-driven.
+- Do not manufacture urgency.
+
+The finished paper should feel calm, selective, worldly, and curious.
