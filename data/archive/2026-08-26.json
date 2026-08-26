@@ -1,0 +1,278 @@
+{
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T08:24:00-04:00",
+  "title": "Morning Edition",
+  "dek": "Syria enters a new phase after the SDF dissolves, North American trade fractures deepen, and today’s paper ranges from Afghan child nutrition to thunder-powered geology.",
+  "lead_story": {
+    "headline": "The Syrian Democratic Forces are dissolving into the Syrian state",
+    "summary": "Mazloum Abdi announced that the Syrian Democratic Forces, the Kurdish-led coalition created during the war against ISIS, will cease to exist as an independent military force and integrate into Syrian state institutions. The agreement also includes a public commitment from President Ahmed al-Sharaa to protect Kurdish-language education, while the details of political and administrative integration are still being worked out.",
+    "why_it_matters": "For more than a decade, the SDF controlled a large part of northeastern Syria and was a central U.S. partner against ISIS. Its dissolution is therefore not just a military reorganization: it is a major test of whether postwar Syria can rebuild a single state without simply erasing Kurdish political and cultural claims.",
+    "source": "Al Jazeera Arabic",
+    "country": "Qatar",
+    "original_language": "Arabic",
+    "published_date": "2026-08-25",
+    "url": "https://www.aljazeera.net/news/2026/8/25/%D8%B9%D8%A7%D8%AC%D9%84-%D9%88%D9%83%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D8%A3%D9%86%D8%A8%D8%A7%D8%A1-%D8%A7%D9%84%D8%B3%D9%88%D8%B1%D9%8A%D8%A9-%D8%B3%D8%A7%D9%86%D8%A7-%D9%85%D8%B8%D9%84%D9%88%D9%85",
+    "type": "reporting",
+    "topics": ["Syria", "Kurds", "state-building", "geopolitics"],
+    "selection_lane": "core"
+  },
+  "sections": [
+    {
+      "id": "front-page",
+      "title": "Front Page",
+      "items": [
+        {
+          "headline": "Canada is retaliating as its trade relationship with the United States deteriorates",
+          "summary": "Canada announced retaliatory tariffs of 15% to 50% on roughly $20 billion of U.S. goods after negotiations with Washington failed and the Trump administration escalated duties on Canadian products. The dispute now reaches steel, dairy, appliances, electronics and other sectors, with further U.S. tariffs on Canadian vehicles and steel scheduled for 2027.",
+          "why_it_matters": "The United States and Canada built one of the world’s deepest integrated production systems under decades of trade agreements. A prolonged tariff fight would not stay at the border: it would reorganize supply chains, raise costs inside both countries and put the future of the three-country USMCA system under greater strain.",
+          "source": "El País",
+          "country": "Spain",
+          "original_language": "Spanish",
+          "published_date": "2026-08-25",
+          "url": "https://elpais.com/internacional/2026-08-25/canada-impone-nuevos-aranceles-de-entre-el-15-y-el-50-a-estados-unidos-como-represalia-a-los-de-trump.html",
+          "type": "reporting",
+          "topics": ["Canada", "United States", "trade", "USMCA"],
+          "selection_lane": "core"
+        },
+        {
+          "headline": "Armenia says it will soon begin a formal bid to join the European Union",
+          "summary": "Prime Minister Nikol Pashinyan told parliament that Armenia expects to begin the work required for a formal EU membership application in the near future. He also said Armenia’s interest in the Russia-led CSTO security bloc has been exhausted, while Moscow and other Eurasian Economic Union members are pressing Yerevan to clarify which integration path it intends to follow.",
+          "why_it_matters": "This is a small country making a potentially large geopolitical choice. Armenia spent decades economically and militarily tied to Russia; an EU application would turn its gradual Western pivot into a formal strategic project and force harder decisions about its place in Russian-led institutions.",
+          "source": "CivilNet",
+          "country": "Armenia",
+          "original_language": "English",
+          "published_date": "2026-08-24",
+          "url": "https://civilnet.am/en/news/1013757",
+          "type": "local reporting",
+          "topics": ["Armenia", "European Union", "Russia", "Caucasus"],
+          "selection_lane": "core"
+        },
+        {
+          "headline": "Afghanistan’s child-malnutrition crisis is overwhelming hospitals",
+          "summary": "UNICEF says 3.7 million children in Afghanistan are currently suffering from acute malnutrition, including about one million with severe acute malnutrition. Nearly 40% of children admitted to hospital with severe wasting and medical complications are babies younger than six months, and children under two account for most severe cases.",
+          "why_it_matters": "The age distribution matters. Severe malnutrition in infancy can affect survival, development and lifelong health, while overloaded hospitals are a sign that a food and nutrition problem has already moved into medical emergency territory.",
+          "source": "UNICEF",
+          "country": "Afghanistan / United Nations",
+          "original_language": "English",
+          "published_date": "2026-08-25",
+          "url": "https://www.unicef.org/press-releases/hospitals-overwhelmed-child-malnutrition-surges-across-afghanistan",
+          "type": "UN field briefing",
+          "topics": ["Afghanistan", "children", "malnutrition", "public health"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "world",
+      "title": "World",
+      "items": [
+        {
+          "headline": "Zambia closed major courts as an election challenge deadline arrived",
+          "summary": "Zambia’s High Court and other judicial complexes were closed and guarded by armed police on the day opposition lawyers were trying to challenge President Hakainde Hichilema’s re-election. Authorities cited security concerns; State House denied that the president ordered the closures, while lawyers, civil-society groups and opposition figures questioned why access to the courts disappeared at such a consequential moment.",
+          "why_it_matters": "Democratic systems depend not only on elections but on credible ways to contest them. Even if the security explanation is genuine, closing the institutions that are supposed to hear an election dispute at the filing deadline creates a rule-of-law problem that cannot be solved by simply pointing to the official vote count.",
+          "source": "News Diggers!",
+          "country": "Zambia",
+          "original_language": "English",
+          "published_date": "2026-08-25",
+          "url": "https://diggers.news/courts/2026/08/25/courts-shut-down-nationwide-ahead-of-election-presidential-petition-deadline/",
+          "type": "local reporting",
+          "topics": ["Zambia", "elections", "judiciary", "democracy"],
+          "selection_lane": "core"
+        },
+        {
+          "headline": "Indonesia’s forest-fire haze is again becoming a regional problem",
+          "summary": "Indonesia’s environment ministry says it is moving toward subregional mitigation with neighboring countries as forest and peat fires continue across several provinces. Indonesian reporting says smoke has crossed provincial and national borders, while Malaysia has offered assistance and ASEAN’s transboundary-haze framework is being used for coordination.",
+          "why_it_matters": "Southeast Asia’s haze crises are a reminder that environmental governance does not respect borders. Fires tied to peat, land clearing, drought and agricultural practices can become a public-health and diplomatic problem for several countries at once, especially during a strong El Niño cycle.",
+          "source": "ANTARA",
+          "country": "Indonesia",
+          "original_language": "Indonesian",
+          "published_date": "2026-08-26",
+          "url": "https://www.antaranews.com/berita/5711380/klh-sebut-akan-ada-langkah-mitigasi-karhutla-secara-subregional",
+          "type": "local reporting",
+          "topics": ["Indonesia", "wildfires", "haze", "ASEAN", "climate"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "science",
+      "title": "Science",
+      "items": [
+        {
+          "headline": "A detailed human-brain atlas finds neurogenesis appears to stall in major depression",
+          "summary": "Researchers mapped nearly 500,000 cell nuclei from adult human hippocampi and found evidence of a neurogenic lineage—the sequence by which new neurons develop—in both people with and without major depressive disorder. In the depression samples, that developmental process appeared disrupted or stalled alongside changes involving stress responses, inflammation and neural plasticity.",
+          "why_it_matters": "The study adds unusually detailed human evidence to a long-running debate over whether adults continue making hippocampal neurons and how that process might relate to depression. But it is a postmortem observational study: it does not show that impaired neurogenesis causes depression, nor that simply increasing neuron production would treat it.",
+          "source": "Nature",
+          "country": "United Kingdom",
+          "original_language": "English",
+          "published_date": "2026-08-25",
+          "url": "https://www.nature.com/articles/d41586-026-02661-8",
+          "type": "science reporting",
+          "topics": ["depression", "neuroscience", "neurogenesis", "mental health"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "society-human-behavior",
+      "title": "Society & Human Behavior",
+      "items": [
+        {
+          "headline": "China is confronting what happens when AI companionship becomes ordinary",
+          "summary": "A Guardian report from China describes users who have built emotionally meaningful relationships with conversational AI as regulators tighten rules around anthropomorphic AI services. The restrictions reflect concern about minors, addiction and emotional dependence, but they also arrive in a society where loneliness, delayed marriage and falling birth rates are already major policy concerns.",
+          "why_it_matters": "AI companionship is often discussed as a software feature. The more consequential question is social: if people begin using machines for reassurance, intimacy and emotional regulation at scale, governments and designers will have to decide when a useful tool becomes a substitute relationship—and who is responsible for the dependency it can create.",
+          "source": "The Guardian",
+          "country": "United Kingdom",
+          "original_language": "English",
+          "published_date": "2026-08-26",
+          "url": "https://www.theguardian.com/world/2026/aug/26/china-ai-companion-relationships-marriage-birth-rate-concern",
+          "type": "reporting / social feature",
+          "topics": ["China", "AI companions", "loneliness", "relationships", "regulation"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "history-culture",
+      "title": "History & Culture",
+      "items": [
+        {
+          "headline": "Archaeologists found a 450-year-old sailors’ hospital beneath a Lima sanctuary",
+          "summary": "Excavations beneath the Sanctuary of Santa Rosa de Lima have uncovered remains of the Church and Hospital of the Holy Spirit, founded in 1575 to serve sailors, pilots and other workers connected to the port. Archaeologists have identified walls, burials, later Valencian tiles and a stone floor decorated with a six-petaled flower.",
+          "why_it_matters": "The find gives physical form to an early urban institution that combined religion, health care and maritime labor. It also complicates the familiar image of colonial Lima by showing how occupational communities built systems for caring for workers centuries before modern public hospitals or employer health plans.",
+          "source": "El Comercio",
+          "country": "Peru",
+          "original_language": "Spanish",
+          "published_date": "2026-08-21",
+          "url": "https://elcomercio.pe/lima/patrimonio/hallazgo-bajo-el-santuario-santa-rosa-de-lima-descubren-restos-de-un-hospital-de-450-anos-y-entierros-humanos-noticia/",
+          "type": "archaeology / local reporting",
+          "topics": ["Peru", "Lima", "archaeology", "medicine", "maritime history"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "ideas",
+      "title": "Ideas",
+      "items": [
+        {
+          "headline": "Politeness in political debate can itself be a form of privilege",
+          "summary": "Political theorist Geertje Bol revisits Mary Astell and Catharine Macaulay, two early women political thinkers who rejected the demand that good partisans must always be moderate, agreeable and polite. Their argument was not that rage automatically makes someone right; it was that people excluded from power may need stubborn, disruptive commitment because the rules of respectable debate are often written by those already inside.",
+          "why_it_matters": "The essay complicates a familiar diagnosis of polarization. Disagreement and zeal can be destructive, but a politics that values harmony above contest can also protect the status quo by treating forceful outsiders as the problem. The harder question is how to distinguish principled persistence from the kind of zeal that stops listening altogether.",
+          "source": "Aeon",
+          "country": "United Kingdom / international",
+          "original_language": "English",
+          "published_date": "2026-08-18",
+          "url": "https://aeon.co/essays/polite-debate-has-privilege-the-marginalised-need-zealotry",
+          "type": "political philosophy essay",
+          "topics": ["political philosophy", "democracy", "partisanship", "history of ideas"],
+          "selection_lane": "core"
+        }
+      ]
+    },
+    {
+      "id": "outside-the-bubble",
+      "title": "Outside the Bubble",
+      "items": [
+        {
+          "headline": "Scientists are learning to use thunder as a kind of underground X-ray",
+          "summary": "Researchers analyzed more than two years of vibrations generated when thunder couples into the ground and found that these “thunderquakes” can be used for shallow seismic imaging. Using existing fiber-optic telecommunications cables as sensors, the team reconstructed underground structure to roughly 100 meters beneath an urban site.",
+          "why_it_matters": "This is a useful example of scientific opportunism: a noisy atmospheric phenomenon and infrastructure already buried under cities can become a geological instrument. If the method generalizes, it could help investigate groundwater, sinkholes, unstable ground and construction sites without waiting for earthquakes or deploying conventional seismic sources.",
+          "source": "Science News",
+          "country": "United States",
+          "original_language": "English",
+          "published_date": "2026-08-21",
+          "url": "https://www.sciencenews.org/article/thunderquakes-shake-ground-map-it",
+          "type": "science feature",
+          "topics": ["geophysics", "thunder", "fiber optics", "infrastructure"],
+          "selection_lane": "exploration"
+        }
+      ]
+    },
+    {
+      "id": "small-things",
+      "title": "Small Things Worth Knowing",
+      "items": [
+        {
+          "headline": "Tomorrow night’s lunar eclipse will cover more than 96% of the Moon",
+          "summary": "On the night of August 27–28, Earth’s dark inner shadow will cover about 96% of the Moon at maximum eclipse. The Americas get the best view; the partial phase begins at 10:33 p.m. EDT and peaks at 12:12 a.m. EDT on August 28.",
+          "why_it_matters": "It is not quite a total eclipse, but it will be close enough for most of the Moon to darken and potentially take on a reddish color. No eye protection is needed for a lunar eclipse.",
+          "source": "Space.com",
+          "country": "United States",
+          "original_language": "English",
+          "published_date": "2026-08-25",
+          "url": "https://www.space.com/stargazing/lunar-eclipses/what-time-is-the-partial-lunar-eclipse-on-aug-27-28-heres-when-to-see-the-96-percent-blood-moon",
+          "type": "astronomy guide",
+          "topics": ["Moon", "eclipse", "astronomy"],
+          "selection_lane": "exploration"
+        },
+        {
+          "headline": "Blacksmiths are reverse-engineering a Viking anchor with X-rays and a forge",
+          "summary": "At Aggersborg in northern Denmark, blacksmithing students and researchers are recreating an early medieval anchor from bloomery iron using hand-powered bellows and period-appropriate techniques. X-rays of surviving anchors reveal weld lines and layers of different iron, giving the team clues about how Viking smiths assembled large objects when consistent steel was scarce.",
+          "why_it_matters": "Experimental archaeology can answer questions that drawings and museum cases cannot: not just what an object looked like, but what knowledge, labor and material compromises were required to make it work.",
+          "source": "Euronews",
+          "country": "Europe",
+          "original_language": "English",
+          "published_date": "2026-08-25",
+          "url": "https://www.euronews.com/culture/2026/08/25/blacksmiths-recreate-viking-age-anchor-using-ancient-techniques-in-denmark",
+          "type": "experimental archaeology feature",
+          "topics": ["Vikings", "blacksmithing", "experimental archaeology", "Denmark"],
+          "selection_lane": "exploration"
+        }
+      ]
+    },
+    {
+      "id": "one-thing-to-think-about",
+      "title": "One Thing to Think About",
+      "items": [
+        {
+          "headline": "Can a democracy fail from incapacity before it fails at the ballot box?",
+          "summary": "We usually imagine democratic decline as a leader breaking rules, corrupting elections or silencing opponents. But there is another route: institutions remain formally democratic while becoming too slow, brittle or dysfunctional to carry out ordinary public decisions.",
+          "why_it_matters": "Legitimacy depends on more than choosing leaders. It also depends on whether institutions can turn collective decisions into competent action. Which failure ultimately does more damage: power that becomes less accountable, or government that remains accountable but can no longer reliably do what it promises?",
+          "source": "Morning Edition",
+          "type": "editorial question",
+          "topics": ["democracy", "state capacity", "institutions"],
+          "selection_lane": "exploration"
+        }
+      ]
+    }
+  ],
+  "worth_your_time": [
+    {
+      "headline": "Democracies Need Creative Destruction",
+      "summary": "Jennifer Pahlka and Andrew Greenway argue that democratic decline is partly a problem of state capacity: public institutions accumulate rules, structures and technologies that make basic execution harder, while reform efforts often try to modernize organizations whose underlying form no longer works. Their answer is not generic efficiency rhetoric but institutional rebirth—new teams, clearer missions, ownership of whole problems and, sometimes, the willingness to retire organizations that cannot be repaired.",
+      "why_it_matters": "This is worth the time because it shifts the democracy conversation away from personalities and elections toward a less visible question: can the state actually do things? It offers a framework for understanding why public frustration can grow even when formal democratic procedures remain intact.",
+      "source": "Foreign Affairs",
+      "country": "United States",
+      "original_language": "English",
+      "published_date": "2026-08-18",
+      "url": "https://www.foreignaffairs.com/united-states/democracies-need-creative-destruction-pahlka-greenway",
+      "type": "long-form institutional analysis",
+      "topics": ["democracy", "government", "state capacity", "institutions"],
+      "selection_lane": "core"
+    },
+    {
+      "headline": "There is an unseen smuggling operation between fiction and reality",
+      "summary": "Daniele Molinari, Valentina Petrolini and Wolfgang Huemer challenge the idea that fiction lives in a mental quarantine separate from real belief. They propose a trade metaphor instead: readers import assumptions from reality into fictional worlds and export attitudes, expectations and moral frames back out—sometimes deliberately, sometimes without noticing.",
+      "why_it_matters": "It is an older essay chosen on purpose. The argument is a useful tool for thinking about stories, propaganda, stereotypes and even why fictional characters can change how people interpret real groups and events without ever presenting an explicit argument.",
+      "source": "Psyche",
+      "country": "United Kingdom / international",
+      "original_language": "English",
+      "published_date": "2022-11-02",
+      "url": "https://psyche.co/ideas/there-is-an-unseen-smuggling-operation-between-fiction-and-reality",
+      "type": "philosophy of mind / literature essay",
+      "topics": ["fiction", "imagination", "belief", "psychology"],
+      "selection_lane": "exploration"
+    }
+  ],
+  "editorial_review": {
+    "filler_check": "pass — sections were omitted rather than padded; every included item has a distinct editorial purpose.",
+    "repetition_check": "pass — yesterday’s Iran sanctions, Ukraine drone parade, free-will essay and heavy ABC/Nature concentration were not repeated.",
+    "geographic_check": "pass — the edition draws from the Middle East, North America, the Caucasus, South Asia, southern Africa, Southeast Asia, Latin America and Europe.",
+    "language_check": "pass — current selections include direct Arabic, Spanish and Indonesian reporting alongside English-language sources.",
+    "discovery_check": "pass — thunderquakes, Viking experimental archaeology and the Lima hospital provide deliberate exploration rather than random novelty.",
+    "long_read_check": "pass — two substantial pieces were selected for durable explanatory value rather than freshness alone.",
+    "ideas_check": "pass — the Ideas section contains a political-philosophy argument rather than ordinary opinion-news commentary.",
+    "difference_from_previous": "The edition is less source-concentrated, introduces a ranked Front Page, separates science from technology, and shifts from yesterday’s Iran/AI-heavy mix toward state-building, trade, public institutions and deliberate discovery."
+  }
+}
