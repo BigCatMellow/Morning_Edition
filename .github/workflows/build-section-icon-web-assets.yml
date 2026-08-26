@@ -1,3 +1,4 @@
+# Existing workflow re-saved to trigger the exact SVG web render build.
 name: Build exact section icon web assets
 
 on:
