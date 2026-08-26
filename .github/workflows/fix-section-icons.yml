@@ -1,0 +1,59 @@
+name: Fix section icon rendering
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-section-icons.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render uploaded SVGs directly in section headers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text()
+
+          css_anchor = '    .section-head span.count{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}\n'
+          css_add = '''    .section-head h2,.worth h2{display:flex;align-items:center;gap:11px}\n    .me-section-icon{display:block;width:43px;height:43px;flex:0 0 43px;object-fit:contain}\n    .worth .me-section-icon{width:48px;height:48px;flex-basis:48px}\n'''
+          if css_add.strip() not in text:
+              text = text.replace(css_anchor, css_anchor + css_add, 1)
+
+          mobile_anchor = '      .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:34px 22px 58px}.reader-content h1{font-size:2.35rem;line-height:1.04}.reader-standfirst{font-size:1.1rem}.reader-content p{font-size:1.05rem;line-height:1.74}\n'
+          mobile_add = '      .section-head h2,.worth h2{gap:9px}.me-section-icon{width:36px;height:36px;flex-basis:36px}.worth .me-section-icon{width:40px;height:40px;flex-basis:40px}\n'
+          if mobile_add.strip() not in text:
+              text = text.replace(mobile_anchor, mobile_anchor + mobile_add, 1)
+
+          js_anchor = '    let readerStories = new Map();\n    let readerCounter = 0;\n\n'
+          js_add = '''    const SECTION_ICONS = {\n      'World':'/Morning_Edition/assets/section-icons/world.svg?v=20260826',\n      'Science':'/Morning_Edition/assets/section-icons/science.svg?v=20260826',\n      'Society & Human Behavior':'/Morning_Edition/assets/section-icons/happy.svg?v=20260826',\n      'History & Culture':'/Morning_Edition/assets/section-icons/philosophy.svg?v=20260826',\n      'Ideas':'/Morning_Edition/assets/section-icons/lightbulb.svg?v=20260826',\n      'Outside the Bubble':'/Morning_Edition/assets/section-icons/box.svg?v=20260826',\n      'Small Things Worth Knowing':'/Morning_Edition/assets/section-icons/bookmark.svg?v=20260826',\n      'Worth Your Time':'/Morning_Edition/assets/section-icons/clock.svg?v=20260826'\n    };\n\n'''
+          if 'const SECTION_ICONS' not in text:
+              text = text.replace(js_anchor, js_anchor + js_add, 1)
+
+          esc_line = '    const esc = value => String(value ?? \'\').replace(/[&<>"\']/g, ch => ({\'&\':\'&amp;\',\'<\':\'&lt;\',\'>\':\'&gt;\',\'"\':\'&quot;\',"\'":\'&#39;\'}[ch]));\n'
+          helper = '''    function sectionTitleHtml(title){\n      const clean = String(title || 'Section');\n      const src = SECTION_ICONS[clean];\n      const icon = src ? `<img class="me-section-icon" src="${esc(src)}" alt="" aria-hidden="true">` : '';\n      return icon + esc(clean);\n    }\n'''
+          if 'function sectionTitleHtml' not in text:
+              text = text.replace(esc_line, esc_line + helper, 1)
+
+          text = text.replace('<h2>${esc(section.title || \'Section\')}</h2>', '<h2>${sectionTitleHtml(section.title || \'Section\')}</h2>')
+          text = text.replace('<h2>Worth Your Time</h2>', '<h2>${sectionTitleHtml(\'Worth Your Time\')}</h2>')
+          text = text.replace('  <script src="assets/section-icons.js" defer></script>\n', '')
+
+          p.write_text(text)
+          PY
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Render uploaded SVG section icons directly"
+          git push
