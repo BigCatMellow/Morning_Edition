@@ -1,13 +1,14 @@
 (() => {
+  const RAW = 'https://raw.githubusercontent.com/BigCatMellow/Morning_Edition/main/assets/section-icons/';
   const ICONS = {
-    'World': 'assets/section-icons/world.svg',
-    'Science': 'assets/section-icons/science.svg',
-    'Society & Human Behavior': 'assets/section-icons/happy.svg',
-    'History & Culture': 'assets/section-icons/philosophy.svg',
-    'Ideas': 'assets/section-icons/lightbulb.svg',
-    'Outside the Bubble': 'assets/section-icons/box.svg',
-    'Small Things Worth Knowing': 'assets/section-icons/bookmark.svg',
-    'Worth Your Time': 'assets/section-icons/clock.svg'
+    'World': RAW + 'world.svg',
+    'Science': RAW + 'science.svg',
+    'Society & Human Behavior': RAW + 'happy.svg',
+    'History & Culture': RAW + 'philosophy.svg',
+    'Ideas': RAW + 'lightbulb.svg',
+    'Outside the Bubble': RAW + 'box.svg',
+    'Small Things Worth Knowing': RAW + 'bookmark.svg',
+    'Worth Your Time': RAW + 'clock.svg'
   };
 
   const style = document.createElement('style');
@@ -23,6 +24,32 @@
   `;
   document.head.appendChild(style);
 
+  const pending = new Map();
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const img = entry.target;
+      const src = pending.get(img);
+      if (src) {
+        img.src = src;
+        pending.delete(img);
+      }
+      observer.unobserve(img);
+    }
+  }, {rootMargin:'240px 0px'}) : null;
+
+  function queueImage(img, src){
+    img.alt = '';
+    img.setAttribute('aria-hidden','true');
+    img.decoding = 'async';
+    if (observer) {
+      pending.set(img, src);
+      observer.observe(img);
+    } else {
+      img.src = src;
+    }
+  }
+
   function applyIcons(root = document) {
     root.querySelectorAll('.section-head h2, .worth h2').forEach(h2 => {
       if (h2.querySelector('.me-section-icon')) return;
@@ -31,9 +58,7 @@
       if (!src) return;
       const img = document.createElement('img');
       img.className = 'me-section-icon';
-      img.src = src;
-      img.alt = '';
-      img.setAttribute('aria-hidden', 'true');
+      queueImage(img, src);
       h2.prepend(img);
     });
   }
