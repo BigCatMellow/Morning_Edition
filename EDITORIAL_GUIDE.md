@@ -4,7 +4,7 @@
 
 Morning Edition is a personal daily newspaper assembled for one thoughtful reader. It is not an RSS dump, a generic AI news summary, or a list of whatever is trending.
 
-Each edition should answer three questions:
+Each edition should answer:
 
 > **What happened that is worth knowing, what is worth thinking about, and what might I be glad I discovered?**
 
@@ -37,8 +37,7 @@ Avoid:
 - multiple stories that are essentially the same event;
 - generic "AI is changing everything" pieces;
 - stories selected mainly because they are popular;
-- false balance when the underlying evidence is not balanced;
-- forced conclusions when an unresolved question is more intellectually useful.
+- forced conclusions when an unresolved question is more useful.
 
 ## Editorial priorities
 
@@ -63,24 +62,22 @@ Useful source ecosystems include serious newspapers and magazines, academic and 
 
 ## Personalization without a filter bubble
 
-The edition should be approximately **70–80% high-confidence relevance and 20–30% intelligent exploration**.
+Aim for roughly **70–80% high-confidence relevance and 20–30% intelligent exploration**.
 
 Before researching a new edition, inspect recent archived editions—normally the previous 7–14 days when available—and look for:
 
 - topics repeatedly selected;
-- sources that appear too frequently;
+- sources appearing too frequently;
 - repeated story frames or events;
 - emerging interests;
 - areas that have been neglected;
 - discoveries that broadened the paper rather than merely matching known interests.
 
-Use explicit reader feedback when it exists. Do **not** pretend to know which stories the reader skipped unless actual feedback or telemetry exists. Publication history is evidence of what Morning Edition selected, not proof of what the reader liked.
+Use explicit reader feedback when it exists. Do **not** pretend to know which stories the reader skipped unless actual feedback or telemetry exists. Publication history shows what Morning Edition selected, not what the reader necessarily liked.
 
 Avoid overfitting. A subject appearing several times may reflect an important news cycle rather than a permanent preference.
 
 ## Daily research and selection process
-
-The generator should use this sequence each day.
 
 ### 1. Read the recent paper before reading today's news
 
@@ -88,7 +85,7 @@ Inspect the most recent archives and their `editorial_review` objects. Note rece
 
 ### 2. Research broadly before selecting narrowly
 
-Search across multiple source ecosystems and geographic regions before choosing final stories. Build a sufficiently broad candidate pool to allow real editorial choice rather than accepting the first plausible results.
+Search across multiple source ecosystems and geographic regions before choosing final stories. Build a broad enough candidate pool to permit real editorial choice rather than accepting the first plausible results.
 
 Search deliberately for:
 
@@ -98,7 +95,7 @@ Search deliberately for:
 - primary research or authoritative scientific coverage;
 - serious analysis and essays;
 - older work whose value outlasts the news cycle;
-- one or more candidates outside established interests;
+- candidates outside established interests;
 - local, human-scale, or delightful reporting.
 
 ### 3. Judge candidates on value, not category quotas
@@ -113,15 +110,18 @@ For each serious candidate, ask:
 - **Discovery value:** Might the reader be glad to have encountered this even if he would not have searched for it?
 - **Shelf life:** Is this worth knowing tomorrow, next week, or next month?
 
-A story does not need to score highly on every dimension. It should, however, have a clear reason to exist in the paper.
+A story does not need to score highly on every dimension, but it should have a clear reason to exist in the paper.
 
 ### 4. Rank the Front Page first
 
-Choose the 3–5 stories most worth knowing today before filling subject sections. The Front Page is a ranking of importance and value, not a sampling quota.
+Choose the **3–5 stories most worth knowing today** before filling subject sections.
 
-One story is the lead. The remaining 2–4 are secondary Front Page stories.
+- The single strongest story is `lead_story`.
+- Put the other 2–4 ranked stories in a `Front Page` section with id `front-page`.
+- Front Page ranking is based on importance and value, not on subject quotas.
+- Do not repeat Front Page stories later merely to fill another section.
 
-Do not repeat those same story objects later merely to fill a section.
+This preserves the existing data-driven website and email structure while giving the edition a real front page.
 
 ### 5. Build sections only from stories that clear the bar
 
@@ -135,9 +135,9 @@ Before publication, check the paper as a whole for:
 - excessive concentration in one country or region;
 - excessive concentration in one publication or media ecosystem;
 - too much U.S./Western-European coverage;
-- too much AI or technology relative to the rest of the world;
+- too much AI or technology relative to the rest of the paper;
 - a lack of genuine discovery;
-- a lack of long-form reading;
+- a lack of worthwhile long-form material;
 - an Ideas section that is actually just opinion news;
 - a paper that looks substantially identical to yesterday without a compelling news reason.
 
@@ -209,7 +209,7 @@ An optional **In Case You Missed It** section may contain 1–3 stories that rem
 - Prefer consequential stories that were easy to miss, received limited U.S. attention, or became more meaningful with hindsight.
 - Do not recycle unavoidable headlines merely because they are still recent.
 
-### The Long Read
+### Long-form reading
 
 Long reads do **not** need to be recent unless their usefulness depends on current conditions.
 
@@ -225,38 +225,41 @@ The exact mix should vary with the material. Recommended sections follow.
 
 ### Front Page
 
-The **3–5 stories most worth knowing today**.
+The lead story plus a `Front Page` section should total **3–5 stories most worth knowing today**.
 
-The lead story lives in `lead_story`. The other 2–4 Front Page stories live in the optional top-level `front_page` array.
+Each should make clear what happened, why it matters, useful context, and the source.
 
-Each should make clear:
-
-- what happened;
-- why it matters;
-- useful context;
-- the source.
-
-Front Page stories should not be duplicated in later sections.
+Recommended section id: `front-page`.
 
 ### World
 
 Important international developments, including stories receiving insufficient U.S. attention. Look beyond the United States and Western Europe.
 
+Recommended section id: `world`.
+
 ### Science
 
 Research, discoveries, medicine, space, biology, physics, environment, archaeology, and related fields. Explain the strength and limits of evidence when relevant.
+
+Recommended section id: `science`.
 
 ### Society & Human Behavior
 
 Psychology, economics, institutions, demographics, education, work, social behavior, and cultural change.
 
+Recommended section id: `society-human-behavior`.
+
 ### Technology
 
-Important developments in computing, AI, open source, cybersecurity, infrastructure, and the internet. Keep this section broad and consequential; highly technical hobbyist material belongs in a separate Tech Edition rather than dominating Morning Edition.
+Important developments in computing, AI, open source, cybersecurity, infrastructure, and the internet. Keep this broad and consequential; highly technical hobbyist material belongs in a separate Tech Edition rather than dominating Morning Edition.
+
+Recommended section id: `technology`.
 
 ### History & Culture
 
 History, archaeology, books, art, language, media, cultural criticism, intellectual history, and useful historical parallels.
+
+Recommended section id: `history-culture`.
 
 ### Ideas
 
@@ -264,11 +267,13 @@ Essays, philosophical questions, intellectual debates, social theory, and seriou
 
 It may intentionally leave a question unresolved when doing so is more useful than forcing a conclusion.
 
+Recommended section id: `ideas`.
+
 ### The Long Read
 
 Select **1–3 exceptional pieces** worth spending real time with. Explain specifically why each deserves the reader's time rather than merely summarizing it.
 
-The data field remains `worth_your_time` for backward compatibility with existing archives and interfaces, but the editorial name is **The Long Read**.
+For backward compatibility, these continue to live in the top-level `worth_your_time` array. The current website may label the block `Worth Your Time`; editorially it serves the role of **The Long Read**.
 
 ### Outside the Bubble
 
@@ -276,19 +281,7 @@ Deliberately find something the reader probably would not have searched for hims
 
 This is a core discovery function, not a novelty slot.
 
-Good candidates may come from:
-
-- obscure scientific fields;
-- infrastructure;
-- anthropology;
-- industrial design;
-- linguistics;
-- unusual engineering;
-- forgotten history;
-- an unfamiliar country;
-- niche art or craft;
-- an unexpected subculture;
-- a new research area.
+Good candidates may come from obscure scientific fields, infrastructure, anthropology, industrial design, linguistics, unusual engineering, forgotten history, an unfamiliar country, niche art or craft, an unexpected subculture, or a new research area.
 
 Do not confuse unexpected with random. The selection should still have intellectual substance, explanatory value, beauty, ingenuity, or human interest.
 
@@ -296,7 +289,7 @@ Recommended section id: `outside-the-bubble`.
 
 ### Small Things Worth Knowing
 
-A small number of concise discoveries: facts, tools, maps, papers, visualizations, archives, museum collections, datasets, unusual local stories, or other things that are worth encountering but do not need a full article treatment.
+A few concise discoveries: facts, tools, maps, papers, visualizations, archives, museum collections, datasets, unusual local stories, or other things worth encountering that do not need a full article treatment.
 
 This section may absorb the spirit of the older `Small & Fun News` and `Something I Didn't Know Yesterday` sections when that produces a cleaner edition. Those older section IDs remain valid for archived or occasional use.
 
@@ -330,13 +323,9 @@ Do not paste full copyrighted articles or substantial passages into the reader. 
 
 ### Reader-pack storage
 
-The live site already supports a separate reader pack, and new editions should normally use it to keep the primary edition JSON compact.
+The live site supports a separate reader pack, and new editions should normally use it to keep the primary edition JSON compact.
 
-Create:
-
-`data/readers/YYYY-MM-DD.json`
-
-using this shape:
+Create `data/readers/YYYY-MM-DD.json` using:
 
 ```json
 {
@@ -377,13 +366,13 @@ A standard story object may use:
 
 `topics` is optional but useful for detecting repetition across recent editions.
 
-`selection_lane` is optional and should be either `core` or `exploration`. It exists for editorial review, not for display. Across the edition, intelligent exploration should normally account for roughly 20–30% of selections, but quality overrides arithmetic.
+`selection_lane` is optional and should be `core` or `exploration`. It exists for editorial review, not display. Intelligent exploration should normally account for roughly 20–30% of selections, but quality overrides arithmetic.
 
 `original_language` should contain the language of the specific article, such as `English`, `Spanish`, `French`, `Arabic`, `Mandarin Chinese`, or `Japanese`.
 
 ## Edition JSON format
 
-`data/latest.json` and archived editions use this top-level structure:
+`data/latest.json` and archived editions retain the existing top-level structure:
 
 ```json
 {
@@ -392,11 +381,12 @@ A standard story object may use:
   "title": "Morning Edition",
   "dek": "One-line description of today's edition.",
   "lead_story": { "headline": "..." },
-  "front_page": [
-    { "headline": "..." },
-    { "headline": "..." }
-  ],
   "sections": [
+    {
+      "id": "front-page",
+      "title": "Front Page",
+      "items": []
+    },
     {
       "id": "world",
       "title": "World",
@@ -417,7 +407,7 @@ A standard story object may use:
 }
 ```
 
-Unknown optional metadata fields should be ignored by the interface and email renderer.
+Unknown optional metadata fields are intentionally safe: the existing website and email renderer ignore fields they do not use.
 
 ### Editorial review
 
@@ -457,10 +447,10 @@ Write like an intelligent newspaper editor.
 
 - Use clear language and assume the reader may know nothing about the specific subject.
 - Explain necessary context without bloating the piece.
-- Define specialized terms when they are necessary.
+- Define specialized terms when necessary.
 - Distinguish fact, inference, uncertainty, and argument.
 - Explain why a story matters rather than merely restating the article.
-- Avoid hype words such as `game-changing`, `groundbreaking`, `massive`, or `incredible` unless objectively warranted.
+- Avoid hype such as `game-changing`, `groundbreaking`, `massive`, or `incredible` unless objectively warranted.
 - Keep headlines concise and informative rather than click-driven.
 - Do not manufacture urgency.
 
