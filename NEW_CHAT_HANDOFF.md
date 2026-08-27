@@ -95,7 +95,7 @@ Preserve this publish → website → trigger → email sequence unless the user
 
 ## Scheduled task
 
-The Morning Edition ChatGPT task is configured to run daily at **8:45 AM Eastern** on an exact schedule.
+The Morning Edition ChatGPT task is configured to run daily at **8:25 AM Eastern** on an exact schedule. The earlier start provides roughly 20 minutes for research, publication, and email delivery so the finished edition should normally arrive by about **8:45 AM Eastern**.
 
 The scheduled task should stay relatively concise and defer editorial detail to the repository's current `EDITORIAL_GUIDE.md`. This prevents the automation prompt and repository instructions from drifting apart.
 
