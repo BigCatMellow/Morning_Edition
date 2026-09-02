@@ -1,13 +1,16 @@
 (() => {
   const RAW = 'https://raw.githubusercontent.com/BigCatMellow/Morning_Edition/main/assets/section-icons/';
   const ICONS = {
+    'Front Page': RAW + 'MEicon2.svg',
     'World': RAW + 'world.svg',
     'Science': RAW + 'science.svg',
     'Society & Human Behavior': RAW + 'happy.svg',
     'History & Culture': RAW + 'philosophy.svg',
     'Ideas': RAW + 'lightbulb.svg',
+    'In Case You Missed It': RAW + 'clock.svg',
     'Outside the Bubble': RAW + 'box.svg',
     'Small Things Worth Knowing': RAW + 'bookmark.svg',
+    'One Thing to Think About': RAW + 'lightbulb.svg',
     'Worth Your Time': RAW + 'clock.svg'
   };
 
