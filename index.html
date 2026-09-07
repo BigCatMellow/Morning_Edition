@@ -116,6 +116,10 @@
     .reader-content h2{font-family:var(--sans);font-size:.78rem;text-transform:uppercase;letter-spacing:.11em;margin:38px 0 11px;color:var(--accent)}
     .reader-content p{font-size:1.09rem;line-height:1.82;margin:0 0 21px;color:#292622}.reader-content ul{padding-left:22px;margin:8px 0 26px}.reader-content li{font-size:1.05rem;line-height:1.72;margin:0 0 10px}
     .reader-why{border-left:3px solid var(--accent);padding:2px 0 2px 19px;margin:34px 0}.reader-why p{margin:0}
+    .reader-assessment{margin:8px 0 36px;padding:18px 20px;border-top:3px solid var(--accent-2);border-bottom:1px solid #d4cabd;background:#f2ede3}
+    .reader-assessment-label{font-size:.67rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}.reader-assessment strong{font-family:var(--display);font-size:1.42rem;line-height:1.15}.reader-assessment p{font-size:.98rem;line-height:1.65;margin:8px 0 0;color:#494239}
+    .reader-implications{display:grid;gap:16px;margin:10px 0 30px}.reader-implication{padding:16px 18px;border-left:3px solid #b9ad9a;background:#f5f1e8}.reader-implication h3{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px;color:var(--accent-2)}.reader-implication ul{margin:0;padding-left:20px}.reader-implication li{font-size:1rem;line-height:1.65;margin-bottom:7px}
+    .reader-connections,.reader-supporting-sources{margin-top:8px}.reader-connections li,.reader-supporting-sources li{margin-bottom:12px}.reader-supporting-sources a{font-weight:800;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}.reader-source-role{display:block;margin-top:3px;font-size:.76rem;line-height:1.45;color:var(--muted)}
     .reader-source-box{margin-top:46px;padding-top:23px;border-top:1px solid #cfc6b9;font-size:.86rem;color:#665f56}.reader-source-box p{font-size:.86rem;line-height:1.55;color:#665f56;margin:0 0 12px}
     .reader-source-box a{display:inline-block;font-weight:800;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}.reader-note{font-size:.76rem!important;color:#81786e!important;margin-top:13px!important}
 
@@ -134,7 +138,7 @@
       .story h3{font-size:1.42rem}.story p{font-size:1rem;line-height:1.68}
       .section--ideas .story h3,.section--in-case-you-missed-it .story h3,.section--one-thing-to-think-about .story h3{font-size:1.52rem}
       .worth{margin-left:-11px;margin-right:-11px;padding:34px 20px 38px}.worth h2{font-size:2.15rem}.worth-grid{gap:22px}
-      .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:38px 22px 64px}.reader-content h1{font-size:2.4rem;line-height:1.03}.reader-standfirst{font-size:1.11rem}.reader-content p{font-size:1.05rem;line-height:1.76}.topbar .brand-small{display:none}
+      .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:38px 22px 64px}.reader-content h1{font-size:2.4rem;line-height:1.03}.reader-standfirst{font-size:1.11rem}.reader-content p{font-size:1.05rem;line-height:1.76}.reader-assessment{margin-left:-4px;margin-right:-4px}.reader-implication{padding:14px 15px}.topbar .brand-small{display:none}
     }
   </style>
 </head>
@@ -182,11 +186,19 @@
     const why=story=>story.why_it_matters?`<div class="why"><strong>Why it matters</strong><br>${esc(story.why_it_matters)}</div>`:'';
 
     function readerParagraphs(reader){if(!reader)return[];if(Array.isArray(reader.body))return reader.body.filter(Boolean);if(typeof reader.body==='string'&&reader.body.trim())return reader.body.split(/\n\s*\n/).filter(Boolean);if(Array.isArray(reader.paragraphs))return reader.paragraphs.filter(Boolean);return[]}
-    function hasExpandedReader(story){if(!story||!story.reader)return false;const reader=story.reader,paragraphs=readerParagraphs(reader),keyPoints=Array.isArray(reader.key_points)?reader.key_points.filter(Boolean):[];return paragraphs.length>=2||Boolean(reader.context||reader.background||reader.what_to_watch||keyPoints.length>=2)}
+    function valueList(value){if(Array.isArray(value))return value.filter(Boolean);if(typeof value==='string'&&value.trim())return[value.trim()];return[]}
+    function safeHttpUrl(value){if(!value)return'';try{const url=new URL(String(value),window.location.href);return(url.protocol==='http:'||url.protocol==='https:')?url.href:''}catch{return''}}
+    function hasExpandedReader(story){if(!story||!story.reader)return false;const reader=story.reader,paragraphs=readerParagraphs(reader),keyPoints=valueList(reader.key_points),connections=valueList(reader.connections),supporting=Array.isArray(reader.supporting_sources)?reader.supporting_sources.filter(Boolean):[];return paragraphs.length>=2||Boolean(reader.context||reader.background||reader.why_it_matters||reader.bigger_picture||reader.significance||reader.future_implications||reader.uncertainty||reader.uncertainties||reader.what_to_watch||keyPoints.length>=2||connections.length||supporting.length)}
     function registerReader(story){const id=`reader-${++readerCounter}`;readerStories.set(id,story);return id}
     function actions(story){const parts=[];if(hasExpandedReader(story)){const id=registerReader(story);parts.push(`<button class="reader-button" type="button" data-reader-id="${id}">Continue reading</button>`)}if(story.url)parts.push(sourceLink(story));return parts.length?`<div class="story-actions">${parts.join('')}</div>`:''}
     function storyCard(story){return`<article class="story"><div class="meta">${storyMetaHtml(story)}</div><h3>${esc(story.headline||'Untitled')}</h3>${story.summary?`<p>${esc(story.summary)}</p>`:''}${why(story)}${actions(story)}</article>`}
     function worthCard(story){return`<article><div class="meta">${storyMetaHtml(story)}</div><h3>${esc(story.headline||'Untitled')}</h3>${story.summary?`<p>${esc(story.summary)}</p>`:''}${story.why_it_matters?`<p><strong>Why it is worth your time:</strong> ${esc(story.why_it_matters)}</p>`:''}${actions(story)}</article>`}
+
+    function significanceHtml(value){if(!value)return'';const label=typeof value==='string'?value:(value.label||value.level||''),rationale=typeof value==='object'?(value.rationale||value.reason||value.explanation||''):'';if(!label&&!rationale)return'';return`<div class="reader-assessment"><div class="reader-assessment-label">Editorial significance</div>${label?`<strong>${esc(label)}</strong>`:''}${rationale?`<p>${esc(rationale)}</p>`:''}</div>`}
+    function implicationGroupHtml(label,value){const items=valueList(value);if(!items.length)return'';return`<div class="reader-implication"><h3>${esc(label)}</h3><ul>${items.map(item=>`<li>${esc(item)}</li>`).join('')}</ul></div>`}
+    function implicationsHtml(value){if(!value)return'';if(typeof value==='string'||Array.isArray(value)){const items=valueList(value);return items.length?`<div class="reader-implications">${implicationGroupHtml('Possible',items)}</div>`:''}if(typeof value!=='object')return'';const groups=[implicationGroupHtml('Likely',value.likely),implicationGroupHtml('Possible',value.possible),implicationGroupHtml('Speculative',value.speculative)].filter(Boolean);return groups.length?`<div class="reader-implications">${groups.join('')}</div>`:''}
+    function connectionsHtml(value){if(!Array.isArray(value)||!value.length)return'';const items=value.map(item=>{if(typeof item==='string')return`<li>${esc(item)}</li>`;if(!item||typeof item!=='object')return'';const title=item.title||item.headline||item.label||'',note=item.note||item.description||item.context||'',date=item.date||'',url=safeHttpUrl(item.url);let line=url&&title?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title||note);if(title&&note)line+=` — ${esc(note)}`;if(date)line+=` <span class="reader-source-role">${esc(shortDate(date)||date)}</span>`;return line?`<li>${line}</li>`:''}).filter(Boolean);return items.length?`<h2>Connections</h2><ul class="reader-connections">${items.join('')}</ul>`:''}
+    function supportingSourcesHtml(value){if(!Array.isArray(value)||!value.length)return'';const items=value.map(item=>{if(typeof item==='string')return`<li>${esc(item)}</li>`;if(!item||typeof item!=='object')return'';const name=item.name||item.source||item.title||'Supporting source',role=item.role||'',url=safeHttpUrl(item.url);const label=url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(name)}</a>`:`<strong>${esc(name)}</strong>`;return`<li>${label}${role?`<span class="reader-source-role">${esc(role)}</span>`:''}</li>`}).filter(Boolean);return items.length?`<h2>Sources used for context</h2><ul class="reader-supporting-sources">${items.join('')}</ul>`:''}
 
     const sectionCopy={
       'front-page':"The strongest stories after today's lead, ranked for importance rather than category.",
@@ -215,14 +227,20 @@
     }
 
     function openReader(story){
-      if(!hasExpandedReader(story))return;const reader=story.reader,paragraphs=readerParagraphs(reader),keyPoints=Array.isArray(reader.key_points)?reader.key_points.filter(Boolean):[],context=reader.context||reader.background||'',watch=reader.what_to_watch||'',standfirst=reader.standfirst||'';
+      if(!hasExpandedReader(story))return;const reader=story.reader,paragraphs=readerParagraphs(reader),keyPoints=valueList(reader.key_points),background=reader.background||reader.context||'',readerWhy=reader.why_it_matters||story.why_it_matters||'',bigger=reader.bigger_picture||'',watch=reader.what_to_watch||'',uncertainty=reader.uncertainty||reader.uncertainties||'',standfirst=reader.standfirst||'';
       let html=`<div class="reader-meta">${storyMetaHtml(story)}</div><h1>${esc(story.headline||'Untitled')}</h1>`;
       if(standfirst)html+=`<p class="reader-standfirst">${esc(standfirst)}</p>`;
+      html+=significanceHtml(reader.significance);
       if(paragraphs.length)html+='<h2>The story</h2>'+paragraphs.map(p=>`<p>${esc(p)}</p>`).join('');
-      if(context)html+=`<h2>Context</h2><p>${esc(context)}</p>`;
+      if(readerWhy)html+=`<div class="reader-why"><h2>Why it matters</h2><p>${esc(readerWhy)}</p></div>`;
+      if(background)html+=`<h2>Background</h2><p>${esc(background)}</p>`;
+      if(bigger)html+=`<h2>The bigger picture</h2><p>${esc(bigger)}</p>`;
       if(keyPoints.length)html+=`<h2>Key points</h2><ul>${keyPoints.map(point=>`<li>${esc(point)}</li>`).join('')}</ul>`;
-      if(story.why_it_matters)html+=`<div class="reader-why"><h2>Why it matters</h2><p>${esc(story.why_it_matters)}</p></div>`;
-      if(watch)html+=`<h2>What to watch</h2><p>${esc(watch)}</p>`;
+      const implicationBlock=implicationsHtml(reader.future_implications);if(implicationBlock)html+=`<h2>What this could mean</h2>${implicationBlock}`;
+      if(uncertainty)html+=`<h2>What remains uncertain</h2><p>${esc(uncertainty)}</p>`;
+      if(watch)html+=`<h2>What to watch next</h2><p>${esc(watch)}</p>`;
+      html+=connectionsHtml(reader.connections);
+      html+=supportingSourcesHtml(reader.supporting_sources);
       html+=`<div class="reader-source-box"><p><strong>${esc(story.source||'Original source')}</strong>${story.published_date?` · ${esc(shortDate(story.published_date))}`:''}</p>`;
       if(story.url)html+=`<a href="${esc(story.url)}" target="_blank" rel="noopener">Open original article →</a><p class="reader-note">This is a Morning Edition synthesis, not a copy of the source article. Opening the original article leaves Morning Edition and connects your browser to the publisher's site.</p>`;
       html+='</div>';el('readerContent').innerHTML=html;el('readerModal').classList.add('open');el('readerBackdrop').classList.add('open');el('readerModal').setAttribute('aria-hidden','false');document.body.classList.add('reader-open');el('readerClose').focus();
