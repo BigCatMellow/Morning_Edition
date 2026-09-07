@@ -147,6 +147,18 @@ Every included story should have a defensible answer to **"Why is this in Mornin
 
 If the answer is vague, remove it.
 
+### 8. Contextualize only the stories that survived selection
+
+Continue Reading is a **second editorial pass**, not part of initial discovery. Do not spend deep-analysis effort on stories that will not be published.
+
+For each selected story, re-open the primary article and gather enough verified background to answer not only what happened, but why the reader should care and how the story fits into a larger process. When the subject is consequential or technically complex, consult an authoritative primary source, original research, or an independent high-quality source where useful.
+
+The goal of this pass is:
+
+**event → background → significance → larger pattern → implications → uncertainty → next signals**
+
+This pass should improve understanding rather than simply make the summary longer.
+
 ## Source principles
 
 - Every factual story must link to a real source.
@@ -307,17 +319,70 @@ Recommended section id: `one-thing-to-think-about`.
 
 ## Internal reader
 
-Morning Edition has a built-in **Continue Reading** modal. The reader should provide a fuller Morning Edition treatment without reproducing copyrighted articles.
+Morning Edition has a built-in **Continue Reading** modal. This is the paper's deeper context-and-analysis layer. The front page should remain concise; the reader should teach enough to explain **why the story belongs in the edition**.
 
-Recommended reader fields:
+The reader is newly written synthesis based on verified reporting. It may combine context from multiple verified sources, but it must not reproduce copyrighted articles.
+
+### What the reader should answer
+
+Use the sections that genuinely improve understanding. Do not force empty headings simply to satisfy a template.
+
+1. **The story** — what happened, with enough detail to understand the event or argument.
+2. **Why it matters** — the actual consequence or explanatory value, not a restatement of the headline.
+3. **Background** — the history, institutions, technical concepts, previous events, or definitions a nonexpert needs.
+4. **The bigger picture** — the larger process, trend, argument, or chain of events this story belongs to.
+5. **What this could mean** — consequences separated by confidence when prediction is useful.
+6. **What remains uncertain** — evidence limits, unresolved questions, missing data, contested interpretations, or reasons for caution.
+7. **What to watch next** — concrete signals that would show whether the story develops into something more important.
+8. **Connections** — useful links to earlier Morning Edition themes or developments when a real connection exists.
+
+For essays and philosophy, prediction may be inappropriate. In those cases, use the deeper layer to explain the argument, assumptions, objections, intellectual background, and what accepting the argument would change.
+
+### Significance judgment
+
+Each substantial reader treatment should make an explicit editorial judgment about how much weight the story deserves. Prefer a short categorical label plus a reason instead of a fake-precision numeric score.
+
+Useful labels include:
+
+- `Major development`
+- `Meaningful signal`
+- `Early but worth watching`
+- `Important context`
+- `Interesting discovery`
+- `Worth thinking about`
+
+The label is not a ranking of entertainment value. It should reflect consequence, evidence, explanatory value, novelty, and shelf life. The accompanying rationale matters more than the label.
+
+### Future implications and uncertainty
+
+Do not collapse all future-facing claims into one confident prediction. When useful, separate them into:
+
+- **Likely** — follows reasonably from current evidence or institutional mechanics;
+- **Possible** — plausible, but dependent on unresolved events or assumptions;
+- **Speculative** — worth considering only if clearly labeled as weakly supported.
+
+Omit the speculative category when it adds noise. Never invent a dramatic future simply to fill the section.
+
+### Recommended reader fields
 
 - `standfirst`: one or two sentences orienting the reader;
-- `body`: 3–7 short explanatory paragraphs;
-- `context`: concise background needed to understand the subject;
-- `key_points`: 2–5 important facts, arguments, implications, or takeaways;
-- `what_to_watch`: what could happen next when meaningful.
+- `body`: 3–7 short explanatory paragraphs for the core story or argument;
+- `why_it_matters`: a deeper reader-level significance explanation; when absent, the story-level `why_it_matters` remains the fallback;
+- `background`: concise history or concepts needed to understand the subject;
+- `bigger_picture`: how the story connects to a larger development, system, trend, or argument;
+- `significance`: object with `label` and `rationale`;
+- `future_implications`: object with optional `likely`, `possible`, and `speculative` arrays;
+- `uncertainty`: important limits, unknowns, or competing interpretations;
+- `key_points`: optional 2–5 takeaways when a list genuinely helps;
+- `what_to_watch`: concrete next events, measurements, decisions, replications, court steps, adoption signals, or other evidence to monitor;
+- `connections`: optional array of relevant prior developments or Morning Edition threads;
+- `supporting_sources`: optional array of additional sources used for context, each with `name`, `url`, and optional `role`.
 
-The reader is newly written synthesis based on verified reporting. It may combine context from multiple verified sources, but the displayed source remains the primary article being recommended.
+Backward compatibility:
+
+- `context` remains valid and is treated as an alias/fallback for `background`;
+- older reader packs containing only `standfirst`, `body`, `context`, `key_points`, and `what_to_watch` must continue to render;
+- inline `reader` objects remain valid, although separate reader packs are preferred.
 
 Do not paste full copyrighted articles or substantial passages into the reader. Brief quotations should be rare and short.
 
@@ -334,15 +399,37 @@ Create `data/readers/YYYY-MM-DD.json` using:
     "https://original-article-url.example/story": {
       "standfirst": "...",
       "body": ["...", "..."],
-      "context": "...",
+      "why_it_matters": "...",
+      "background": "...",
+      "bigger_picture": "...",
+      "significance": {
+        "label": "Meaningful signal",
+        "rationale": "..."
+      },
+      "future_implications": {
+        "likely": ["..."],
+        "possible": ["..."],
+        "speculative": ["..."]
+      },
+      "uncertainty": "...",
       "key_points": ["...", "..."],
-      "what_to_watch": "..."
+      "what_to_watch": "...",
+      "connections": ["..."],
+      "supporting_sources": [
+        {
+          "name": "Primary document or additional reporting",
+          "url": "https://...",
+          "role": "background / verification"
+        }
+      ]
     }
   }
 }
 ```
 
 The source URL is the key. Inline `reader` objects remain valid for backward compatibility, but the separate reader pack is preferred for new editions because `index.html` automatically attaches it when available.
+
+Not every story needs every optional field. The required standard is **useful understanding, not template completion**.
 
 ## Story data format
 
@@ -421,6 +508,7 @@ After assembling each edition, silently evaluate:
 6. Is there enough worthwhile long-form material?
 7. Does Ideas contain actual ideas rather than opinion news?
 8. Does today's paper differ meaningfully from recent editions where appropriate?
+9. Did the Continue Reading layer distinguish verified context from inference and future uncertainty rather than merely expand the summary?
 
 Persist a concise `editorial_review` in the archived edition and `latest.json`. Future runs should read recent reviews before selecting new stories.
 
