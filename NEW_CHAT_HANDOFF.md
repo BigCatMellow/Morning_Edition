@@ -9,10 +9,11 @@ Repository: `BigCatMellow/Morning_Edition`
 Primary files to read before making changes or generating an edition:
 
 1. `EDITORIAL_GUIDE.md` — canonical editorial rules, research process, sections, recency rules, story schema, discovery targets, and self-review process.
-2. `index.html` — current GitHub Pages reader UI.
-3. `data/latest.json` — most recently published edition and the current live data shape.
-4. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
-5. `README.md` — project overview and file layout.
+2. `PHILOSOPHY_READER_PROTOCOL.md` — canonical supplemental protocol for deep Continue Reading treatments of philosophy, ethics, political thought, social theory, intellectual history, and argument-driven essays.
+3. `index.html` — current GitHub Pages reader UI.
+4. `data/latest.json` — most recently published edition and the current live data shape.
+5. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
+6. `README.md` — project overview and file layout.
 
 Email delivery lives in `BigCatMellow/Notes`:
 
@@ -27,7 +28,7 @@ Do not expose or modify SMTP secrets.
 
 For a manual or scheduled Morning Edition run:
 
-1. Read `EDITORIAL_GUIDE.md` first. Treat it as the single canonical editorial specification rather than reconstructing rules from old chats or duplicating a large prompt elsewhere.
+1. Read `EDITORIAL_GUIDE.md` first. Also read `PHILOSOPHY_READER_PROTOCOL.md` before generating reader packs for philosophy/Ideas selections. Treat those repository files as canonical rather than reconstructing rules from old chats or duplicating a large prompt elsewhere.
 2. Inspect the most recent 7–14 archived editions when available, including `editorial_review`, to detect topic repetition, source concentration, neglected areas, and opportunities for deliberate exploration.
 3. Research in three distinct lanes before selecting stories:
    - **Current news:** mainly the last 24–72 hours.
@@ -38,7 +39,7 @@ For a manual or scheduled Morning Edition run:
 6. Fill subject sections only with material that clears the editorial bar. Sections may be small or absent, except for the recurring balance requirements below.
 7. Include deliberate `Outside the Bubble` discovery and useful long-form reading when strong material exists.
 8. Populate `published_date`, `original_language`, `topics`, and `selection_lane` when they can be established reliably and are useful.
-9. Generate substantial Continue Reading synthesis in a separate reader pack at `data/readers/YYYY-MM-DD.json`, keyed by each story's source URL. Inline `reader` objects remain backward-compatible but are not required.
+9. Generate substantial Continue Reading synthesis in a separate reader pack at `data/readers/YYYY-MM-DD.json`, keyed by each story's source URL. Inline `reader` objects remain backward-compatible but are not required. Use the specialized philosophy protocol for philosophy, ethics, political thought, social theory, intellectual history, book reviews, and argument-driven essays rather than forcing them into a news-event template.
 10. Run the edition-level quality check and persist a concise `editorial_review` in the edition JSON. This is an editorial process aid, not a claim about reader behavior.
 11. Publish the completed edition to:
     - `data/latest.json`
@@ -71,6 +72,26 @@ The `worth_your_time` / Long Read block should normally include **1–3 pieces**
 Useful discovery ecosystems include Aeon, Psyche, 3 Quarks Daily, Arts & Letters Daily, Foreign Affairs, serious university publications, academic journals, open-access papers, intellectual reviews, and high-quality independent essay publications. These are discovery sources, not a whitelist.
 
 Do not satisfy the ideas check simply by writing that no separate Ideas section was forced because a long read was reflective. If `Ideas` is omitted, the review should make clear that a real ideas/philosophy search occurred and why the strongest candidates failed the bar.
+
+#### Philosophy Continue Reading should use the available space
+
+The front-page Ideas card should remain concise. The **Continue Reading** layer is where Morning Edition should unpack the argument in depth.
+
+For a substantial philosophy or argument-driven selection, follow `PHILOSOPHY_READER_PROTOCOL.md`. The reader should normally help the user understand:
+
+- the precise question being asked;
+- the thesis rather than merely the topic;
+- why the author thinks the conclusion follows;
+- the important concepts in plain language;
+- the relevant philosophical or historical background;
+- a concrete example that makes the mechanism visible;
+- the strongest serious objection;
+- the author's likely response when it can be responsibly reconstructed;
+- what else would have to change if the argument were right;
+- connections to other thinkers, traditions, or live debates;
+- one to three unresolved questions worth carrying forward.
+
+Depth is welcome here. A good philosophy reader can be substantially longer than an ordinary story summary when the extra space is doing explanatory work rather than padding.
 
 ### The intended daily mix
 
@@ -118,6 +139,8 @@ This means editorial sections such as `Front Page`, `Society & Human Behavior`, 
 
 A story with substantial reader content gets a `Continue reading` option. A story without it falls back to the source link.
 
+For philosophy/Ideas readers, the loaded `assets/section-icons.js` adapts generic reader headings into more appropriate labels such as `The question & argument`, `Argument map`, `Strongest objections & limits`, and `Questions to carry forward` when the story metadata identifies it as philosophy, ethics, political theory/thought, social theory, intellectual history, a book review, or an essay.
+
 The current visual direction is a restrained newspaper aesthetic: warm paper colors, serif editorial typography, subtle alternating article backgrounds, off-white section headers, and a dark long-read block. Avoid turning it into a generic card-heavy app.
 
 Current logo files:
@@ -137,7 +160,7 @@ Preserve this publish → website → trigger → email sequence unless the user
 
 The Morning Edition ChatGPT task is configured to run daily at **8:25 AM Eastern** on an exact schedule. The earlier start provides roughly 20 minutes for research, publication, and email delivery so the finished edition should normally arrive by about **8:45 AM Eastern**.
 
-The scheduled task should stay relatively concise and defer editorial detail to the repository's current `EDITORIAL_GUIDE.md` and this handoff. It should explicitly preserve the three research lanes above so the run does not drift into a fresh-news-only edition.
+The scheduled task should stay relatively concise and defer editorial detail to the repository's current `EDITORIAL_GUIDE.md`, `PHILOSOPHY_READER_PROTOCOL.md`, and this handoff. It should explicitly preserve the three research lanes above so the run does not drift into a fresh-news-only edition.
 
 The automatic run is independent of the development conversation's context window. Each run should rely on the repository and current web research.
 
@@ -153,7 +176,7 @@ The automatic run is independent of the development conversation's context windo
 
 ## Recommended prompt for a fresh chat
 
-> Continue my Morning Edition project from GitHub. Use `BigCatMellow/Morning_Edition/NEW_CHAT_HANDOFF.md` as the handoff, then read `EDITORIAL_GUIDE.md`, `index.html`, `data/latest.json`, and recent archived editions before making changes. Treat the repository as the source of truth. Preserve the three daily research lanes: fresh current news, 2–8 week `In Case You Missed It`, and durable Ideas/philosophy/long-form material. For article research, use current web sources; for repo changes, use the connected GitHub repository directly. Preserve the existing automatic publish → website → email-trigger workflow.
+> Continue my Morning Edition project from GitHub. Use `BigCatMellow/Morning_Edition/NEW_CHAT_HANDOFF.md` as the handoff, then read `EDITORIAL_GUIDE.md`, `PHILOSOPHY_READER_PROTOCOL.md`, `index.html`, `data/latest.json`, and recent archived editions before making changes. Treat the repository as the source of truth. Preserve the three daily research lanes: fresh current news, 2–8 week `In Case You Missed It`, and durable Ideas/philosophy/long-form material. Use the specialized philosophy reader protocol for deep Continue Reading treatments of arguments and ideas. For article research, use current web sources; for repo changes, use the connected GitHub repository directly. Preserve the existing automatic publish → website → email-trigger workflow.
 
 For a fresh manual edition run, add:
 
