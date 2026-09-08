@@ -113,9 +113,11 @@
     new MutationObserver(() => applyIcons(content)).observe(content, {childList:true, subtree:true});
   }
   if (readerContent) {
+    // Only observe replacement of the reader's top-level contents. Watching the
+    // full subtree caused our own heading relabels to retrigger this observer.
     new MutationObserver(() => {
       resetReaderLabel();
       adaptReaderLabels(document);
-    }).observe(readerContent, {childList:true, subtree:true});
+    }).observe(readerContent, {childList:true});
   }
 })();
