@@ -66,9 +66,56 @@
     });
   }
 
+  function isPhilosophyReader(root) {
+    const meta = root.querySelector('.reader-meta');
+    if (!meta) return false;
+    const text = meta.textContent.toLowerCase();
+    return /(philosoph|ethics|moral psychology|political thought|political theory|social theory|intellectual history|book review|essay)/.test(text);
+  }
+
+  function adaptReaderLabels(root = document) {
+    const reader = root.querySelector ? root.querySelector('#readerContent') : null;
+    if (!reader || !reader.children.length || !isPhilosophyReader(reader)) return;
+
+    const replacements = {
+      'The story': 'The question & argument',
+      'Background': 'Intellectual background',
+      'The bigger picture': 'Where it sits in the debate',
+      'Key points': 'Argument map',
+      'What this could mean': 'What follows if it is right',
+      'What remains uncertain': 'Strongest objections & limits',
+      'What to watch next': 'Questions to carry forward',
+      'Connections': 'Connections & comparisons',
+      'Sources used for context': 'Further reading & sources'
+    };
+
+    reader.querySelectorAll('h2').forEach(h2 => {
+      const replacement = replacements[h2.textContent.trim()];
+      if (replacement) h2.textContent = replacement;
+    });
+
+    const assessment = reader.querySelector('.reader-assessment-label');
+    if (assessment) assessment.textContent = 'Why this argument is worth your time';
+
+    const modalLabel = document.querySelector('.reader-label');
+    if (modalLabel) modalLabel.textContent = 'Morning Edition · Ideas Deep Read';
+  }
+
+  function resetReaderLabel() {
+    const modalLabel = document.querySelector('.reader-label');
+    if (modalLabel) modalLabel.textContent = 'Morning Edition Deep Read';
+  }
+
   const content = document.getElementById('content');
+  const readerContent = document.getElementById('readerContent');
   applyIcons();
   if (content) {
     new MutationObserver(() => applyIcons(content)).observe(content, {childList:true, subtree:true});
+  }
+  if (readerContent) {
+    new MutationObserver(() => {
+      resetReaderLabel();
+      adaptReaderLabels(document);
+    }).observe(readerContent, {childList:true, subtree:true});
   }
 })();
