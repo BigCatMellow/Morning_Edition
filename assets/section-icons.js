@@ -19,6 +19,8 @@
     .section-head h2,.worth h2{display:flex;align-items:center;gap:11px}
     .me-section-icon{display:block;width:43px;height:43px;flex:0 0 43px;object-fit:contain}
     .worth .me-section-icon{width:48px;height:48px;flex-basis:48px}
+    .reader-frame{overflow:hidden}
+    .reader-top{z-index:10!important;background:#fbfaf6!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
     @media(max-width:540px){
       .section-head h2,.worth h2{gap:9px}
       .me-section-icon{width:36px;height:36px;flex-basis:36px}
