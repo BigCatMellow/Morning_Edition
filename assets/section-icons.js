@@ -108,11 +108,97 @@
     if (modalLabel) modalLabel.textContent = 'Morning Edition Deep Read';
   }
 
+  // JSON does not permit literal line breaks inside quoted strings. A single
+  // accidental return used to make the entire reader pack fail, which removed
+  // every Continue Reading button. This fallback repairs only those raw control
+  // characters while leaving otherwise valid JSON untouched.
+  function escapeRawControlCharsInStrings(text) {
+    let out = '', inString = false, escaped = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (!inString) {
+        out += ch;
+        if (ch === '"') inString = true;
+        continue;
+      }
+      if (escaped) {
+        out += ch;
+        escaped = false;
+      } else if (ch === '\\') {
+        out += ch;
+        escaped = true;
+      } else if (ch === '"') {
+        out += ch;
+        inString = false;
+      } else if (ch === '\n') {
+        out += '\\n';
+      } else if (ch === '\r') {
+        if (text[i + 1] === '\n') i++;
+        out += '\\n';
+      } else if (ch === '\t') {
+        out += '\\t';
+      } else {
+        out += ch;
+      }
+    }
+    return out;
+  }
+
+  async function loadJsonTolerant(path) {
+    const res = await fetch(`${path}?v=${Date.now()}`, {cache:'no-store'});
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    try {
+      return JSON.parse(text);
+    } catch (firstError) {
+      return JSON.parse(escapeRawControlCharsInStrings(text));
+    }
+  }
+
+  let readerRecoveryInFlight = false;
+  let readerRecoveryDoneFor = '';
+
+  async function recoverMissingReaderButtons() {
+    if (readerRecoveryInFlight) return;
+    if (document.querySelector('.reader-button')) return;
+
+    const status = document.getElementById('status');
+    const match = status && status.textContent.match(/\b(\d{4}-\d{2}-\d{2})\b/);
+    const date = match ? match[1] : '';
+    if (!date || readerRecoveryDoneFor === date) return;
+    if (typeof applyReaderPack !== 'function' || typeof render !== 'function') return;
+
+    readerRecoveryInFlight = true;
+    try {
+      const [edition, pack] = await Promise.all([
+        loadJsonTolerant(`data/archive/${date}.json`),
+        loadJsonTolerant(`data/readers/${date}.json`)
+      ]);
+      if (!pack || !pack.readers || !Object.keys(pack.readers).length) return;
+      applyReaderPack(edition, pack);
+      const hasReader = [edition.lead_story, ...(edition.sections || []).flatMap(s => s.items || []), ...(edition.worth_your_time || [])]
+        .some(story => story && story.reader);
+      if (!hasReader) return;
+      readerRecoveryDoneFor = date;
+      render(edition);
+    } catch (error) {
+      console.warn('Morning Edition reader recovery failed', error);
+    } finally {
+      readerRecoveryInFlight = false;
+    }
+  }
+
   const content = document.getElementById('content');
   const readerContent = document.getElementById('readerContent');
   applyIcons();
   if (content) {
-    new MutationObserver(() => applyIcons(content)).observe(content, {childList:true, subtree:true});
+    let recoveryTimer = null;
+    new MutationObserver(() => {
+      applyIcons(content);
+      clearTimeout(recoveryTimer);
+      recoveryTimer = setTimeout(recoverMissingReaderButtons, 80);
+    }).observe(content, {childList:true, subtree:true});
+    setTimeout(recoverMissingReaderButtons, 250);
   }
   if (readerContent) {
     // Only observe replacement of the reader's top-level contents. Watching the
