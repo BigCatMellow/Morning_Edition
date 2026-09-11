@@ -91,7 +91,23 @@ Prefer genuinely local or regional sources when possible:
 
 Do not default to national aggregators when the original local story is accessible.
 
-This lane is also an opportunity to widen geographic perspective. It should not become 'small-town America' every day. Search across different countries and regions, including non-English local reporting when practical.
+### Geographic priority: look beyond the United States first
+
+**At Human Scale is deliberately not an American-local-news section.** Its strongest editorial use is to show ordinary life in places the rest of an English-language news diet rarely lets the reader inhabit.
+
+The default expectation is therefore **non-U.S.**:
+
+1. Begin the daily Human Scale search outside the United States.
+2. Search multiple world regions rather than merely English-speaking countries: Europe, Africa, Latin America and the Caribbean, South and East Asia, Southeast Asia, the Middle East, Oceania, islands, rural regions, border communities, and other locally distinctive places.
+3. Actively use original-language local reporting when practical. Translation effort is a feature of this lane, not a reason to fall back to U.S. material.
+4. Consider a U.S. story only after a real non-U.S. search, and select it when it is clearly stronger, unusually revealing, or useful for geographic rotation—not simply because American local reporting is easier to find.
+5. Avoid consecutive U.S. Human Scale selections when a credible non-U.S. alternative clears the bar.
+
+As a rolling editorial target, **most Human Scale selections should come from outside the United States**. A useful benchmark is roughly **5 of every 7 daily selections non-U.S.**, without treating that number as a mechanical quota. If the recent run has become U.S.-heavy, the next search should deliberately correct the imbalance.
+
+The section should also rotate within the non-U.S. world. Replacing 'small-town America' with only Britain, Canada, Australia, or another easy English-language source ecosystem would miss the purpose.
+
+The goal is not exoticism. Do not select a place because it seems quaint or foreign. Select an ordinary local story because it gives the reader a truthful glimpse of everyday life somewhere they would otherwise be unlikely to encounter.
 
 ## Recency
 
@@ -123,8 +139,10 @@ A story can be interesting, delightful, or even funny, but those qualities are i
 
 Each edition's `editorial_review` should include a `human_scale_check` or equivalent note stating either:
 
-- that an `At Human Scale` item was selected and why it fits the lane; or
+- that an `At Human Scale` item was selected, why it fits the lane, and its country/region;
 - that the lane was deliberately searched but omitted because no candidate cleared the sourcing/tone bar.
+
+The review should also watch the rolling geographic balance. If a U.S. item is selected, note that non-U.S. candidates were deliberately searched first. If recent Human Scale selections have become disproportionately U.S.-based or concentrated in a small set of English-speaking countries, record that drift and correct it in the next edition.
 
 ## Final test
 
@@ -132,4 +150,8 @@ Before publishing, ask:
 
 > If someone read only the major-news sections, would they leave with the false impression that almost everything happening in the world is enormous, dangerous, political, or historically consequential?
 
-`At Human Scale` exists to correct that distortion with one small, true piece of ordinary life.
+Then ask a second question:
+
+> Is this section actually widening the reader's picture of ordinary life around the world, or merely reproducing the easiest American and English-language local-news sources?
+
+`At Human Scale` exists to correct both distortions with one small, true piece of ordinary life.
