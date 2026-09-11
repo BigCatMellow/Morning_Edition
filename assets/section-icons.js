@@ -21,6 +21,8 @@
     .worth .me-section-icon{width:48px;height:48px;flex-basis:48px}
     .reader-frame{overflow:hidden}
     .reader-top{z-index:10!important;background:#fbfaf6!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+    .reader-triangulation-note{margin:7px 0 16px!important;padding:11px 13px;border-left:3px solid var(--accent-2);background:#f3efe7;color:#514a41!important;font-size:.9rem!important;line-height:1.55!important}
+    .reader-supporting-sources li:first-child{padding-bottom:10px;border-bottom:1px solid #ddd5c8}
     @media(max-width:540px){
       .section-head h2,.worth h2{gap:9px}
       .me-section-icon{width:36px;height:36px;flex-basis:36px}
@@ -73,6 +75,48 @@
     if (!meta) return false;
     const text = meta.textContent.toLowerCase();
     return /(philosoph|ethics|moral psychology|political thought|political theory|social theory|intellectual history|book review|essay)/.test(text);
+  }
+
+  function enhanceSourceTriangulation(root = document) {
+    const reader = root.querySelector ? root.querySelector('#readerContent') : null;
+    if (!reader || !reader.children.length) return;
+    const list = reader.querySelector('.reader-supporting-sources');
+    if (!list || list.dataset.meTriangulation === '1') return;
+
+    const heading = list.previousElementSibling;
+    if (heading && heading.tagName === 'H2') heading.textContent = 'Source triangulation';
+
+    const sourceBox = reader.querySelector('.reader-source-box');
+    const sourceName = sourceBox && sourceBox.querySelector('strong') ? sourceBox.querySelector('strong').textContent.trim() : '';
+    const sourceLink = sourceBox ? sourceBox.querySelector('a[href]') : null;
+    if (sourceName && sourceLink) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = sourceLink.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = sourceName;
+      const role = document.createElement('span');
+      role.className = 'reader-source-role';
+      role.textContent = 'Primary displayed article';
+      li.append(a, role);
+      list.prepend(li);
+    }
+
+    [...list.children].forEach((li, index) => {
+      if (index === 0 && sourceName && sourceLink) return;
+      if (li.querySelector('.reader-source-role')) return;
+      const role = document.createElement('span');
+      role.className = 'reader-source-role';
+      role.textContent = 'Supporting verification / context';
+      li.appendChild(role);
+    });
+
+    const note = document.createElement('p');
+    note.className = 'reader-triangulation-note';
+    note.textContent = 'Morning Edition compared the displayed article with additional reporting or primary evidence. Source roles are shown so you can see how the account was checked.';
+    list.before(note);
+    list.dataset.meTriangulation = '1';
   }
 
   function adaptReaderLabels(root = document) {
@@ -205,6 +249,7 @@
     // full subtree caused our own heading relabels to retrigger this observer.
     new MutationObserver(() => {
       resetReaderLabel();
+      enhanceSourceTriangulation(document);
       adaptReaderLabels(document);
     }).observe(readerContent, {childList:true});
   }
