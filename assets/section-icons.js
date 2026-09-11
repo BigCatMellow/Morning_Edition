@@ -79,7 +79,7 @@
 
   function enhanceSourceTriangulation(root = document) {
     const reader = root.querySelector ? root.querySelector('#readerContent') : null;
-    if (!reader || !reader.children.length) return;
+    if (!reader || !reader.children.length || isPhilosophyReader(reader)) return;
     const list = reader.querySelector('.reader-supporting-sources');
     if (!list || list.dataset.meTriangulation === '1') return;
 
