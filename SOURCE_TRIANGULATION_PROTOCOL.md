@@ -137,9 +137,9 @@ Follow the translation rules in `EDITORIAL_GUIDE.md`:
 
 ## Reader data representation
 
-The website already supports a `supporting_sources` array inside a reader object and renders it as **Sources used for context**.
+The website supports a `supporting_sources` array inside a reader object. Factual deep reads with triangulation are displayed as an explicit **Source triangulation** block that combines the displayed article with these additional sources.
 
-Use objects with the following shape when possible:
+Every supporting source used to satisfy triangulation must be an object with all three fields below:
 
 ```json
 "supporting_sources": [
@@ -156,7 +156,7 @@ Use objects with the following shape when possible:
 ]
 ```
 
-The original displayed article remains represented by the story's normal `source` and `url` fields and is shown separately in the reader source box.
+The original displayed article remains represented by the story's normal `source` and `url` fields and counts as one evidence stream only when it genuinely qualifies.
 
 Use concise, informative role labels such as:
 
@@ -170,11 +170,31 @@ Use concise, informative role labels such as:
 
 Do not add sources merely to make the list longer. Every supporting source should materially improve verification, context or interpretation.
 
+## Hard publication gate
+
+For every consequential or materially contested factual story that receives Continue Reading, publication is incomplete unless **one** of the following is true:
+
+1. the displayed article itself genuinely supplies one of the required evidence roles **and** `supporting_sources` contains at least one materially independent source supplying the other role; or
+2. the displayed article does not count as one of the required roles, in which case `supporting_sources` contains at least two materially independent sources that together provide local/primary evidence and external verification.
+
+For highly disputed, security-sensitive, attribution-heavy, election, conflict, intelligence, or major institutional stories, use three or more materially independent evidence streams when reasonably available.
+
+In addition:
+
+- every source used to satisfy this gate must have a real URL;
+- every `supporting_sources` object used to satisfy the gate must include a non-empty `name`, `url`, and `role`;
+- role labels must describe the actual function of the source, not generic filler;
+- two URLs that share the same underlying wire copy, press release, anonymous briefing, or primary claim do not satisfy independence;
+- the reader should make meaningful disagreement or residual uncertainty visible when it exists;
+- if adequate triangulation is genuinely impossible but the story is still too important to omit, the reader must say so explicitly and `editorial_review.triangulation_check` must identify the limitation.
+
+**Do not update the Morning Edition email trigger while this gate fails.** Missing role labels, missing independent evidence, or a missing required `triangulation_check` are publication defects to repair before the edition is considered complete.
+
 ## Editorial review
 
-For editions containing consequential or contested stories, `editorial_review` should include a concise `triangulation_check` or equivalent note confirming whether the important stories received appropriate independent verification.
+For every edition containing consequential or contested stories, `editorial_review` must include a concise `triangulation_check` or equivalent field confirming which important stories were independently verified and noting any unresolved sourcing limitations.
 
-If a story could not be triangulated adequately but remains important enough to publish, the reader must state that limitation clearly and the editorial review should preserve it for the next run.
+If no selected story required triangulation, the field may say that explicitly. It should not simply be omitted.
 
 ## Editorial standard
 
