@@ -14,7 +14,7 @@ Primary files to read before making changes or generating an edition:
 4. `index.html` — current GitHub Pages reader UI.
 5. `data/latest.json` — most recently published edition and the current live data shape.
 6. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
-7. `README.md` — project overview and file layout.
+7. `README.md` — project overview and file layout.\n8. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.
 
 Email delivery lives in `BigCatMellow/Notes`:
 
@@ -49,7 +49,7 @@ For a manual or scheduled Morning Edition run:
     - `data/readers/YYYY-MM-DD.json`
     - `editions/YYYY-MM-DD.md`
 12. Only after all Morning Edition files are successfully published, update `BigCatMellow/Notes/data/morning-edition-trigger.txt` with the Eastern Time date and the edition's `generated_at` timestamp. That commit triggers the existing SMTP email workflow.
-13. Never update the email trigger when publication failed or `data/latest.json` is incomplete.
+14. Never update the email trigger when publication failed, `data/latest.json` is incomplete, the reader-pack schema/linkage check fails, or an applicable triangulation gate fails.
 
 ## Recurring balance requirements
 
