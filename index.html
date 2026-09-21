@@ -211,7 +211,7 @@
     function sectionDek(section){return section.dek||section.description||sectionCopy[section.id]||''}
     function gridClass(items){return`story-grid items-${Math.min(Math.max(items.length,1),3)}`}
 
-    function applyReaderPack(edition,pack){const readers=pack&&pack.readers?pack.readers:{};const apply=story=>{if(!story||hasExpandedReader(story)||!story.url)return;if(readers[story.url])story.reader=readers[story.url]};apply(edition.lead_story);for(const section of(edition.sections||[]))for(const story of(section.items||[]))apply(story);for(const story of(edition.worth_your_time||[]))apply(story);return edition}
+    function applyReaderPack(edition,pack){const readers=pack&&pack.readers&&typeof pack.readers==='object'?pack.readers:(pack&&typeof pack==='object'?pack:{});const apply=story=>{if(!story||hasExpandedReader(story)||!story.url)return;if(readers[story.url])story.reader=readers[story.url]};apply(edition.lead_story);for(const section of(edition.sections||[]))for(const story of(section.items||[]))apply(story);for(const story of(edition.worth_your_time||[]))apply(story);return edition}
     async function attachReaderPack(edition){if(!edition||!edition.date)return edition;try{return applyReaderPack(edition,await loadJson(`data/readers/${edition.date}.json`))}catch{return edition}}
 
     function render(edition){
