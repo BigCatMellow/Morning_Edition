@@ -48,8 +48,9 @@ For a manual or scheduled Morning Edition run:
     - `data/archive/YYYY-MM-DD.json`
     - `data/readers/YYYY-MM-DD.json`
     - `editions/YYYY-MM-DD.md`
-12. Only after all Morning Edition files are successfully published, update `BigCatMellow/Notes/data/morning-edition-trigger.txt` with the Eastern Time date and the edition's `generated_at` timestamp. That commit triggers the existing SMTP email workflow.
-14. Never update the email trigger when publication failed, `data/latest.json` is incomplete, the reader-pack schema/linkage check fails, or an applicable triangulation gate fails.
+12. Apply the publication gates in `OPERATIONS_RUNBOOK.md`. A reader pack is invalid unless it has a top-level `readers` object containing the URL-keyed treatments; those keys must exactly match final published story URLs; and every populated `published_date` must be an exact `YYYY-MM-DD` value. Re-read the persisted JSON after writing it.
+13. Only after all Morning Edition files and validation gates succeed, update `BigCatMellow/Notes/data/morning-edition-trigger.txt` with the Eastern Time date and the edition's `generated_at` timestamp. That commit triggers the existing SMTP email workflow.
+14. Never update the email trigger when publication failed, `data/latest.json` is incomplete, the reader-pack schema/linkage check fails, a publication date is invalid, or an applicable triangulation gate fails.
 
 ## Recurring balance requirements
 
