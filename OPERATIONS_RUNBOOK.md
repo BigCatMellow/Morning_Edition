@@ -240,6 +240,32 @@ The regression affected reader packs for September 18–21 before repair.
 
 The compatibility fallback in `index.html` is defense in depth. It does **not** make raw root-level URL maps an accepted publication format. New reader packs must use the canonical schema.
 
+## Known incident: September 22, 2026 invalid publication date blocked the whole page
+
+### Symptom
+
+The Tuesday **2026-09-22** edition had been published correctly, but the website remained on **Preparing the paper**.
+
+### Root cause
+
+One Ideas story used:
+
+```json
+"published_date": "2026-09-24 issue"
+```
+
+The site formatter treated every `published_date` as a JavaScript date and passed the invalid value to `Intl.DateTimeFormat`. That raised a `RangeError` during `render()`, aborting the entire edition before the placeholder content could be replaced.
+
+### Corrective actions taken
+
+- Corrected the story metadata to `"published_date": "2026-09-24"` in `data/latest.json` and `data/archive/2026-09-22.json`.
+- Hardened the site's `prettyDate` and `shortDate` helpers so an invalid date value falls back to raw text instead of crashing the edition.
+- Added a publication rule that machine-readable `published_date` values must use exact `YYYY-MM-DD` format.
+
+### General lesson
+
+Metadata must not be allowed to become a page-wide single point of failure. Publication validation should check semantic field formats, not only whether the JSON parses.
+
 ## Troubleshooting
 
 ### Continue Reading buttons disappear for most or all stories
