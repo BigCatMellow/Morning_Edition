@@ -18,11 +18,15 @@ The main edition card should remain concise and readable. Continue Reading is wh
 
 ## Default rule
 
-For a **consequential or materially contested factual story**, Continue Reading should normally use **at least two materially independent evidence streams**:
+For a **consequential or materially contested factual story**, Continue Reading should normally use **at least two materially independent evidence streams**.
 
-1. **Local reporting whenever reasonably available** — actively look for an actual local or on-the-ground news report from the country, region, city, or community where the event occurred. Prefer original reporting by journalists close to the event over a foreign rewrite of a wire story. Local-language reporting is welcome and often preferable.
-2. **Primary evidence when useful** — for example, an official document, court ruling, research paper, election authority, regulator, direct transcript, public dataset, or other authoritative record.
-3. **Independent external verification** — a reputable source outside the institution, faction, country-level information chain, or reporting organization responsible for the primary claim.
+The preferred pattern for a place-based story is:
+
+1. **Actual local reporting whenever reasonably available** — actively look for an on-the-ground news report from the country, region, city, or community where the event occurred. Prefer original reporting by journalists close to the event over a foreign rewrite of a wire story. Local-language reporting is welcome and often preferable.
+2. **Independent external verification** — a reputable source outside the institution, faction, country-level information chain, or reporting organization responsible for the primary claim.
+3. **Primary evidence when useful** — add an official document, court ruling, research paper, election authority record, regulator filing, direct transcript, public dataset, or other authoritative record when it materially strengthens the account.
+
+This does **not** mean every ordinary consequential story requires three sources. If credible local reporting exists, the usual minimum is local reporting + an independent external verifier, with primary evidence added when useful. If credible local reporting cannot reasonably be found, primary evidence + an independent external verifier may satisfy the minimum, with the local-source limitation noted when appropriate.
 
 The article displayed on the Morning Edition card may count as one of these sources when it genuinely fills one role. If the displayed article is itself an international verifier, **make a real attempt to find a separate local report before settling for primary evidence alone**. If it is genuine local reporting, seek an external verifier and primary evidence when useful.
 
