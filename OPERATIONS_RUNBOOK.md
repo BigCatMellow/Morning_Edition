@@ -82,7 +82,7 @@ A normal factual reader should explain, where useful:
 - useful connections;
 - supporting sources used for verification or context.
 
-For consequential or contested stories, apply `SOURCE_TRIANGULATION_PROTOCOL.md`.
+For consequential or contested stories, apply `SOURCE_TRIANGULATION_PROTOCOL.md`. As part of that pass, actively seek at least one **actual local or on-the-ground report from the affected place when reasonably available**. A primary document is useful evidence but is not the same thing as local journalism. If credible local reporting cannot be found after a real search, proceed with the strongest available sources and record the limitation for consequential stories.
 
 For philosophy and argument-driven work, use `PHILOSOPHY_READER_PROTOCOL.md` rather than forcing the story into a news-event template.
 
@@ -185,7 +185,7 @@ If a story URL changes after the reader pack is drafted, update the reader key b
 
 For substantial reader treatments, confirm the deeper layer actually adds context rather than merely repeating the card summary.
 
-For consequential or materially contested factual stories, confirm required independent evidence streams and usable supporting-source URLs/roles are present.
+For consequential or materially contested factual stories, confirm required independent evidence streams and usable supporting-source URLs/roles are present. Also confirm that a real local-reporting search occurred for place-based stories; when a credible local report exists it should normally appear as `Local reporting`, and when none is reasonably available the limitation should be documented rather than silently skipped.
 
 ### Re-read after write
 
