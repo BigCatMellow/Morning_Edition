@@ -242,6 +242,8 @@ The compatibility fallback in `index.html` is defense in depth. It does **not** 
 
 ## Known incident: September 22, 2026 invalid publication date blocked the whole page
 
+Detailed incident record: [`incidents/2026-09-22-preparing-the-paper-invalid-date.md`](incidents/2026-09-22-preparing-the-paper-invalid-date.md)
+
 ### Symptom
 
 The Tuesday **2026-09-22** edition had been published correctly, but the website remained on **Preparing the paper**.
