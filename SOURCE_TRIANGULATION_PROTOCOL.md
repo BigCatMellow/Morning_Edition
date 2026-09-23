@@ -20,10 +20,13 @@ The main edition card should remain concise and readable. Continue Reading is wh
 
 For a **consequential or materially contested factual story**, Continue Reading should normally use **at least two materially independent evidence streams**:
 
-1. **Local or primary evidence** — for example, original local reporting, an official document, court ruling, research paper, election authority, regulator, direct transcript, public dataset, or credible reporting from the place where the event occurred.
-2. **Independent external verification** — a reputable source outside the institution, faction, country-level information chain, or reporting organization responsible for the primary claim.
+1. **Local reporting whenever reasonably available** — actively look for an actual local or on-the-ground news report from the country, region, city, or community where the event occurred. Prefer original reporting by journalists close to the event over a foreign rewrite of a wire story. Local-language reporting is welcome and often preferable.
+2. **Primary evidence when useful** — for example, an official document, court ruling, research paper, election authority, regulator, direct transcript, public dataset, or other authoritative record.
+3. **Independent external verification** — a reputable source outside the institution, faction, country-level information chain, or reporting organization responsible for the primary claim.
 
-The article displayed on the Morning Edition card may count as one of these sources when it genuinely fills one role. If the displayed article is itself an international verifier, seek local or primary evidence for the other role. If it is local or primary reporting, seek an external verifier.
+The article displayed on the Morning Edition card may count as one of these sources when it genuinely fills one role. If the displayed article is itself an international verifier, **make a real attempt to find a separate local report before settling for primary evidence alone**. If it is genuine local reporting, seek an external verifier and primary evidence when useful.
+
+The local-reporting preference is an effort requirement, not a mechanical quota. A story may still publish without a local report when credible local journalism is unsafe, inaccessible, paywalled beyond practical use, unavailable, state-controlled without adequate independence, or when no relevant local outlet appears to have reported the event. In that case, use the strongest available primary and independent sources and make the limitation visible in the reader or `editorial_review.triangulation_check` for consequential stories.
 
 For highly disputed, security-sensitive, politically consequential, or attribution-heavy stories, use **three or more independent evidence streams when reasonably available**.
 
@@ -116,11 +119,17 @@ Do not elevate:
 
 When evidence is asymmetric, say so. The aim is independent verification, not a 50/50 presentation.
 
-## Local and primary sources
+## Local reporting and primary sources
 
-Whenever practical, look first for reporting or records from the place and institution involved.
+For consequential international or regional stories, **search for an actual local report as a distinct step**. Do not treat an official statement, government website, court filing, research paper, or local office of an international wire as equivalent to local journalism.
 
-Local sources can reveal facts, language, institutional context and public concerns that an international wire may flatten. But local does not automatically mean independent or trustworthy. Note state control, ownership conflicts, strong partisan alignment or other material constraints when relevant.
+A useful local source is normally a news organization or reporter based in, serving, or routinely covering the affected place and doing its own reporting. It may be national, regional, city-level, community, specialist, or local-language media. The point is proximity to the event and local information ecosystem, not simply a country-code domain.
+
+Local reporting can reveal facts, language, institutional context, public reaction, and details that an international wire may flatten or miss. When a credible local report materially contributes to the story, include it in `supporting_sources` with the role `Local reporting`.
+
+Local does not automatically mean independent or trustworthy. Check whether the outlet is state-controlled, owned by an interested party, strongly partisan, repeating the same wire copy, or simply relaying an official claim. A local source that adds no independent reporting may still be useful for perspective, but it does not automatically satisfy an independent evidence role.
+
+If no credible local report can be found after a real search, do not invent one or substitute a primary document while calling it local reporting. Use the strongest available primary and external sources, and note the local-reporting limitation when the story is consequential enough for triangulation.
 
 Primary sources are especially useful for establishing what an institution officially did or said. They are **not automatically independent verification of the institution's interpretation of itself**.
 
@@ -175,7 +184,9 @@ Do not add sources merely to make the list longer. Every supporting source shoul
 For every consequential or materially contested factual story that receives Continue Reading, publication is incomplete unless **one** of the following is true:
 
 1. the displayed article itself genuinely supplies one of the required evidence roles **and** `supporting_sources` contains at least one materially independent source supplying the other role; or
-2. the displayed article does not count as one of the required roles, in which case `supporting_sources` contains at least two materially independent sources that together provide local/primary evidence and external verification.
+2. the displayed article does not count as one of the required roles, in which case `supporting_sources` contains at least two materially independent sources that together provide primary/local evidence and external verification.
+
+In either case, the triangulation pass must also make a good-faith search for **actual local reporting** when the story concerns a specific place or community. If credible local reporting is found, use it unless there is a documented reason not to. If none is reasonably available, publication may still proceed, but the sourcing limitation should be noted for consequential stories rather than silently treating a primary document as a local report.
 
 For highly disputed, security-sensitive, attribution-heavy, election, conflict, intelligence, or major institutional stories, use three or more materially independent evidence streams when reasonably available.
 
