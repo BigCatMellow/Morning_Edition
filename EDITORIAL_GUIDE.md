@@ -185,7 +185,8 @@ For each daily edition:
 - Normally use no more than **two current-news-core stories from the same outlet**.
 - Avoid letting a single publication country account for more than roughly **one quarter to one third** of the current-news core unless an extraordinary event clearly justifies it.
 - When covering a country or region, first look for credible local or regional reporting before defaulting to Reuters, AP, BBC, The Guardian, ABC Australia, or another large English-language outlet.
-- Wire services and major international publications remain valuable for verification and for stories where local reporting is unsafe, inaccessible, unreliable, or unavailable.
+- For consequential stories selected for Continue Reading, make a **separate good-faith search for an actual local or on-the-ground news report** from the affected place. An official document or government statement is primary evidence, not a substitute for local journalism. When credible local reporting exists, normally include it in the triangulation set.
+- Wire services and major international publications remain valuable for verification and for stories where local reporting is unsafe, inaccessible, unreliable, state-controlled without sufficient independence, paywalled beyond practical use, or genuinely unavailable. If a consequential story proceeds without local reporting after a real search, note that limitation in the triangulation review rather than pretending a local source was found.
 - Seek different media ecosystems, not merely different domain names.
 - Periodically rotate source discovery so the edition does not settle into a small convenience set.
 
