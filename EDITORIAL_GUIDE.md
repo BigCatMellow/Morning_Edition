@@ -215,12 +215,19 @@ Front Page, World, Science, Society, Technology, and other current-news sections
 
 ### In Case You Missed It
 
-An optional **In Case You Missed It** section may contain 1–3 stories that remain important, revealing, or unusually interesting despite no longer being fresh headlines.
+**In Case You Missed It** is a standard daily catch-up section, normally containing **2–4 stories**. It has two distinct discovery jobs and should deliberately search both before selecting:
 
-- Look mainly across the previous **2–8 weeks**.
+1. **Recent Misses — previous ~72 hours.** Find consequential stories that were not among the day's 3–5 biggest Front Page stories but are still important enough that the reader should not lose them merely because larger events crowded them out.
+2. **Older Catch-up — roughly 4 days to 8 weeks.** Recover consequential, revealing, under-covered, or newly meaningful stories after they have fallen out of the immediate cycle. Deliberately search the **2–8 week** range so this does not collapse into a second current-news section.
+
+Normally include at least **one Recent Miss and one Older Catch-up** when both lanes produce material that clears the editorial bar. Do not fill either sub-lane mechanically.
+
+- A Recent Miss must have independent value; it is not a dumping ground for every story that failed to make the Front Page.
+- An Older Catch-up should reward distance: significance that persisted, became clearer, was under-covered, or matters more in hindsight.
 - Stories from roughly the last one to two months are acceptable when their significance outlasted the initial news cycle.
-- Prefer consequential stories that were easy to miss, received limited U.S. attention, or became more meaningful with hindsight.
-- Do not recycle unavoidable headlines merely because they are still recent.
+- Prefer consequential stories that were easy to miss, received limited U.S. attention, or were displaced by larger breaking news.
+- Do not duplicate a story already used on today's Front Page merely to satisfy the section.
+- If one sub-lane produces no strong candidate after a real search, use the stronger material from the other and record the omission in `editorial_review`.
 
 ### Long-form reading
 

@@ -33,7 +33,7 @@ For a manual or scheduled Morning Edition run:
 2. Inspect the most recent 7–14 archived editions when available, including `editorial_review`, to detect topic repetition, source concentration, neglected areas, and opportunities for deliberate exploration.
 3. Research in four distinct lanes before selecting stories:
    - **Current news:** mainly the last 24–72 hours.
-   - **In Case You Missed It:** mainly the previous 2–8 weeks, deliberately looking for consequential or revealing stories that fell out of the immediate cycle.
+   - **In Case You Missed It:** search two sub-lanes: **Recent Misses** from the previous ~72 hours that were important but displaced from the Front Page by larger stories, and **Older Catch-up** from roughly 4 days–8 weeks, with deliberate attention to the 2–8 week range.
    - **Ideas and long-form:** philosophy, political thought, social theory, psychology, intellectual history, criticism, essays, academic papers, reviews, and other durable work with no strict freshness requirement.
    - **At Human Scale:** usually the previous 1–7 days, deliberately searching local and regional reporting for one or two low-temperature stories about ordinary community life whose value is perspective rather than consequence.
 4. Research current material on the web broadly before selecting narrowly. Prefer strong original reporting, primary research, credible local/regional sources, and genuinely local sources for the human-scale lane.
@@ -58,11 +58,12 @@ Morning Edition is not supposed to become a current-news-only product. Each run 
 
 ### In Case You Missed It is a standard daily lane
 
-`In Case You Missed It` should normally appear in every edition with **1–3 stories**, mainly from the previous **2–8 weeks**.
+`In Case You Missed It` should normally appear in every edition with **2–4 stories** and must deliberately search two different catch-up horizons:
 
-The purpose is not to recycle old headlines. Search specifically for stories that were consequential, revealing, under-covered in the United States, easy to miss, or more meaningful after a little time passed.
+- **Recent Misses — previous ~72 hours:** consequential stories that did not make the 3–5-story Front Page because even larger stories displaced them. These should still be stories the reader ought to know, not leftovers.
+- **Older Catch-up — roughly 4 days–8 weeks:** stories whose importance persisted, was under-covered, became clearer with hindsight, or fell out of the immediate cycle. Deliberately search the **2–8 week** range so older discovery is preserved.
 
-Do not let the section disappear merely because enough fresh news was found. It may be omitted only when a genuine 2–8 week search fails to produce anything that clears the editorial bar. If omitted, `editorial_review` should state that the older-news lane was searched and why no candidate was selected.
+Normally include at least one item from each sub-lane when both produce material that clears the editorial bar. Do not duplicate today's Front Page. If either sub-lane is omitted, `editorial_review` should state that it was searched and why no candidate was selected.
 
 ### Ideas and philosophy are part of the daily paper, not occasional decoration
 

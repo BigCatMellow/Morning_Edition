@@ -16,7 +16,7 @@ The repository is authoritative for editorial behavior and publication structure
 
 The scheduled ChatGPT task should recover current repository state before each run and should not rely on remembered chat context or a stale copy of the rules.
 
-The normal schedule is daily at **8:25 AM Eastern**.
+The normal primary schedule is daily at **5:00 AM Eastern**, with an independent recovery check at **5:30 AM Eastern**.
 
 ## Parent outcome
 
@@ -54,11 +54,22 @@ Do not assume yesterday's remembered state is still correct.
 Research before selecting:
 
 1. **Current news** — mainly the previous 24–72 hours.
-2. **In Case You Missed It** — mainly the previous 2–8 weeks.
+2. **In Case You Missed It** — deliberately search both **Recent Misses** from the previous ~72 hours and **Older Catch-up** from roughly 4 days–8 weeks, with deliberate attention to the 2–8 week range.
 3. **Ideas / long-form** — durable essays, philosophy, political thought, psychology, intellectual history, criticism, papers, reviews, and related work with no strict freshness requirement.
 4. **At Human Scale** — generally the previous 1–7 days of genuinely local or regional ordinary-life reporting.
 
 Do not allow a strong current-news pool to crowd out the other lanes without an actual search.
+
+## In Case You Missed It coverage contract
+
+The section is designed to prevent two different kinds of loss:
+
+- **Recent Misses (~72 hours):** consequential stories that were crowded out of the Front Page by larger developments.
+- **Older Catch-up (~4 days–8 weeks):** stories that became clearer with distance, were under-covered, or simply fell out of the immediate cycle. Search the **2–8 week** range deliberately on every run.
+
+The normal target is **2–4 ICYMI stories**, preferably including at least one from each sub-lane when both clear the editorial bar. This is not a quota. Do not duplicate the Front Page and do not promote weak leftovers merely to fill the section.
+
+`editorial_review` should separately record whether the Recent Misses search and Older Catch-up search were performed and whether each produced a selected story.
 
 ### 3. Select and write the concise edition
 
@@ -365,12 +376,12 @@ A validation gate protects data quality but cannot protect against the scheduler
 
 The normal publication schedule and the recovery schedule have different roles:
 
-1. **Primary publisher — 8:25 AM Eastern**
+1. **Primary publisher — 5:00 AM Eastern**
    - Runs the full canonical workflow.
    - Remains enabled after ordinary publication failures.
    - Never advances the email trigger after an incomplete publication.
 
-2. **Recovery publisher — after the primary window**
+2. **Recovery publisher — 5:30 AM Eastern**
    - Reads `data/latest.json` first.
    - Uses today's Eastern date as the idempotency guard.
    - Does nothing when today's edition already exists.

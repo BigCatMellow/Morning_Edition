@@ -79,3 +79,13 @@ If the primary task repeatedly becomes disabled, treat that as a platform/schedu
 - Recovery publishes only when today's edition is missing.
 - Email remains downstream of successful validated publication.
 - This incident is linked from `OPERATIONS_RUNBOOK.md`.
+
+
+## Later schedule adjustment
+
+On **2026-09-25**, after the incident was stabilized, the operator moved the normal publication schedule earlier:
+
+- Primary publisher: **5:00 AM Eastern**
+- Independent recovery check: **5:30 AM Eastern**
+
+This is an operator preference change, not part of the incident root cause.
