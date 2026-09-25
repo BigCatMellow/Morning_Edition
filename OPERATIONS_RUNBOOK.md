@@ -331,3 +331,50 @@ Morning Edition currently has three layers protecting Continue Reading:
 3. **UI compatibility fallback** — `index.html` can still consume a legacy/raw URL map if one appears, preventing a single schema regression from silently hiding every reader.
 
 The publication gate remains authoritative. The UI fallback exists only to reduce user-visible failure severity.
+
+
+## Known incident: September 25, 2026 scheduled run fired but published nothing and became disabled
+
+Detailed incident record: [`incidents/2026-09-25-scheduled-run-disabled-before-publication.md`](incidents/2026-09-25-scheduled-run-disabled-before-publication.md)
+
+### Symptom
+
+The normal 8:25 AM Eastern scheduled task recorded a run, but no September 25 publication artifacts were committed. The recurring task was disabled immediately afterward.
+
+### Established cause
+
+The exact platform-level exception is not exposed on the available scheduler surface, so the narrow root cause remains unknown. What is verified is that execution stopped **before the first publication commit** and the recurring task did not remain enabled.
+
+This failure class is distinct from malformed-data incidents because the repository never received a partial September 25 edition.
+
+### Corrective actions
+
+- Re-enabled the primary 8:25 AM Eastern Morning Edition task.
+- Added an explicit rule that publication failure must not intentionally disable or alter the recurring scheduler.
+- Added an independent post-run recovery task with an idempotent date guard:
+  - if `data/latest.json.date` equals today's Eastern date, exit;
+  - otherwise execute the canonical Morning Edition workflow from this repository and publish the missing edition;
+  - update the Notes email trigger only after all existing publication gates pass.
+- Preserved the downstream email safety gate rather than sending from stale or incomplete data.
+
+### General lesson
+
+A validation gate protects data quality but cannot protect against the scheduler itself failing before publication begins. Scheduler resilience therefore requires a **separate failure boundary**: an independent recovery execution that checks the repository's observable state rather than trusting whether the primary task reports success.
+
+## Scheduler resilience contract
+
+The normal publication schedule and the recovery schedule have different roles:
+
+1. **Primary publisher — 8:25 AM Eastern**
+   - Runs the full canonical workflow.
+   - Remains enabled after ordinary publication failures.
+   - Never advances the email trigger after an incomplete publication.
+
+2. **Recovery publisher — after the primary window**
+   - Reads `data/latest.json` first.
+   - Uses today's Eastern date as the idempotency guard.
+   - Does nothing when today's edition already exists.
+   - Runs the full canonical publication workflow only when today's edition is missing.
+   - Uses the same JSON, linkage, date, triangulation, persisted-file re-read, and email-trigger gates as the primary publisher.
+
+A recovery path must never be implemented by weakening validation or by blindly sending yesterday's edition.
