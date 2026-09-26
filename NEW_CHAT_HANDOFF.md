@@ -65,13 +65,23 @@ Morning Edition is not supposed to become a current-news-only product. Each run 
 
 Normally include at least one item from each sub-lane when both produce material that clears the editorial bar. Do not duplicate today's Front Page. If either sub-lane is omitted, `editorial_review` should state that it was searched and why no candidate was selected.
 
+### Human Scale is a tonal reset, not just small geography
+
+At Human Scale should normally be **lower-stakes and less serious than the surrounding paper**. Locality alone is not enough.
+
+Prefer ordinary community life: a festival, craft, club, animal, local tradition, small restoration, neighborhood gathering, village ritual, modest project, small-town curiosity, or other specific glimpse of people living their lives.
+
+Do **not** use the lane for serious hardship merely because the story is local. School-access failures, major road collapses, loss of essential services, displacement, safety crises, poverty, serious institutional failure, and similar stories belong elsewhere in Morning Edition.
+
+The section is not required to be funny or positive. It should function as a brief **tonal and scale reset**.
+
 ### Ideas and philosophy are part of the daily paper, not occasional decoration
 
 Every edition must deliberately search for **philosophy, political thought, social theory, ethics, psychology, intellectual history, criticism, serious essays, and relevant academic papers**. These selections do not need to be tied to the day's headlines.
 
 Normally include at least **one dedicated reflective/Ideas selection** in addition to the current-news core. It can be an essay, paper, review, lecture, argument, historical intellectual piece, or carefully framed philosophical question. A strong `Ideas` section is preferred when a source piece exists; `One Thing to Think About` can supplement it but should not become a substitute for consistently finding serious outside ideas.
 
-The `worth_your_time` / Long Read block should normally include **1–3 pieces**, and at least one should regularly come from the durable ideas/essay lane rather than being simply a longer version of current affairs. Philosophy and intellectual history can be years old or much older if the argument remains useful.
+The `worth_your_time` / Long Read block should normally include **1–3 pieces**, and at least one should regularly come from the durable ideas/essay lane rather than being simply a longer version of current affairs. Philosophy and intellectual history can be years old or much older if the argument remains useful. **Do not repeat an article already selected for Ideas or any other section. One source piece gets one visible placement; use Continue Reading for depth.**
 
 Useful discovery ecosystems include Aeon, Psyche, 3 Quarks Daily, Arts & Letters Daily, Foreign Affairs, serious university publications, academic journals, open-access papers, intellectual reviews, and high-quality independent essay publications. These are discovery sources, not a whitelist.
 

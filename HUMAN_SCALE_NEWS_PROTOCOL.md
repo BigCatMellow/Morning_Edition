@@ -42,6 +42,10 @@ Examples include:
 
 The story does **not** need to be positive. It does need to be low-temperature and human-sized.
 
+More specifically, this lane should usually feel **lighter in stakes than the rest of the paper**. It is a tonal reset, not merely a geographically small serious story. Good selections often involve festivals, clubs, crafts, animals, local traditions, small restorations, neighborhood rituals, community gatherings, everyday conveniences, minor curiosities, or modest local projects.
+
+A story can contain inconvenience or friction, but **material hardship should not be the reason it matters**.
+
 ## What does not belong here
 
 Do not use this lane for:
@@ -55,8 +59,24 @@ Do not use this lane for:
 - corporate PR dressed up as community news;
 - generic 'good news' or inspirational content;
 - stories whose real purpose is to provoke outrage, sentimentality, or a laugh.
+- serious access failures involving school, healthcare, food, housing, transport, or other essential services;
+- stories primarily about poverty, displacement, institutional failure, major infrastructure breakdown, public-safety risk, or a community losing a basic service;
+- local stories whose central question is whether people can continue attending school, reaching medical care, keeping housing, staying safe, or meeting another basic need.
+
+Those may be excellent Morning Edition stories, but they belong in Front Page, a subject section, or ICYMI rather than the tonal-reset lane.
 
 A useful test is: **Would this still be worth including if nobody found it funny, heartwarming, or shareable?** If yes, it may fit.
+
+## Stakes test
+
+Before selecting a Human Scale item, ask:
+
+1. **If I removed the town name, would this still sound like a serious public-policy or hardship story?** If yes, it probably belongs elsewhere.
+2. **Is the main consequence loss, danger, deprivation, displacement, or access to an essential service?** If yes, reject it from Human Scale.
+3. **Does this briefly let the reader inhabit ordinary life somewhere?** If yes, it is closer to the target.
+4. **Would this plausibly run on page three or in the community section of a local paper, without needing the reader to feel alarmed?** That is the preferred zone.
+
+The target is not comedy or forced positivity. It is **low stakes, specificity, and ordinary human texture**.
 
 ## Tone
 

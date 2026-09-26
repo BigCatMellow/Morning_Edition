@@ -32,8 +32,10 @@ The run is DONE only when:
 4. the reader-pack schema is correct;
 5. reader treatments link to the final canonical story URLs;
 6. applicable triangulation requirements pass;
-7. the live publication files have been re-read after writing;
-8. only then is the Notes email trigger updated.
+7. the cross-section uniqueness gate passes;
+8. the Human Scale stakes/tone gate passes;
+9. the live publication files have been re-read after writing;
+10. only then is the Notes email trigger updated.
 
 ## Intended daily flow
 
@@ -191,6 +193,26 @@ Collect the final canonical URLs from the published edition.
 Every story intended to have Continue Reading must have an exact matching key under `pack.readers`.
 
 If a story URL changes after the reader pack is drafted, update the reader key before publication completes.
+
+### Cross-section uniqueness gate
+
+Before publication, collect the canonical source article used by the lead story, every section item, and every `worth_your_time` item.
+
+Publication fails if:
+
+- the same canonical URL appears more than once;
+- trivial URL variants point to the same article in multiple visible slots;
+- the same source piece is represented by multiple visible cards under different URLs.
+
+In particular, an Ideas selection must not be repeated in Worth Your Time. Use Continue Reading to deepen the selected article instead.
+
+### Human Scale stakes gate
+
+Confirm the Human Scale selection is not merely a serious local story.
+
+Reject it from Human Scale when its primary significance is material hardship, loss of an essential service, serious infrastructure failure, displacement, safety risk, poverty, institutional failure, or whether people can access school, healthcare, housing, food, transport, or another basic need.
+
+Human Scale should normally provide a low-stakes tonal reset through ordinary community life. Serious local stories can still run elsewhere in the edition.
 
 ### Context quality
 

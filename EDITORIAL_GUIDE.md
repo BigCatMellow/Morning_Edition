@@ -289,11 +289,15 @@ It may intentionally leave a question unresolved when doing so is more useful th
 
 Recommended section id: `ideas`.
 
+**Do not duplicate an Ideas source in `worth_your_time` / The Long Read.** A source article gets one visible placement in the edition. If an Ideas essay deserves deeper treatment, use its Continue Reading reader rather than repeating the same headline, URL, or source piece in another section.
+
 ### The Long Read
 
 Select **1–3 exceptional pieces** worth spending real time with. Explain specifically why each deserves the reader's time rather than merely summarizing it.
 
 For backward compatibility, these continue to live in the top-level `worth_your_time` array. The current website may label the block `Worth Your Time`; editorially it serves the role of **The Long Read**.
+
+**Every Long Read must be distinct from every lead story and section item in the same edition.** Do not reuse an article already selected for Ideas, Front Page, ICYMI, Human Scale, or another section. A piece can satisfy the durable-ideas goal either as an Ideas item or as a Long Read; it does not need to occupy both surfaces.
 
 ### Outside the Bubble
 
@@ -324,6 +328,22 @@ Do not use a motivational quote.
 This item may be original Morning Edition framing rather than a conventional article. If it relies on factual or historical claims, cite the source material.
 
 Recommended section id: `one-thing-to-think-about`.
+
+## Cross-section uniqueness
+
+The visible edition must not repeat the same source piece in multiple sections.
+
+Before publication, build a normalized list of every article URL used by:
+
+- `lead_story`;
+- all `sections[].items[]`;
+- `worth_your_time[]`.
+
+Reject publication if the same canonical source article appears more than once. Normalize obvious URL variants such as trailing slashes, tracking parameters, AMP aliases, and alternate links that resolve to the same article when this can be established.
+
+Also reject near-duplicate visible cards that use different URLs for the same article or substantially the same source piece.
+
+**One article, one visible placement.** Continue Reading is the intended place to deepen an article without duplicating its card elsewhere in the paper.
 
 ## Internal reader
 
