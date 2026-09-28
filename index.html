@@ -140,6 +140,153 @@
       .reader-modal{padding:0}.reader-frame{min-height:100vh;border:0}.reader-content{padding:38px 22px 64px}.reader-content h1{font-size:2.4rem;line-height:1.03}.reader-standfirst{font-size:1.11rem}.reader-content p{font-size:1.05rem;line-height:1.76}.reader-assessment{margin-left:-4px;margin-right:-4px}.reader-implication{padding:14px 15px}.reader-close{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:43;width:44px;height:44px;background:#fbfaf6;box-shadow:0 3px 14px rgba(0,0,0,.16)}.topbar .brand-small{display:none}
     }
   </style>
+
+  <style id="story-layout-tuning">
+    /* Editorial story hierarchy tuned from the approved layout mockup. */
+    .story{
+      padding:0;
+      min-width:0;
+      overflow:hidden;
+    }
+    .story-layout{
+      padding:25px 28px 0;
+    }
+    .story-main{
+      min-width:0;
+      padding-bottom:24px;
+    }
+    .story h3{
+      margin-bottom:15px;
+    }
+    .story-summary{
+      margin:0;
+      text-indent:1.8em;
+    }
+    .story .story-meta{
+      margin:26px 0 0;
+      padding-top:11px;
+      border-top:1px solid rgba(185,173,154,.55);
+    }
+    .story-why{
+      margin:0 0 24px;
+      padding:15px 17px 17px;
+      background:#efe7da;
+      border-top:3px solid var(--accent);
+      border-bottom:1px solid #d4c7b5;
+      align-self:start;
+    }
+    .story-why-label{
+      display:block;
+      margin-bottom:7px;
+      color:var(--accent);
+      font-size:.72rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .story-why p{
+      margin:0;
+      color:#3e3830;
+      font-size:.91rem;
+      line-height:1.6;
+    }
+    .story-grid.items-1 .story{
+      background:rgba(255,253,248,.72);
+      border-top:1px solid #cfc4b3;
+      border-bottom:1px solid #cfc4b3;
+    }
+    .story-grid.items-1 .story-layout.has-why{
+      display:grid;
+      grid-template-columns:minmax(0,2.15fr) minmax(240px,.85fr);
+      gap:34px;
+    }
+    .story-grid.items-1 .story-main{
+      padding-bottom:28px;
+    }
+    .story-grid.items-1 .story-why{
+      margin:3px 0 28px;
+    }
+    .story > .story-actions--structured{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      margin:0;
+      padding:14px 28px 16px;
+      border-top:1px solid #d7cec0;
+      background:rgba(238,234,224,.45);
+    }
+    .story-action-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .story > .story-actions--structured .reader-button{
+      color:var(--accent);
+    }
+    .story > .story-actions--structured .read-link{
+      color:var(--muted);
+      border-bottom-color:#aaa095;
+      font-weight:700;
+    }
+    .story-context-cue{
+      color:#8a8177;
+      font-size:.7rem;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .section--ideas .story-layout,
+    .section--in-case-you-missed-it .story-layout,
+    .section--one-thing-to-think-about .story-layout{
+      padding:30px 34px 0;
+    }
+    .section--ideas .story > .story-actions--structured,
+    .section--in-case-you-missed-it .story > .story-actions--structured,
+    .section--one-thing-to-think-about .story > .story-actions--structured{
+      padding-left:34px;
+      padding-right:34px;
+    }
+
+    @media(max-width:900px){
+      .story{padding:0}
+      .story-layout,
+      .section--ideas .story-layout,
+      .section--in-case-you-missed-it .story-layout,
+      .section--one-thing-to-think-about .story-layout{
+        padding:24px 22px 0;
+      }
+      .story-grid.items-1 .story-layout.has-why{
+        grid-template-columns:1fr;
+        gap:0;
+      }
+      .story-grid.items-1 .story-main{
+        padding-bottom:24px;
+      }
+      .story-grid.items-1 .story-why{
+        margin:0 0 24px;
+      }
+      .story > .story-actions--structured,
+      .section--ideas .story > .story-actions--structured,
+      .section--in-case-you-missed-it .story > .story-actions--structured,
+      .section--one-thing-to-think-about .story > .story-actions--structured{
+        padding:14px 22px 17px;
+      }
+    }
+
+    @media(max-width:560px){
+      .story-summary{
+        text-indent:1.5em;
+      }
+      .story .story-meta{
+        margin-top:24px;
+      }
+      .story-context-cue{
+        display:none;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="topbar"><div class="shell"><div class="brand-small">A personal world newspaper</div><div id="status" class="status">Loading today's edition…</div><div class="top-actions"><button id="archiveBtn" class="archive-button" type="button">Archive</button></div></div></div>
@@ -181,7 +328,7 @@
     function countryHtml(country){if(!country)return'';const flag=flagForCountry(country);return`${flag?`<span class="country-flag" aria-hidden="true">${flag}</span>`:''}${esc(country)}`}
     function storyMetaHtml(story){const parts=[];if(story.type)parts.push(esc(story.type));if(story.source)parts.push(esc(story.source));if(story.country)parts.push(countryHtml(story.country));if(story.published_date)parts.push(esc(shortDate(story.published_date)));return parts.join(' · ')}
     function leadMetaHtml(story){const parts=[];if(story.country)parts.push(countryHtml(story.country));if(story.type)parts.push(esc(story.type));if(story.published_date)parts.push(esc(shortDate(story.published_date)));return parts.join(' · ')}
-    const sourceLink=story=>story.url?`<a class="read-link" href="${esc(story.url)}" target="_blank" rel="noopener">Read source →</a>`:'';
+    const sourceLink=story=>story.url?`<a class="read-link" href="${esc(story.url)}" target="_blank" rel="noopener">Original source →</a>`:'';
     const why=story=>story.why_it_matters?`<div class="why"><strong>Why it matters</strong><br>${esc(story.why_it_matters)}</div>`:'';
 
     function readerParagraphs(reader){if(!reader)return[];if(Array.isArray(reader.body))return reader.body.filter(Boolean);if(typeof reader.body==='string'&&reader.body.trim())return reader.body.split(/\n\s*\n/).filter(Boolean);if(Array.isArray(reader.paragraphs))return reader.paragraphs.filter(Boolean);return[]}
@@ -190,7 +337,9 @@
     function hasExpandedReader(story){if(!story||!story.reader)return false;const reader=story.reader,paragraphs=readerParagraphs(reader),keyPoints=valueList(reader.key_points),connections=valueList(reader.connections),supporting=Array.isArray(reader.supporting_sources)?reader.supporting_sources.filter(Boolean):[];return paragraphs.length>=2||Boolean(reader.context||reader.background||reader.why_it_matters||reader.bigger_picture||reader.significance||reader.future_implications||reader.uncertainty||reader.uncertainties||reader.what_to_watch||keyPoints.length>=2||connections.length||supporting.length)}
     function registerReader(story){const id=`reader-${++readerCounter}`;readerStories.set(id,story);return id}
     function actions(story){const parts=[];if(hasExpandedReader(story)){const id=registerReader(story);parts.push(`<button class="reader-button" type="button" data-reader-id="${id}">Continue reading</button>`)}if(story.url)parts.push(sourceLink(story));return parts.length?`<div class="story-actions">${parts.join('')}</div>`:''}
-    function storyCard(story){return`<article class="story"><div class="meta">${storyMetaHtml(story)}</div><h3>${esc(story.headline||'Untitled')}</h3>${story.summary?`<p>${esc(story.summary)}</p>`:''}${why(story)}${actions(story)}</article>`}
+    function storyWhy(story){return story.why_it_matters?`<aside class="story-why"><span class="story-why-label">Why it matters</span><p>${esc(story.why_it_matters)}</p></aside>`:''}
+    function storyActions(story){const parts=[];if(hasExpandedReader(story)){const id=registerReader(story);parts.push(`<button class="reader-button" type="button" data-reader-id="${id}">Continue reading</button>`)}if(story.url)parts.push(sourceLink(story));return parts.length?`<div class="story-actions story-actions--structured"><div class="story-action-links">${parts.join('')}</div><span class="story-context-cue">Morning Edition synthesis</span></div>`:''}
+    function storyCard(story){const meta=storyMetaHtml(story),hasWhy=Boolean(story.why_it_matters);return`<article class="story"><div class="story-layout${hasWhy?' has-why':''}"><div class="story-main"><h3>${esc(story.headline||'Untitled')}</h3>${story.summary?`<p class="story-summary">${esc(story.summary)}</p>`:''}${meta?`<div class="meta story-meta">${meta}</div>`:''}</div>${storyWhy(story)}</div>${storyActions(story)}</article>`}
     function worthCard(story){return`<article><div class="meta">${storyMetaHtml(story)}</div><h3>${esc(story.headline||'Untitled')}</h3>${story.summary?`<p>${esc(story.summary)}</p>`:''}${story.why_it_matters?`<p><strong>Why it is worth your time:</strong> ${esc(story.why_it_matters)}</p>`:''}${actions(story)}</article>`}
 
     function significanceHtml(value){if(!value)return'';const label=typeof value==='string'?value:(value.label||value.level||''),rationale=typeof value==='object'?(value.rationale||value.reason||value.explanation||''):'';if(!label&&!rationale)return'';return`<div class="reader-assessment"><div class="reader-assessment-label">Editorial significance</div>${label?`<strong>${esc(label)}</strong>`:''}${rationale?`<p>${esc(rationale)}</p>`:''}</div>`}
