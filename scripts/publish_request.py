@@ -53,7 +53,7 @@ def validate(p):
     if any(not u for u in urls) or len(urls)!=len(set(urls)): fail("Visible canonical URLs are missing or duplicated")
     for x in stories:
         d=x.get("published_date")
-        if d is not None and not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}",str(d)): fail("Invalid published_date")
+        if d is not None and not re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(d)): fail("Invalid published_date")
     ideas=[i.get("url") for s in e.get("sections",[]) if s.get("id")=="ideas" for i in s.get("items",[])]
     wyt={i.get("url") for i in e.get("worth_your_time",[])}
     if any(u in wyt for u in ideas): fail("Ideas article duplicated in Worth Your Time")
