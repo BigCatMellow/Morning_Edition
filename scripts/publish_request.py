@@ -16,8 +16,15 @@ def run(*args):
     subprocess.run(args,check=True)
 
 def extract(body):
-    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\n(.*?)\nMORNING_EDITION_PACKAGE -->",body or "",re.S)
-    if not m: fail("Missing MORNING_EDITION_PACKAGE envelope")
+    body=body or ""
+    # Prefer raw JSON: it is easier for scheduled agents to emit reliably and avoids
+    # adding an unnecessary encoding step. Keep base64 support for old requests.
+    raw=re.search(r"<!-- MORNING_EDITION_PACKAGE_JSON\\n(.*?)\\nMORNING_EDITION_PACKAGE_JSON -->",body,re.S)
+    if raw:
+        try: return json.loads(raw.group(1).strip())
+        except Exception as e: fail(f"Invalid raw JSON package: {e}")
+    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\\n(.*?)\\nMORNING_EDITION_PACKAGE -->",body,re.S)
+    if not m: fail("Missing Morning Edition package envelope")
     try: return json.loads(base64.b64decode(m.group(1).strip()).decode("utf-8"))
     except Exception as e: fail(f"Invalid package encoding: {e}")
 
