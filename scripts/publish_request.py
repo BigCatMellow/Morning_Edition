@@ -16,7 +16,7 @@ def run(*args):
     subprocess.run(args,check=True)
 
 def extract(body):
-    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\\n(.*?)\\nMORNING_EDITION_PACKAGE -->",body or "",re.S)
+    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\n(.*?)\nMORNING_EDITION_PACKAGE -->",body or "",re.S)
     if not m: fail("Missing MORNING_EDITION_PACKAGE envelope")
     try: return json.loads(base64.b64decode(m.group(1).strip()).decode("utf-8"))
     except Exception as e: fail(f"Invalid package encoding: {e}")
