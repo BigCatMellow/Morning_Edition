@@ -19,11 +19,11 @@ def extract(body):
     body=body or ""
     # Prefer raw JSON: it is easier for scheduled agents to emit reliably and avoids
     # adding an unnecessary encoding step. Keep base64 support for old requests.
-    raw=re.search(r"<!-- MORNING_EDITION_PACKAGE_JSON\\n(.*?)\\nMORNING_EDITION_PACKAGE_JSON -->",body,re.S)
+    raw=re.search(r"<!-- MORNING_EDITION_PACKAGE_JSON\n(.*?)\nMORNING_EDITION_PACKAGE_JSON -->",body,re.S)
     if raw:
         try: return json.loads(raw.group(1).strip())
         except Exception as e: fail(f"Invalid raw JSON package: {e}")
-    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\\n(.*?)\\nMORNING_EDITION_PACKAGE -->",body,re.S)
+    m=re.search(r"<!-- MORNING_EDITION_PACKAGE\n(.*?)\nMORNING_EDITION_PACKAGE -->",body,re.S)
     if not m: fail("Missing Morning Edition package envelope")
     try: return json.loads(base64.b64decode(m.group(1).strip()).decode("utf-8"))
     except Exception as e: fail(f"Invalid package encoding: {e}")
@@ -78,7 +78,7 @@ def update_trigger(date,generated):
     if not token: fail("NOTES_TRIGGER_TOKEN is not configured; edition files were published but email trigger cannot be advanced")
     url=f"https://api.github.com/repos/{NOTES_REPO}/contents/{TRIGGER_PATH}"
     cur=api(url,token)
-    content=f"{date}\\n{generated}"
+    content=f"{date}\n{generated}"
     api(url,token,"PUT",{"message":f"Trigger Morning Edition {date}","content":base64.b64encode(content.encode()).decode(),"sha":cur["sha"]})
 
 def main():
