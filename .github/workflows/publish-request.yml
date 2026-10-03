@@ -2,7 +2,7 @@ name: Publish Morning Edition request
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 permissions:
   contents: write
