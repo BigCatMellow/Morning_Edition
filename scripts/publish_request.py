@@ -17,15 +17,31 @@ def run(*args):
 
 def extract(body):
     body=body or ""
+    ref=re.search(r"<!-- MORNING_EDITION_REQUEST_JSON\n(.*?)\nMORNING_EDITION_REQUEST_JSON -->",body,re.S)
+    if ref:
+        try: request=json.loads(ref.group(1).strip())
+        except Exception as e: fail(f"Invalid staged request JSON: {e}")
+        if request.get("request_version")!=1: fail("Unsupported request_version")
+        path=request.get("staging_path","")
+        sha=request.get("staging_sha","")
+        if not re.fullmatch(r"staging/requests/\d{4}-\d{2}-\d{2}\.json",path): fail("Invalid staging_path")
+        if not re.fullmatch(r"[0-9a-f]{40}",sha): fail("Invalid staging_sha")
+        q=REPO/path
+        if not q.is_file(): fail("Staged package does not exist")
+        actual=subprocess.check_output(["git","rev-parse",f"HEAD:{path}"],text=True).strip()
+        if actual!=sha: fail("Staged package SHA mismatch")
+        try: package=json.loads(q.read_text(encoding="utf-8"))
+        except Exception as e: fail(f"Invalid staged package JSON: {e}")
+        return package,path
     # Prefer raw JSON: it is easier for scheduled agents to emit reliably and avoids
     # adding an unnecessary encoding step. Keep base64 support for old requests.
     raw=re.search(r"<!-- MORNING_EDITION_PACKAGE_JSON\n(.*?)\nMORNING_EDITION_PACKAGE_JSON -->",body,re.S)
     if raw:
-        try: return json.loads(raw.group(1).strip())
+        try: return json.loads(raw.group(1).strip()),None
         except Exception as e: fail(f"Invalid raw JSON package: {e}")
     m=re.search(r"<!-- MORNING_EDITION_PACKAGE\n(.*?)\nMORNING_EDITION_PACKAGE -->",body,re.S)
     if not m: fail("Missing Morning Edition package envelope")
-    try: return json.loads(base64.b64decode(m.group(1).strip()).decode("utf-8"))
+    try: return json.loads(base64.b64decode(m.group(1).strip()).decode("utf-8")),None
     except Exception as e: fail(f"Invalid package encoding: {e}")
 
 def markdown(e):
@@ -82,7 +98,7 @@ def update_trigger(date,generated):
     api(url,token,"PUT",{"message":f"Trigger Morning Edition {date}","content":base64.b64encode(content.encode()).decode(),"sha":cur["sha"]})
 
 def main():
-    p=extract(os.getenv("ISSUE_BODY",""))
+    p,staging_path=extract(os.getenv("ISSUE_BODY",""))
     e,r,date=validate(p)
     latest=REPO/"data/latest.json"
     if latest.exists():
@@ -102,6 +118,8 @@ def main():
     run("git","config","user.name","github-actions[bot]")
     run("git","config","user.email","41898282+github-actions[bot]@users.noreply.github.com")
     run("git","add",*files.keys())
+    if staging_path:
+        run("git","rm",staging_path)
     run("git","commit","-m",f"Publish Morning Edition {date}")
     run("git","push","origin","HEAD:main")
     # Re-read the committed representation and repeat critical linkage/equality gates.
