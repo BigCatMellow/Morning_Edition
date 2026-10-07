@@ -411,3 +411,16 @@ The normal publication schedule and the recovery schedule have different roles:
    - Uses the same JSON, linkage, date, triangulation, persisted-file re-read, and email-trigger gates as the primary publisher.
 
 A recovery path must never be implemented by weakening validation or by blindly sending yesterday's edition.
+
+
+## Staged publication transport
+
+The canonical agent-to-publisher transport is defined in `STAGED_PUBLICATION_PROTOCOL.md`.
+
+Scheduled/manual agents no longer place the full edition and reader pack in an issue body. They write one non-publication staging artifact at `staging/requests/YYYY-MM-DD.json`, re-fetch its Git blob SHA, and create a small OWNER-authored issue containing only the staging path and SHA.
+
+`scripts/publish_request.py` verifies the path and exact blob SHA before parsing or validating the staged package. On successful publication the staging file is removed in the same commit that writes the four canonical publication artifacts.
+
+The older full-package issue envelope remains accepted only for backward compatibility.
+
+This transport change does not alter publication authority: GitHub Actions still owns validation, canonical file writes, persisted reread validation, and the downstream Notes trigger.
