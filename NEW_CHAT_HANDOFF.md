@@ -14,7 +14,7 @@ Primary files to read before making changes or generating an edition:
 4. `index.html` — current GitHub Pages reader UI.
 5. `data/latest.json` — most recently published edition and the current live data shape.
 6. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
-7. `README.md` — project overview and file layout.\n8. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.
+7. `README.md` — project overview and file layout.\n8. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.\n9. `STAGED_PUBLICATION_PROTOCOL.md` — canonical transport from ChatGPT/scheduled agents to the GitHub Action; use this instead of embedding the full edition in an issue.
 
 Email delivery lives in `BigCatMellow/Notes`:
 
@@ -43,12 +43,12 @@ For a manual or scheduled Morning Edition run:
 8. Populate `published_date`, `original_language`, `topics`, and `selection_lane` when they can be established reliably and are useful.
 9. Generate substantial Continue Reading synthesis in a separate reader pack at `data/readers/YYYY-MM-DD.json`, keyed by each story's source URL. Inline `reader` objects remain backward-compatible but are not required. Use the specialized philosophy protocol for philosophy, ethics, political thought, social theory, intellectual history, book reviews, and argument-driven essays rather than forcing them into a news-event template. Human-scale items normally do not need deep reader treatment unless useful local history or context genuinely warrants it.
 10. Run the edition-level quality check and persist a concise `editorial_review` in the edition JSON. This is an editorial process aid, not a claim about reader behavior. Include a `human_scale_check` or equivalent note confirming that the lane was searched and either selected or consciously omitted.
-11. Publish the completed edition to:
+11. Hand the completed package to GitHub Actions using `STAGED_PUBLICATION_PROTOCOL.md`. The agent writes only `staging/requests/YYYY-MM-DD.json` and creates the small SHA-bound OWNER issue. GitHub Actions publishes to:
     - `data/latest.json`
     - `data/archive/YYYY-MM-DD.json`
     - `data/readers/YYYY-MM-DD.json`
     - `editions/YYYY-MM-DD.md`
-12. Apply the publication gates in `OPERATIONS_RUNBOOK.md`. A reader pack is invalid unless it has a top-level `readers` object containing the URL-keyed treatments; those keys must exactly match final published story URLs; and every populated `published_date` must be an exact `YYYY-MM-DD` value. Re-read the persisted JSON after writing it.
+12. The GitHub Action applies the publication gates in `OPERATIONS_RUNBOOK.md`. A reader pack is invalid unless it has a top-level `readers` object containing the URL-keyed treatments; those keys must exactly match final published story URLs; and every populated `published_date` must be an exact `YYYY-MM-DD` value. Re-read the persisted JSON after writing it.
 13. Only after all Morning Edition files and validation gates succeed, update `BigCatMellow/Notes/data/morning-edition-trigger.txt` with the Eastern Time date and the edition's `generated_at` timestamp. That commit triggers the existing SMTP email workflow.
 14. Never update the email trigger when publication failed, `data/latest.json` is incomplete, the reader-pack schema/linkage check fails, a publication date is invalid, or an applicable triangulation gate fails.
 
