@@ -1,0 +1,33 @@
+name: Publish staged Morning Edition
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'staging/requests/*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: morning-edition-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.actor == 'BigCatMellow' && !startsWith(github.event.head_commit.message, 'Publish Morning Edition ')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publish verified staged package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES_TRIGGER_TOKEN: ${{ secrets.NOTES_TRIGGER_TOKEN }}
+        run: |
+          python scripts/publish_request.py --staged-auto
