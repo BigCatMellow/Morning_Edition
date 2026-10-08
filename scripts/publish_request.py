@@ -98,7 +98,16 @@ def update_trigger(date,generated):
     api(url,token,"PUT",{"message":f"Trigger Morning Edition {date}","content":base64.b64encode(content.encode()).decode(),"sha":cur["sha"]})
 
 def main():
-    p,staging_path=extract(os.getenv("ISSUE_BODY",""))
+    if "--staged-auto" in sys.argv:
+        today=datetime.now(TZ).date().isoformat()
+        staging_path=f"staging/requests/{today}.json"
+        q=REPO/staging_path
+        if not q.is_file():
+            print("No staged package for Eastern today; exit.")
+            return
+        p=json.loads(q.read_text(encoding="utf-8"))
+    else:
+        p,staging_path=extract(os.getenv("ISSUE_BODY",""))
     e,r,date=validate(p)
     latest=REPO/"data/latest.json"
     if latest.exists():
