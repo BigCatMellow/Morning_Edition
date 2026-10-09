@@ -80,7 +80,7 @@ def validate(p):
     review=e.get("editorial_review") or {}
     required=["section_uniqueness_check","human_scale_stakes_check","triangulation_check","contextualization_check"]
     for k in required:
-        if not str(review.get(k,"")).lower().startswith("pass"): fail(f"Editorial gate not passed: {k}")
+        if not str(review.get(k,"")).lower().startswith("pass"): fail(f"Editorial gate not passed: {k} (must begin with pass)")
     return e,r,today
 
 def api(url,token,method="GET",data=None):
@@ -98,6 +98,14 @@ def update_trigger(date,generated):
     api(url,token,"PUT",{"message":f"Trigger Morning Edition {date}","content":base64.b64encode(content.encode()).decode(),"sha":cur["sha"]})
 
 def main():
+    if "--validate-staged" in sys.argv:
+        if len(sys.argv)!=3: fail("Usage: --validate-staged staging/requests/YYYY-MM-DD.json")
+        path=sys.argv[2]
+        if not re.fullmatch(r"staging/requests/\\d{4}-\\d{2}-\\d{2}\\.json",path): fail("Invalid staging path")
+        p=json.loads((REPO/path).read_text(encoding="utf-8"))
+        validate(p)
+        print(f"Staged package valid: {path}")
+        return
     if "--staged-auto" in sys.argv:
         today=datetime.now(TZ).date().isoformat()
         staging_path=f"staging/requests/{today}.json"
