@@ -8,29 +8,13 @@ Large complete-edition JSON bodies sent through a GitHub issue write proved inte
 
 ## Canonical handoff
 
-After research, assembly, and every editorial gate passes:
-
-1. Confirm `data/latest.json.date` is not today's America/New_York date.
-2. Confirm no recovery/publish request already exists for today's date.
-3. Create exactly one staging file:
-   `staging/requests/YYYY-MM-DD.json`
-4. The staging file must contain compact valid JSON with exactly the existing publication package shape:
-   `{"package_version":1,"edition":<final edition>,"readers":<final reader pack>}`
-5. Re-fetch the staging file and record its Git blob SHA.
-6. Create exactly one OWNER-authored issue titled:
-   `[publish] Morning Edition YYYY-MM-DD recovery`
-7. The issue body must be exactly this small reference envelope:
-
-   ```
-   <!-- MORNING_EDITION_REQUEST_JSON
-   {"request_version":1,"staging_path":"staging/requests/YYYY-MM-DD.json","staging_sha":"<40-character blob SHA>"}
-   MORNING_EDITION_REQUEST_JSON -->
-   ```
-
-8. Verify the issue exists and `author_association` is `OWNER`.
-9. Verify `Publish Morning Edition request` starts.
-10. GitHub Actions verifies the staging path and blob SHA before parsing the package.
-11. The Action applies the existing publication gates, writes the four canonical publication artifacts, removes the staging file in the same publication commit, rereads persisted output, and only then advances the separate Notes trigger.
+1. Confirm Eastern today's date and check `data/latest.json.date`. If already published, exit.
+2. Research and assemble the complete package using the editorial protocols.
+3. Before staging, ensure the four `editorial_review` fields `section_uniqueness_check`, `human_scale_stakes_check`, `triangulation_check`, and `contextualization_check` each begin with `pass` (case-insensitive), and are supported by the actual editorial checks.
+4. Create or replace only `staging/requests/YYYY-MM-DD.json` with compact JSON containing exactly `package_version`, `edition`, and `readers`.
+5. Run `python scripts/publish_request.py --validate-staged staging/requests/YYYY-MM-DD.json` against the final file before pushing. This uses the same validator as publication; fix failures before committing. It does not publish or trigger Notes.
+6. An owner-authored push changing the staging file on `main` triggers `Publish staged Morning Edition`. Do not create a publication issue.
+7. Verify the workflow succeeded, all four canonical files persisted, staging was removed, and the downstream Notes trigger advanced. A failed run is not publication.
 
 ## Authority boundaries
 
@@ -47,11 +31,7 @@ GitHub Actions remains the publication authority.
 
 ## Failure behavior
 
-If staging-file creation fails, retry that same staging write once. Do not create an issue without a verified staging file and SHA.
-
-If issue creation fails, retry the same issue creation once. Do not create multiple requests for the date.
-
-If validation fails after the issue exists, correct the staging package in place, re-fetch its new blob SHA, and edit the same issue body with the new SHA. The workflow listens for issue edits, so this retries the same request without creating a duplicate issue.
+On validation failure, correct the same-day staged package and rerun the preflight before committing the update. Do not manufacture passing review labels without the underlying checks. A corrected owner-authored push retries publication. If a GitHub write is blocked, report the exact blocker and retain the staged package; do not bypass the publication workflow.
 
 A publication failure never disables, pauses, deletes, reschedules, or otherwise alters either Morning Edition recurring task.
 
