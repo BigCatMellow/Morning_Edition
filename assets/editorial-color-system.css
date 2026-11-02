@@ -1,33 +1,29 @@
 /*
- * Morning Edition — Playskool clarity, adult newspaper character.
- *
- * Large editorial surfaces, not tiny colored trim: the page canvas, cover,
- * discovery, history, reflection and long reads each have a deliberate role.
- * Headers, text and sources carry the meaning; color is never the only cue.
+ * Morning Edition — quiet hierarchy.
+ * Most page area is neutral. The lead headline, an exceptional photograph,
+ * and substantive writing set the rhythm. Color is a small navigational cue,
+ * not a competing full-page background for every editorial category.
  */
 :root{
-  --paper:#f7f3e9; --paper-2:#f2ecdf; --paper-3:#e5eee8;
-  --header-surface:#fffdf7; --ink:#222823; --muted:#545c55;
-  --rule:#b2b0a2; --accent:#853e36; --accent-2:#205b57;
+  --paper:#f8f6f0;
+  --paper-2:#f4f1e9;
+  --paper-3:#eeeee7;
+  --header-surface:#fdfbf6;
+  --ink:#222823;
+  --muted:#545c55;
+  --rule:#b2b0a2;
+  --accent:#853e36;
+  --accent-2:#205b57;
   --me-ochre:#7a541a;
-  --me-rust-wash:#f6ebe4; --me-teal-wash:#e5eee8; --me-ochre-wash:#f5edd8;
-
-  --me-canvas:#dae4e0;     /* the page outside the newspaper */
-  --me-sheet:#fffdf7;      /* ordinary readable paper */
-  --me-cover:#efdfd3;      /* the main story */
-  --me-front:#f4e5db;      /* other important reporting */
-  --me-catchup:#e9dfcc;    /* looking back */
-  --me-discover:#dce9e4;   /* science and unexpected finds */
-  --me-human:#e0e7ea;      /* human scale */
-  --me-ideas:#f0e5c8;      /* ideas, history and culture */
-  --me-reflect:#dee7ec;    /* contemplative pause */
-  --me-wonder:#264744;     /* photographs / art */
-  --me-on-dark:#f7f3e9;
-  --me-dark-muted:#d6e4dc;
+  --me-canvas:#e9e9e3;
+  --me-sheet:#fdfbf6;
+  --me-head:#f4f1ea;
+  --me-photomat:#242d2a;
+  --me-wonder-surface:#eeeee8;
+  --me-reflection-surface:#eff1ed;
 }
 
-/* The canvas is green-grey; the readable newspaper itself is warm white.
-   Avoid an uninterrupted wall of #f7f3e9. */
+/* Framing stays calm. The masthead and headline remain primary. */
 body{background:var(--me-canvas)}
 main.shell{
   background:var(--me-sheet);
@@ -35,226 +31,261 @@ main.shell{
   box-shadow:0 0 0 1px rgba(34,40,35,.10);
 }
 .topbar{
-  background:var(--accent-2);
-  color:var(--me-on-dark);
-  border-bottom:2px solid #173d3a;
-}
-.topbar .status{color:#d9e7df}
-.topbar .archive-button{
-  color:var(--me-on-dark);
-  background:transparent;
-  border:1px solid #b8d1c8;
-  font-weight:700;
-}
-.topbar .archive-button:hover{background:rgba(255,255,255,.13)}
-.masthead{
-  background:var(--me-sheet);
-  border-top:5px solid var(--accent-2);
-}
-.masthead .sub{color:var(--muted);letter-spacing:.095em}
-.datebar{
-  margin:0 -18px;
-  padding:12px 18px;
-  background:#efe7d9;
-  border-bottom:2px solid var(--ink);
-}
-.datebar .center{color:var(--accent-2)}
-.edition-route{
-  gap:8px 26px;
-  padding:16px 0;
-  font-size:.72rem;
+  background:#efede6;
+  color:var(--ink);
   border-bottom:1px solid var(--rule);
 }
-.edition-route a{padding:3px 0;border-bottom:2px solid transparent}
-.edition-route a:hover,.edition-route a:focus-visible{border-bottom-color:var(--accent-2)}
-:where(a,button):focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
-.worth :where(a,button):focus-visible,
-.daily-wonder :where(a,button):focus-visible{outline-color:#e8c581}
-.read-link,.reader-button{font-size:.8rem;line-height:1.6}
+.topbar .status{color:var(--muted);font-weight:500}
+.topbar .brand-small{font-weight:700;letter-spacing:.08em}
+.topbar .archive-button{
+  background:transparent;
+  color:var(--ink);
+  border:1px solid #98978d;
+  font-weight:700;
+  padding:5px 10px;
+}
+.topbar .archive-button:hover{background:#e4e3dc}
+.masthead{
+  background:var(--me-sheet);
+  border-top:0;
+  border-bottom:3px double var(--ink);
+}
+.masthead .sub{color:var(--muted);letter-spacing:.08em}
+.datebar{
+  margin:0 -18px;
+  padding:10px 18px;
+  background:#f1eee7;
+  border-bottom:1px solid var(--rule);
+}
+.datebar .center{color:var(--muted);font-weight:700}
+.edition-route{
+  gap:6px 20px;
+  padding:10px 0 12px;
+  border-bottom:1px solid #d2cdc2;
+  font-size:.66rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  color:var(--muted);
+}
+.edition-route .route-label{color:var(--muted);font-weight:700}
+.edition-route a{padding:3px 0;border-bottom:1px solid transparent}
+.edition-route a:hover,.edition-route a:focus-visible{
+  color:var(--ink);
+  border-bottom-color:var(--accent-2);
+}
+:where(a,button):focus-visible{
+  outline:3px solid var(--accent-2);
+  outline-offset:3px;
+}
+.worth :where(a,button):focus-visible{outline-color:#e8c581}
+.read-link,.reader-button{
+  font-size:.78rem;
+  line-height:1.6;
+  letter-spacing:.035em;
+}
 
-/* The cover has its own large, gently colored surface. */
+/* The headline earns attention through scale, not a huge pink rectangle. */
 .lede{
   margin:0 -18px;
-  padding:40px 30px 44px;
-  background:var(--me-cover);
-  border-bottom:5px solid var(--accent);
+  padding:36px 30px 42px;
+  background:var(--me-sheet);
+  border-bottom:1px solid var(--rule);
 }
+.lede .eyebrow{color:var(--accent)}
 .source-card{
-  border-top:5px solid var(--accent);
-  background:rgba(255,253,247,.68);
-  padding:18px 22px 20px;
+  background:transparent;
+  border-top:2px solid #9a9489;
+  border-bottom:1px solid var(--rule);
+  padding:14px 0 18px;
 }
+.source-card .source{font-size:1.35rem;line-height:1.18}
+.source-card .label{color:var(--muted)}
+.source-card .story-actions{gap:10px 15px}
+.source-card .read-link,
+.source-card .reader-button{font-size:.74rem}
 
-/* Section color is a full reading region, not just an accent stripe.
-   Keep stories unboxed so the layout still resembles a newspaper. */
+/* One neutral editorial language; a small meaningful line at the heading.
+   Never tint every story to match its category. */
 .news-section{
-  --me-section-ink:var(--accent-2);
-  --me-section-wash:var(--me-teal-wash);
-  --me-zone:var(--me-discover);
-  margin:14px -18px 0;
-  padding:34px 18px 40px;
-  border-bottom:0;
-  background:var(--me-zone);
+  margin:0 -18px;
+  padding:36px 18px 40px;
+  border-bottom:1px solid #d0cac0;
+  background:transparent;
+  --me-section-ink:#9a958b;
 }
 .news-section .section-head{
-  background:var(--me-section-wash);
-  border:1px solid rgba(34,40,35,.22);
-  border-left:5px solid var(--me-section-ink);
-  padding:18px 20px;
+  background:transparent;
+  border:0;
+  border-top:2px solid var(--me-section-ink);
+  border-bottom:0;
+  padding:14px 0 14px;
 }
 .news-section .section-head h2{color:var(--ink)}
 .news-section .section-head .count{
-  color:var(--me-section-ink);
-  font-weight:700;
+  color:var(--muted);
+  font-weight:500;
 }
 .section--front-page,
-.section--world,
-.section--society-human-behavior,
-.section--technology{
-  --me-section-ink:var(--accent);
-  --me-section-wash:#e7d2c6;
-  --me-zone:var(--me-front);
-}
-.section--in-case-you-missed-it{
-  --me-section-ink:var(--accent);
-  --me-section-wash:#e0cfb3;
-  --me-zone:var(--me-catchup);
-  background:var(--me-zone);
-}
+.section--world{--me-section-ink:var(--accent)}
 .section--science,
 .section--outside-the-bubble,
-.section--small-things{
-  --me-section-ink:var(--accent-2);
-  --me-section-wash:#cde0d7;
-  --me-zone:var(--me-discover);
+.section--at-human-scale{--me-section-ink:var(--accent-2)}
+.section--ideas,
+.section--history-culture{--me-section-ink:var(--me-ochre)}
+.section--in-case-you-missed-it,
+.section--small-things,
+.section--one-thing-to-think-about{--me-section-ink:#aaa49a}
+.section--in-case-you-missed-it{
+  background:transparent;
+  margin:0 -18px;
+  padding:36px 18px 40px;
 }
 .section--at-human-scale{
-  --me-section-ink:var(--accent-2);
-  --me-section-wash:#cad9df;
-  --me-zone:var(--me-human);
-  background:var(--me-zone);
-  margin:14px -18px 0;
-  padding:34px 18px 40px;
+  background:#f3f4ef;
+  margin:0 -18px;
+  padding:36px 18px 40px;
 }
-.section--history-culture,
-.section--ideas,
-.section--one-thing-to-think-about{
-  --me-section-ink:var(--me-ochre);
-  --me-section-wash:#e6d4a3;
-  --me-zone:var(--me-ideas);
-}
-.section--ideas{margin-top:14px}
+.section--ideas{margin-top:0}
 .section--ideas .section-head,
 .section--in-case-you-missed-it .section-head,
 .section--one-thing-to-think-about .section-head,
 .section--outside-the-bubble .section-head,
 .section--at-human-scale .section-head{
-  background:var(--me-section-wash);
-  border-top:1px solid rgba(34,40,35,.22);
+  background:transparent;
+  border-top:2px solid var(--me-section-ink);
 }
-.story{background:transparent}
-.story:nth-child(even){background:rgba(255,253,247,.42)}
-.section--at-human-scale .story{background:rgba(255,253,247,.26)}
+.story,
+.story:nth-child(even),
+.section--at-human-scale .story{background:transparent}
 .story-grid.items-1 .story{
-  background:rgba(255,253,247,.5);
-  border-color:rgba(34,40,35,.16);
+  background:rgba(255,255,255,.25);
+  border-color:#d8d1c7;
 }
 .story-why{
-  background:rgba(255,253,247,.62);
-  border-top-color:var(--me-section-ink);
-  border-bottom-color:rgba(34,40,35,.2);
+  background:#f1eee8;
+  border-top:2px solid #b8b1a5;
+  border-bottom:1px solid #dbd5cb;
 }
-.story-why-label{color:var(--me-section-ink)}
-.story .story-meta{border-top-color:rgba(34,40,35,.22)}
+.story-why-label{color:var(--muted)}
+.story .story-meta{border-top-color:#d3ccc2}
 .story > .story-actions--structured{
-  background:rgba(255,253,247,.20);
-  border-top-color:rgba(34,40,35,.18);
+  background:transparent;
+  border-top-color:#d8d1c7;
 }
 .story-context-cue{color:var(--muted)}
 
-/* Daily Wonder is intentionally the richest color event on the page.
-   A dark teal gallery surface lets the image carry the detail. */
+/* The photograph—not a full-block teal background—gets the spotlight. */
 .daily-wonder{
-  margin:18px -18px 14px;
-  padding:30px 30px 36px;
-  background:var(--me-wonder);
-  color:var(--me-on-dark);
-  border:0;
+  margin:20px -18px 18px;
+  padding:26px 28px 34px;
+  background:var(--me-wonder-surface);
+  color:var(--ink);
+  border-top:3px solid var(--accent-2);
+  border-bottom:1px solid var(--rule);
 }
-.daily-wonder .feature-kicker{color:#e8cb91}
-.daily-wonder .feature-kicker::after{background:#78918b}
-.wonder-photo a{background:#17312f;padding:10px}
+.daily-wonder .feature-kicker{color:var(--accent-2)}
+.daily-wonder .feature-kicker::after{background:#b2b7ad}
+.wonder-photo a{
+  background:var(--me-photomat);
+  padding:6px;
+}
 .wonder-photo figcaption{
-  padding:12px 0 0 13px;
-  border-left:3px solid #e8cb91;
-  color:var(--me-dark-muted);
+  padding:10px 0 0 12px;
+  border-left:2px solid #85958c;
+  color:var(--muted);
 }
 .wonder-photo figcaption a{
   display:inline;
-  padding:0;
-  color:#f1d49a;
   background:transparent;
+  color:var(--accent-2);
+  padding:0;
 }
-.wonder-text{gap:36px}
-.wonder-text h2{color:var(--me-on-dark)}
-.wonder-copy p{color:#e3eae5}
-.wonder-copy a{color:#f1d49a}
+.wonder-text{gap:28px}
+.wonder-text h2{color:var(--ink)}
+.wonder-copy p{color:#373d36}
+.wonder-copy a{color:var(--accent-2)}
 
-/* The quieter reflective lane is blue-grey, distinct from the ochre Ideas. */
+/* Reflection feels like a quiet pause. The dark Long Read is the
+   only large high-contrast colored editorial panel. */
 .reflection-feature{
-  margin:16px -18px 18px;
-  padding:42px 36px 46px;
-  background:var(--me-reflect);
-  border-top:4px solid var(--accent-2);
-  border-bottom:0;
+  background:var(--me-reflection-surface);
+  margin:18px -18px;
+  padding:38px 34px 42px;
+  border-top:2px solid var(--accent-2);
+  border-bottom:1px solid #d0d7d1;
 }
 .reflection-feature .feature-kicker,
 .reflection-question strong,
 .reflection-source a{color:var(--accent-2)}
-.reflection-feature .feature-kicker::after{background:#a4b9bb}
+.reflection-feature .feature-kicker::after{background:#bdc9bf}
 .reflection-question{border-left-color:var(--accent-2)}
 .worth{
   background:var(--ink);
-  border-top:5px solid #c49b56;
+  border-top:3px solid #aa8964;
   box-shadow:none;
-  margin-top:20px;
+  margin-top:30px;
 }
 .worth .section-kicker{color:#e8c581}
-.preview-notice{border-left:5px solid var(--accent-2)}
+
+/* Preview context should be visible but never compete with the cover. */
+.preview-notice{
+  display:flex;
+  align-items:center;
+  gap:7px 16px;
+  margin:12px 0 0;
+  padding:9px 12px;
+  background:#f0f1eb;
+  color:#4b514c;
+  border:0;
+  border-left:3px solid #8ea399;
+  flex-wrap:wrap;
+}
+.preview-notice strong{
+  font-size:.67rem;
+  letter-spacing:.045em;
+  color:#4b514c;
+}
+.preview-notice p{
+  margin:0;
+  flex:1 1 320px;
+  font-size:.75rem;
+  line-height:1.45;
+}
+.preview-notice a{
+  font-size:.73rem;
+  color:var(--accent-2);
+  font-weight:600;
+  white-space:normal;
+}
 footer{background:var(--me-sheet)}
 
-/* One reading column, no protruding margins or image overflow. */
+/* Keep the reduced hierarchy intact on mobile. */
 @media(max-width:900px){
-  .lede{padding:34px 22px 38px}
-  .daily-wonder{padding:24px 22px 30px}
-  .reflection-feature{padding:34px 24px 38px}
+  .lede{padding:30px 22px 34px}
+  .daily-wonder{padding:22px 20px 28px}
+  .reflection-feature{padding:32px 24px}
   .wonder-text{gap:18px}
 }
 @media(max-width:560px){
-  main.shell{
-    width:100%;
-    padding:0 11px 24px;
-    box-shadow:none;
-  }
-  .masthead{margin-left:-11px;margin-right:-11px;border-top-width:3px}
-  .datebar{margin:0 -11px;padding:11px}
-  .lede{margin:0 -11px;padding:27px 18px 32px}
-  .source-card{padding:15px 16px}
+  main.shell{width:100%;padding:0 11px 24px;box-shadow:none}
+  .masthead{margin-left:-11px;margin-right:-11px}
+  .datebar{margin:0 -11px;padding:10px 11px}
+  .lede{margin:0 -11px;padding:28px 18px 30px}
+  .source-card{padding:12px 0 16px}
   .news-section,
-  .section--at-human-scale{
-    margin:12px -11px 0;
-    padding:25px 11px 30px;
+  .section--at-human-scale,
+  .section--in-case-you-missed-it{
+    margin:0 -11px;
+    padding:28px 11px 30px;
   }
-  .news-section .section-head{padding:15px 16px}
-  .edition-route{gap:6px 17px;font-size:.7rem}
-  .daily-wonder{
-    margin:14px -11px 12px;
-    padding:18px 15px 23px;
+  .news-section .section-head{
+    margin-left:0;
+    margin-right:0;
+    padding:13px 0;
   }
-  .wonder-photo a{padding:5px}
-  .wonder-text{gap:15px}
-  .reflection-feature{
-    margin:12px -11px;
-    padding:30px 20px 34px;
-  }
+  .edition-route{gap:5px 15px;font-size:.62rem}
+  .daily-wonder{margin:16px -11px;padding:18px 14px 22px}
+  .wonder-photo a{padding:4px}
+  .reflection-feature{margin:14px -11px;padding:28px 18px 32px}
+  .preview-notice{padding:9px 10px}
 }
