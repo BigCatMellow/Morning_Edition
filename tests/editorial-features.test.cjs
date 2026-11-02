@@ -81,6 +81,11 @@ function renderFixture(edition) {
   const old = {...edition};
   delete old.daily_wonder;
   delete old.reflection;
+  const preview = await renderFixture({...edition,preview:true,preview_note:'Preview fixture; no email sent.'});
+  assert.ok(preview.includes('Design preview · Not a new publication'));
+  assert.ok(preview.includes('Preview fixture; no email sent.'));
+  assert.equal((preview.match(/id="front-page"/g)||[]).length,1,'Front Page navigation anchor must not be duplicated');
+  assert.equal((preview.match(/id="lead-story"/g)||[]).length,1,'Lead story anchor must be unique');
   const legacy = await renderFixture(old);
   assert.ok(!legacy.includes('id="daily-wonder"'));
   assert.ok(!legacy.includes('id="reflection"'));
