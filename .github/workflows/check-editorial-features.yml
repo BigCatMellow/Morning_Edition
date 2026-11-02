@@ -1,0 +1,27 @@
+name: Check Morning Edition editorial features
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'assets/editorial-features.*'
+      - 'scripts/publish_request.py'
+      - 'tests/**'
+      - '.github/workflows/check-editorial-features.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compile publisher
+        run: python -m py_compile scripts/publish_request.py
+      - name: Run publication feature tests
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Check browser scripts and features
+        run: node tests/editorial-features.test.cjs
