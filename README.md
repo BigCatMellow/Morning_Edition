@@ -14,6 +14,8 @@ Morning Edition combines consequential current news with science, history, cultu
 - `SOURCE_TRIANGULATION_PROTOCOL.md` — canonical multi-source verification protocol for consequential or contested factual stories. Continue Reading should normally combine local/primary evidence with an independent external verifier and make agreement, disagreement, attribution, and uncertainty visible.
 - `NEW_CHAT_HANDOFF.md` — operational handoff for continuing development or running an edition from a fresh ChatGPT conversation.\n- `OPERATIONS_RUNBOOK.md` — durable publication/runbook reference: intended scheduler flow, validation gates, Continue Reading schema, troubleshooting, recovery, and the September 18, 2026 reader-pack incident.
 
+- `VISUAL_REFLECTION_PROTOCOL.md` — daily visual discovery and sourced reflective passage; rights, attribution, data fields and reading placement.
+
 ## Editorial workspaces
 
 - `editorial/human-scale/` — durable workspace for source-discovery notes, examples, anti-patterns, search strategies, and future evaluation of the `At Human Scale` lane. The root `HUMAN_SCALE_NEWS_PROTOCOL.md` remains authoritative.
