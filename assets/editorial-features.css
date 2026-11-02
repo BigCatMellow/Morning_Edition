@@ -43,3 +43,10 @@
   .reflection-feature{margin-left:-18px;margin-right:-18px;padding:32px 22px}
   .reflection-feature blockquote{font-size:clamp(1.7rem,8vw,2.25rem)}
 }
+
+/* Read-only preview distinguishes fixture from the published newspaper. */
+.preview-notice{margin:19px 0 3px;padding:14px 18px;border:1px solid var(--accent-2);background:#e6eade;color:#263e39;display:flex;align-items:center;justify-content:space-between;gap:10px 20px;flex-wrap:wrap}
+.preview-notice strong{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.065em}
+.preview-notice p{margin:0;flex:1 1 340px;font-size:.82rem;line-height:1.5}
+.preview-notice a{color:var(--accent-2);font-size:.78rem;font-weight:700;white-space:nowrap}
+@media(max-width:560px){.preview-notice{padding:14px;align-items:flex-start}.preview-notice a{white-space:normal}}
