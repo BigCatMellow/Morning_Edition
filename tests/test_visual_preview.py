@@ -10,18 +10,18 @@ BASE = Path(__file__).resolve().parents[1]
 class PreviewTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.live = json.loads((BASE / "data/latest.json").read_text(encoding="utf-8"))
+        cls.archive = json.loads((BASE / "data/archive/2026-11-02.json").read_text(encoding="utf-8"))
         cls.preview = json.loads((BASE / "data/previews/2026-11-02-visual.json").read_text(encoding="utf-8"))
 
     def test_sample_is_not_published_data(self):
         self.assertTrue(self.preview["preview"])
-        self.assertNotIn("preview", self.live)
-        self.assertNotIn("daily_wonder", self.live)
-        self.assertNotIn("reflection", self.live)
+        self.assertNotIn("preview", self.archive)
+        self.assertNotIn("daily_wonder", self.archive)
+        self.assertNotIn("reflection", self.archive)
 
     def test_same_articles_as_original(self):
         for field in ("date", "generated_at", "lead_story", "sections", "worth_your_time"):
-            self.assertEqual(self.preview[field], self.live[field], field)
+            self.assertEqual(self.preview[field], self.archive[field], field)
 
     def test_visual_provenance_and_rights(self):
         image = self.preview["daily_wonder"]
