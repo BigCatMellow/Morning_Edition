@@ -11,11 +11,13 @@ Primary files to read before making changes or generating an edition:
 1. `EDITORIAL_GUIDE.md` — canonical editorial rules, research process, sections, recency rules, story schema, discovery targets, and self-review process.
 2. `VISUAL_REFLECTION_PROTOCOL.md` — canonical Daily Wonder and Something to Sit With sourcing, rights, schema and layout rules.
 3. `PHILOSOPHY_READER_PROTOCOL.md` — canonical supplemental protocol for deep Continue Reading treatments of philosophy, ethics, political thought, social theory, intellectual history, and argument-driven essays.
-3. `HUMAN_SCALE_NEWS_PROTOCOL.md` — canonical supplemental protocol for the recurring low-temperature local-news lane that restores a sense of ordinary scale to the paper.
+4. `HUMAN_SCALE_NEWS_PROTOCOL.md` — canonical supplemental protocol for the recurring low-temperature local-news lane that restores a sense of ordinary scale to the paper.
 5. `index.html` — current GitHub Pages reader UI.
 6. `data/latest.json` — most recently published edition and the current live data shape.
 7. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
-8. `README.md` — project overview and file layout.\n9. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.\n10. `STAGED_PUBLICATION_PROTOCOL.md` — canonical transport from ChatGPT/scheduled agents to the GitHub Action; use this instead of embedding the full edition in an issue.
+8. `README.md` — project overview and file layout.
+9. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.
+10. `STAGED_PUBLICATION_PROTOCOL.md` — canonical transport from ChatGPT/scheduled agents to the GitHub Action; use this instead of embedding the full edition in an issue.
 
 Email delivery lives in `BigCatMellow/Notes`:
 
