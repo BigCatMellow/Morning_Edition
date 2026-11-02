@@ -2,55 +2,52 @@
 
 ## Working principle: "Playskool" clarity, not children's design
 
-The reader should immediately understand **what is important, what kind of content this is, and what to do next**. Build with simple forms, strong hierarchy, large legible typography, confident spacing and a very small set of repeatable visual decisions. The goal is an adult newspaper with the obviousness of a well-designed physical object.
+A reader should immediately understand **what matters, what kind of content this is, and where to go next**. Use the simplicity of a well-designed physical object: obvious hierarchy, strong type, predictable spacing, simple shapes, and very few visual rules.
 
-This means **less ornament, not less personality**. Avoid primary-color toys, playful bubbles, meaningless icons, dense controls, fake magazine gloss, and visual decorations without a job.
+**The key lesson from the November 2 design iterations:** adding more color to large areas made every section demand equal attention. Do not mistake variety for hierarchy. The paper needs places for the eye to rest.
 
-## Color roles
+## Attention hierarchy
 
-The actual tokens live in `assets/editorial-color-system.css`, loaded **after** the legacy inline styles.
+1. **Masthead:** an identifiable newspaper brand, not a billboard made of several colored banners.
+2. **Lead:** the largest headline is the main point of attention. Its typography and placement communicate importance without an enormous peach rectangle or a competing source card.
+3. **Stories:** low-stimulation, mostly neutral reading surfaces; articles are separated by whitespace, hairlines, and headings rather than boxes.
+4. **Daily Wonder:** the selected photograph or artwork supplies most of the page's visual variety; give it an unobtrusive mat and a clear, credited caption.
+5. **Something to Sit With:** a modest, quiet pause, not an inspirational quote poster.
+6. **Worth Your Time:** a single dark section near the end provides the strongest deliberate contrast with the standard paper.
 
-| Role | Color | Use |
+The full page should have a **clear hierarchy, not six equally loud landmarks**.
+
+## Palette and use
+
+The canonical tokens live in `assets/editorial-color-system.css`, loaded after legacy inline CSS.
+
+| Role | Value | Use |
 | --- | --- | --- |
-| Cool sage canvas | `#dae4e0` | Outer page frame, distinct from reading paper |
-| Warm paper | `#f7f3e9` | Neutral fallback, not a whole-page fill |
-| Pale cover | `#efdfd3` | The main news story area |
-| Catch-up sand | `#e9dfcc` | In Case You Missed It reading region |
-| Discovery sage | `#dce9e4` | Outside the Bubble and science reading region |
-| Human-scale blue | `#e0e7ea` | Ordinary-life reporting |
-| Ideas ochre wash | `#f0e5c8` | History and philosophy reading region |
-| Gallery teal | `#264744` | Daily Wonder image-and-caption region |
-| Warm-white | `#fffdf7` | Clear section surfaces |
-| Ink | `#222823` | Headings, text, the Long Read panel |
-| Muted ink | `#545c55` | Secondary text |
-| Reporting rust | `#853e36` | Front Page, World, urgent reporting |
-| Discovery teal | `#205b57` | Science, Daily Wonder, Outside the Bubble, At Human Scale |
-| Reflective ochre | `#7a541a` | Ideas, history/culture, reflective editorial lanes |
+| Outside canvas | `#e9e9e3` | Neutral gray framing the paper |
+| Warm paper | `#fdfbf6` | Main masthead, lead, and news reading surface |
+| Ink | `#222823` | Headline, body copy, Long Read background |
+| Secondary copy | `#545c55` | Metadata and minor navigation |
+| Reporting rust | `#853e36` | Lead kicker, news links and selective section rules |
+| Discovery teal | `#205b57` | Photo heading, a few discovery rules and source links |
+| Ideas ochre | `#7a541a` | Small Ideas/culture heading-rule accent |
+| Photo surround | `#eeeee8` | Quiet matte surface; the photograph is the color event |
+| Reflection | `#eff1ed` | Subtle contemplative section |
+| Long Read | `#222823` | The sole large, high-contrast editorial block |
 
-**Large-scale color is intentional.** The previous palette left most of the screen as uninterrupted ivory; section-specific surfaces now occupy the article regions as well as their headings. Keep these backgrounds quiet enough for reading, with dark ink and clear rules. The gallery is the one substantial dark-color feature, alongside the existing Long Read. Do not compensate with individual colored cards or colored body text.
+Color is **supporting evidence for the structure**, never a requirement to decode a story's category. Do not use colorful full-section backgrounds simply because a category has a matching accent color.
 
-Color is never the only category indicator. Section titles, source text, link affordances, and reading order must remain clear in grayscale, on small screens, and without images. Keep normal text and key labels at a contrast ratio of at least **4.5:1** against their backgrounds.
+## Specific defaults
 
-## Hierarchy and interaction
+- A subdued top bar, slim date line, quiet navigation and small preview notice are contextual controls, **not feature banners**.
+- Headlines may be large; chrome and metadata should be smaller, lower contrast, and less bold.
+- Source attribution is visible but should not compete with the lead story.
+- Section headings can use a thin, semantic accent rule; the article text beneath remains neutral.
+- Avoid stacked boxes, shadows, colored pills, prominent card fills, unnecessary icons and gradients.
+- Use dark text on light surfaces, with at least **4.5:1** contrast for ordinary text. Make focus outlines and links recognizable without color alone.
+- Preserve mobile readability, unbroken image aspect ratios, and spacious touch targets.
 
-1. **Know:** the lead and Front Page should look like the obvious main news.
-2. **Discover:** the Daily Wonder gets one spacious photograph; the image is the main visual, not a collage of decorative shapes.
-3. **Understand:** Ideas and longer articles remain easy to read and sourced.
-4. **Reflect:** Something to Sit With gets quiet separation, no poster-like treatment.
+## Verification
 
-Use large, coherent section surfaces, a strong masthead, clean rules, and whitespace to distinguish sections. Do not pile up shadows, colored cards, round buttons, badges, and decorative icons simultaneously. Standardize links and focus outlines and keep plain-language calls to action.
+Review the complete page at desktop and phone width with **both a photo/reflection edition and a legacy edition**. The first view should read in order: masthead, main headline, main story. The eye should not go to the preview notice, navigation or source box first.
 
-Make mobile a first-class reading experience: one column, easy tap targets, no horizontal scroll, and images with intact aspect ratio. Avoid shrinking captions and legal image credits to illegibility.
-
-## Change discipline
-
-Change a small number of meaningful variables at a time. Prefer the central stylesheet to additional scattered overrides. Verify both an edition with Daily Wonder/Reflection and an older edition without them. Changes to the website's palette must not change edition JSON schemas, archived files, scheduled tasks, SMTP, or the staged publish → website → email-trigger workflow.
-
-### Review checklist
-
-- Can the main story be identified in five seconds?
-- Can each section be distinguished without decoding a palette legend?
-- Does the daily image get enough room without pushing all reporting aside?
-- Can a reader understand the significance of a caption, a passage and a source link immediately?
-- Is every shade, rule, and special surface doing a job?
-- Does a mobile reader see readable typography and clear actions?
+The website presentation must never change published edition JSON, archive files, schedule, reader pack, staged publication permissions, or email delivery.
