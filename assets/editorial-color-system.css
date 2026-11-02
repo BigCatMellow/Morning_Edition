@@ -1,150 +1,260 @@
 /*
- * Morning Edition — editorial color system (Playskool principle, not toy styling)
+ * Morning Edition — Playskool clarity, adult newspaper character.
  *
- * One quiet paper base, one readable ink, and three meaningful accents:
- * rust = consequential reporting, teal = discovery / human-scale perspective,
- * ochre = ideas / sustained reading. Color helps readers navigate; it never
- * replaces headings, links, labels, or other semantic cues.
- *
- * Loaded after legacy inline CSS so the palette stays in one editable place.
+ * Large editorial surfaces, not tiny colored trim: the page canvas, cover,
+ * discovery, history, reflection and long reads each have a deliberate role.
+ * Headers, text and sources carry the meaning; color is never the only cue.
  */
 :root{
-  --paper:#f7f3e9;
-  --paper-2:#f2ecdf;
-  --paper-3:#e5eee8;
-  --header-surface:#fffdf7;
-  --ink:#222823;
-  --muted:#545c55;
-  --rule:#b2b0a2;
-  --accent:#853e36;       /* reporting rust */
-  --accent-2:#205b57;     /* discovery teal */
-  --me-ochre:#86601e;     /* essays ochre */
-  --me-rust-wash:#f6ebe4;
-  --me-teal-wash:#e5eee8;
-  --me-ochre-wash:#f5edd8;
+  --paper:#f7f3e9; --paper-2:#f2ecdf; --paper-3:#e5eee8;
+  --header-surface:#fffdf7; --ink:#222823; --muted:#545c55;
+  --rule:#b2b0a2; --accent:#853e36; --accent-2:#205b57;
+  --me-ochre:#7a541a;
+  --me-rust-wash:#f6ebe4; --me-teal-wash:#e5eee8; --me-ochre-wash:#f5edd8;
+
+  --me-canvas:#dae4e0;     /* the page outside the newspaper */
+  --me-sheet:#fffdf7;      /* ordinary readable paper */
+  --me-cover:#efdfd3;      /* the main story */
+  --me-front:#f4e5db;      /* other important reporting */
+  --me-catchup:#e9dfcc;    /* looking back */
+  --me-discover:#dce9e4;   /* science and unexpected finds */
+  --me-human:#e0e7ea;      /* human scale */
+  --me-ideas:#f0e5c8;      /* ideas, history and culture */
+  --me-reflect:#dee7ec;    /* contemplative pause */
+  --me-wonder:#264744;     /* photographs / art */
+  --me-on-dark:#f7f3e9;
+  --me-dark-muted:#d6e4dc;
 }
 
-/* Keep the paper recognizable, not rainbow-colored. */
+/* The canvas is green-grey; the readable newspaper itself is warm white.
+   Avoid an uninterrupted wall of #f7f3e9. */
+body{background:var(--me-canvas)}
+main.shell{
+  background:var(--me-sheet);
+  padding:0 18px 24px;
+  box-shadow:0 0 0 1px rgba(34,40,35,.10);
+}
+.topbar{
+  background:var(--accent-2);
+  color:var(--me-on-dark);
+  border-bottom:2px solid #173d3a;
+}
+.topbar .status{color:#d9e7df}
+.topbar .archive-button{
+  color:var(--me-on-dark);
+  background:transparent;
+  border:1px solid #b8d1c8;
+  font-weight:700;
+}
+.topbar .archive-button:hover{background:rgba(255,255,255,.13)}
 .masthead{
-  border-top:4px solid var(--accent-2);
-  background:var(--header-surface);
+  background:var(--me-sheet);
+  border-top:5px solid var(--accent-2);
 }
 .masthead .sub{color:var(--muted);letter-spacing:.095em}
-.datebar{border-bottom:2px solid var(--ink)}
+.datebar{
+  margin:0 -18px;
+  padding:12px 18px;
+  background:#efe7d9;
+  border-bottom:2px solid var(--ink);
+}
 .datebar .center{color:var(--accent-2)}
 .edition-route{
-  border-bottom:1px solid var(--rule);
   gap:8px 26px;
+  padding:16px 0;
   font-size:.72rem;
+  border-bottom:1px solid var(--rule);
 }
 .edition-route a{padding:3px 0;border-bottom:2px solid transparent}
 .edition-route a:hover,.edition-route a:focus-visible{border-bottom-color:var(--accent-2)}
-.archive-button{border-color:var(--ink);font-weight:700}
-.archive-button:hover{background:var(--me-teal-wash)}
 :where(a,button):focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
-.worth :where(a,button):focus-visible{outline-color:#e8c581}
+.worth :where(a,button):focus-visible,
+.daily-wonder :where(a,button):focus-visible{outline-color:#e8c581}
 .read-link,.reader-button{font-size:.8rem;line-height:1.6}
 
-/* A colored editorial rule means more than a colored card. */
+/* The cover has its own large, gently colored surface. */
+.lede{
+  margin:0 -18px;
+  padding:40px 30px 44px;
+  background:var(--me-cover);
+  border-bottom:5px solid var(--accent);
+}
+.source-card{
+  border-top:5px solid var(--accent);
+  background:rgba(255,253,247,.68);
+  padding:18px 22px 20px;
+}
+
+/* Section color is a full reading region, not just an accent stripe.
+   Keep stories unboxed so the layout still resembles a newspaper. */
 .news-section{
   --me-section-ink:var(--accent-2);
-  --me-section-wash:var(--header-surface);
+  --me-section-wash:var(--me-teal-wash);
+  --me-zone:var(--me-discover);
+  margin:14px -18px 0;
+  padding:34px 18px 40px;
+  border-bottom:0;
+  background:var(--me-zone);
 }
 .news-section .section-head{
   background:var(--me-section-wash);
-  border:1px solid var(--rule);
+  border:1px solid rgba(34,40,35,.22);
   border-left:5px solid var(--me-section-ink);
-  padding-left:20px;
+  padding:18px 20px;
 }
 .news-section .section-head h2{color:var(--ink)}
-.news-section .section-head .count{color:var(--me-section-ink);font-weight:700}
+.news-section .section-head .count{
+  color:var(--me-section-ink);
+  font-weight:700;
+}
 .section--front-page,
 .section--world,
 .section--society-human-behavior,
 .section--technology{
   --me-section-ink:var(--accent);
-  --me-section-wash:var(--me-rust-wash);
+  --me-section-wash:#e7d2c6;
+  --me-zone:var(--me-front);
+}
+.section--in-case-you-missed-it{
+  --me-section-ink:var(--accent);
+  --me-section-wash:#e0cfb3;
+  --me-zone:var(--me-catchup);
+  background:var(--me-zone);
 }
 .section--science,
 .section--outside-the-bubble,
-.section--small-things,
+.section--small-things{
+  --me-section-ink:var(--accent-2);
+  --me-section-wash:#cde0d7;
+  --me-zone:var(--me-discover);
+}
 .section--at-human-scale{
   --me-section-ink:var(--accent-2);
-  --me-section-wash:var(--me-teal-wash);
+  --me-section-wash:#cad9df;
+  --me-zone:var(--me-human);
+  background:var(--me-zone);
+  margin:14px -18px 0;
+  padding:34px 18px 40px;
 }
 .section--history-culture,
 .section--ideas,
 .section--one-thing-to-think-about{
   --me-section-ink:var(--me-ochre);
-  --me-section-wash:var(--me-ochre-wash);
+  --me-section-wash:#e6d4a3;
+  --me-zone:var(--me-ideas);
 }
-.section--in-case-you-missed-it{
-  --me-section-ink:var(--accent);
-  --me-section-wash:var(--me-rust-wash);
-  background:transparent;
-}
+.section--ideas{margin-top:14px}
 .section--ideas .section-head,
 .section--in-case-you-missed-it .section-head,
 .section--one-thing-to-think-about .section-head,
 .section--outside-the-bubble .section-head,
 .section--at-human-scale .section-head{
   background:var(--me-section-wash);
-  border-top:1px solid var(--rule);
+  border-top:1px solid rgba(34,40,35,.22);
 }
-.section--at-human-scale{background:rgba(229,238,232,.24)}
-.section--at-human-scale .story{background:transparent}
-.story:nth-child(even){background:rgba(255,253,247,.36)}
+.story{background:transparent}
+.story:nth-child(even){background:rgba(255,253,247,.42)}
+.section--at-human-scale .story{background:rgba(255,253,247,.26)}
+.story-grid.items-1 .story{
+  background:rgba(255,253,247,.5);
+  border-color:rgba(34,40,35,.16);
+}
 .story-why{
+  background:rgba(255,253,247,.62);
   border-top-color:var(--me-section-ink);
-  background:var(--me-section-wash);
+  border-bottom-color:rgba(34,40,35,.2);
 }
 .story-why-label{color:var(--me-section-ink)}
-.story .story-meta{border-top-color:var(--rule)}
+.story .story-meta{border-top-color:rgba(34,40,35,.22)}
+.story > .story-actions--structured{
+  background:rgba(255,253,247,.20);
+  border-top-color:rgba(34,40,35,.18);
+}
 .story-context-cue{color:var(--muted)}
 
-/* Photograph is the color event. Give it a restrained dark mat and real credit. */
+/* Daily Wonder is intentionally the richest color event on the page.
+   A dark teal gallery surface lets the image carry the detail. */
 .daily-wonder{
-  background:#eeece3;
-  border-top:4px solid var(--accent-2);
-  border-bottom:1px solid var(--rule);
-  padding-top:28px;
+  margin:18px -18px 14px;
+  padding:30px 30px 36px;
+  background:var(--me-wonder);
+  color:var(--me-on-dark);
+  border:0;
 }
-.daily-wonder .feature-kicker{color:var(--accent-2)}
-.wonder-photo a{background:var(--ink);padding:10px}
+.daily-wonder .feature-kicker{color:#e8cb91}
+.daily-wonder .feature-kicker::after{background:#78918b}
+.wonder-photo a{background:#17312f;padding:10px}
 .wonder-photo figcaption{
   padding:12px 0 0 13px;
-  border-left:3px solid var(--accent-2);
-  color:var(--muted);
+  border-left:3px solid #e8cb91;
+  color:var(--me-dark-muted);
 }
-.wonder-photo figcaption a{color:var(--accent-2);background:none;padding:0}
+.wonder-photo figcaption a{
+  display:inline;
+  padding:0;
+  color:#f1d49a;
+  background:transparent;
+}
 .wonder-text{gap:36px}
-.wonder-text h2{color:var(--ink)}
-.wonder-copy a{color:var(--accent-2)}
+.wonder-text h2{color:var(--me-on-dark)}
+.wonder-copy p{color:#e3eae5}
+.wonder-copy a{color:#f1d49a}
 
-/* Calm, distinct reading surfaces; never a motivational poster. */
+/* The quieter reflective lane is blue-grey, distinct from the ochre Ideas. */
 .reflection-feature{
-  background:var(--me-teal-wash);
+  margin:16px -18px 18px;
+  padding:42px 36px 46px;
+  background:var(--me-reflect);
   border-top:4px solid var(--accent-2);
-  border-bottom:1px solid var(--rule);
+  border-bottom:0;
 }
 .reflection-feature .feature-kicker,
 .reflection-question strong,
 .reflection-source a{color:var(--accent-2)}
+.reflection-feature .feature-kicker::after{background:#a4b9bb}
 .reflection-question{border-left-color:var(--accent-2)}
 .worth{
   background:var(--ink);
   border-top:5px solid #c49b56;
   box-shadow:none;
+  margin-top:20px;
 }
 .worth .section-kicker{color:#e8c581}
 .preview-notice{border-left:5px solid var(--accent-2)}
+footer{background:var(--me-sheet)}
 
-/* A single-column edition should be just as clear on a phone. */
+/* One reading column, no protruding margins or image overflow. */
+@media(max-width:900px){
+  .lede{padding:34px 22px 38px}
+  .daily-wonder{padding:24px 22px 30px}
+  .reflection-feature{padding:34px 24px 38px}
+  .wonder-text{gap:18px}
+}
 @media(max-width:560px){
+  main.shell{
+    width:100%;
+    padding:0 11px 24px;
+    box-shadow:none;
+  }
+  .masthead{margin-left:-11px;margin-right:-11px;border-top-width:3px}
+  .datebar{margin:0 -11px;padding:11px}
+  .lede{margin:0 -11px;padding:27px 18px 32px}
+  .source-card{padding:15px 16px}
+  .news-section,
+  .section--at-human-scale{
+    margin:12px -11px 0;
+    padding:25px 11px 30px;
+  }
   .news-section .section-head{padding:15px 16px}
-  .masthead{border-top-width:3px}
   .edition-route{gap:6px 17px;font-size:.7rem}
+  .daily-wonder{
+    margin:14px -11px 12px;
+    padding:18px 15px 23px;
+  }
   .wonder-photo a{padding:5px}
-  .daily-wonder{padding-top:20px}
   .wonder-text{gap:15px}
+  .reflection-feature{
+    margin:12px -11px;
+    padding:30px 20px 34px;
+  }
 }
