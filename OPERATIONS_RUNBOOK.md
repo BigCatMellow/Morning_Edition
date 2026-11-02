@@ -5,6 +5,7 @@ This is the durable operational reference for how Morning Edition is supposed to
 Use this together with:
 
 - `EDITORIAL_GUIDE.md` for editorial and data-format rules.
+- `VISUAL_REFLECTION_PROTOCOL.md` for optional image and reflection sourcing and presentation.
 - `PHILOSOPHY_READER_PROTOCOL.md` for philosophy/argument-driven Continue Reading.
 - `HUMAN_SCALE_NEWS_PROTOCOL.md` for the At Human Scale lane.
 - `SOURCE_TRIANGULATION_PROTOCOL.md` for consequential or contested factual stories.
@@ -17,6 +18,10 @@ The repository is authoritative for editorial behavior and publication structure
 The scheduled ChatGPT task should recover current repository state before each run and should not rely on remembered chat context or a stale copy of the rules.
 
 The normal primary schedule is daily at **5:00 AM Eastern**, with an independent recovery check at **5:30 AM Eastern**.
+
+## Optional editorial features
+
+Daily editions may include top-level `daily_wonder` and `reflection` fields with verified image rights, caption, quote provenance and source links. They are not stories, do not require reader-pack entries, and must not bypass the existing publication gates. Legacy archives without these fields render unchanged. The Notes newsletter renderer displays a concise preview while preserving its existing recipients, unsubscribe behavior and post-publication trigger.
 
 ## Parent outcome
 
