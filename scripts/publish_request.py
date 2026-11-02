@@ -45,15 +45,80 @@ def extract(body):
     except Exception as e: fail(f"Invalid package encoding: {e}")
 
 def markdown(e):
-    out=[f"# Morning Edition — {datetime.fromisoformat(e['date']).strftime('%B %-d, %Y')}","",e.get("dek",""),"","## Lead Story","",f"### {e['lead_story']['headline']}",e['lead_story'].get('summary',''),"",f"**Why it matters:** {e['lead_story'].get('why_it_matters','')}","",f"*{e['lead_story'].get('source','')} — {e['lead_story'].get('published_date','')}*",""]
+    out=[f"# Morning Edition — {datetime.fromisoformat(e['date']).strftime('%B %-d, %Y')}", "", e.get("dek",""), "",
+         "## Lead Story", "", f"### {e['lead_story']['headline']}", e['lead_story'].get("summary",""), "",
+         f"**Why it matters:** {e['lead_story'].get('why_it_matters','')}", "",
+         f"*{e['lead_story'].get('source','')} — {e['lead_story'].get('published_date','')}*", ""]
+    seen_wonder=False
+    seen_reflection=False
+
+    def add_wonder():
+        w=e.get("daily_wonder")
+        if not w: return
+        out.extend(["## The Daily Wonder", "", f"### {w['title']}", "",
+                    f"![{w['alt']}]({w['image_url']})", "", w['caption'], "",
+                    f"*Image: {w['credit']} · {w['rights']}*", "",
+                    f"[Explore the original image]({w['source_url']})", ""])
+
+    def add_reflection():
+        q=e.get("reflection")
+        if not q: return
+        name=q["author"]+(" · "+q["work"] if q.get("work") else "")
+        if q.get("translator"): name+=" · translated by "+q["translator"]
+        out.extend(["## Something to Sit With", "", "> "+q["passage"], "",
+                    f"*— {name}*", "", q.get("context",""), "",
+                    "**A question to carry:** "+q.get("question",""), "",
+                    f"[Original source]({q['source_url']})", ""])
+
     for s in e.get("sections",[]):
-        out += [f"## {s.get('title','Section')}",""]
-        for i in s.get("items",[]):
-            out += [f"### {i['headline']}",i.get("summary",""),"",f"**Why it matters:** {i.get('why_it_matters','')}","",f"*{i.get('source','')} — {i.get('published_date','')}*",""]
-    out += ["## Worth Your Time",""]
-    for i in e.get("worth_your_time",[]):
-        out += [f"### {i['headline']}",i.get("summary",""),"",f"**Why it matters:** {i.get('why_it_matters','')}","",f"*{i.get('source','')} — {i.get('published_date','')}*",""]
+        if not seen_wonder and s.get("id")!="front-page":
+            add_wonder()
+            seen_wonder=True
+        out += [f"## {s.get('title','Section')}", ""]
+        for item in s.get("items",[]):
+            out += [f"### {item['headline']}", item.get("summary",""), "",
+                    f"**Why it matters:** {item.get('why_it_matters','')}", "",
+                    f"*{item.get('source','')} — {item.get('published_date','')}*", ""]
+        if s.get("id")=="front-page" and not seen_wonder:
+            add_wonder()
+            seen_wonder=True
+        if s.get("id")=="ideas" and not seen_reflection:
+            add_reflection()
+            seen_reflection=True
+    if not seen_wonder: add_wonder()
+    if not seen_reflection: add_reflection()
+    out += ["## Worth Your Time", ""]
+    for item in e.get("worth_your_time",[]):
+        out += [f"### {item['headline']}", item.get("summary",""), "",
+                f"**Why it matters:** {item.get('why_it_matters','')}", "",
+                f"*{item.get('source','')} — {item.get('published_date','')}*", ""]
     return "\n".join(out).rstrip()+"\n"
+
+def validate_features(e):
+    from urllib.parse import urlsplit
+
+    def require_url(obj,key):
+        value=obj.get(key)
+        if not isinstance(value,str) or not value.strip():
+            fail(f"Feature missing {key}")
+        parsed=urlsplit(value)
+        if parsed.scheme not in ("http","https") or not parsed.netloc or parsed.username or parsed.password:
+            fail(f"Feature has invalid {key}")
+
+    for field,required,urls in [
+        ("daily_wonder",("title","caption","alt","credit","rights"),("image_url","source_url")),
+        ("reflection",("passage","author"),("source_url",))
+    ]:
+        obj=e.get(field)
+        if obj is None: continue
+        if not isinstance(obj,dict): fail(f"{field} must be an object")
+        for name in required:
+            if not isinstance(obj.get(name),str) or not obj[name].strip():
+                fail(f"{field} missing {name}")
+        for name in urls: require_url(obj,name)
+        if field=="daily_wonder" and obj.get("rights_url"):
+            require_url(obj,"rights_url")
+
 
 def validate(p):
     if p.get("package_version")!=1: fail("Unsupported package_version")
@@ -70,6 +135,7 @@ def validate(p):
     for x in stories:
         d=x.get("published_date")
         if d is not None and not re.fullmatch(r"\d{4}-\d{2}-\d{2}",str(d)): fail("Invalid published_date")
+    validate_features(e)
     ideas=[i.get("url") for s in e.get("sections",[]) if s.get("id")=="ideas" for i in s.get("items",[])]
     wyt={i.get("url") for i in e.get("worth_your_time",[])}
     if any(u in wyt for u in ideas): fail("Ideas article duplicated in Worth Your Time")
