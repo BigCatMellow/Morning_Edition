@@ -15,6 +15,7 @@ Morning Edition combines consequential current news with science, history, cultu
 - `NEW_CHAT_HANDOFF.md` — operational handoff for continuing development or running an edition from a fresh ChatGPT conversation.\n- `OPERATIONS_RUNBOOK.md` — durable publication/runbook reference: intended scheduler flow, validation gates, Continue Reading schema, troubleshooting, recovery, and the September 18, 2026 reader-pack incident.
 
 - `VISUAL_REFLECTION_PROTOCOL.md` — daily visual discovery and sourced reflective passage; rights, attribution, data fields and reading placement.
+- `DESIGN_SYSTEM.md` — adult, clear-at-a-glance visual design rules, restrained color semantics, and mobile/accessibility review.
 
 ## Editorial workspaces
 
