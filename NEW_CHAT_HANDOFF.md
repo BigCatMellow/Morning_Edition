@@ -9,12 +9,15 @@ Repository: `BigCatMellow/Morning_Edition`
 Primary files to read before making changes or generating an edition:
 
 1. `EDITORIAL_GUIDE.md` — canonical editorial rules, research process, sections, recency rules, story schema, discovery targets, and self-review process.
-2. `PHILOSOPHY_READER_PROTOCOL.md` — canonical supplemental protocol for deep Continue Reading treatments of philosophy, ethics, political thought, social theory, intellectual history, and argument-driven essays.
-3. `HUMAN_SCALE_NEWS_PROTOCOL.md` — canonical supplemental protocol for the recurring low-temperature local-news lane that restores a sense of ordinary scale to the paper.
-4. `index.html` — current GitHub Pages reader UI.
-5. `data/latest.json` — most recently published edition and the current live data shape.
-6. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
-7. `README.md` — project overview and file layout.\n8. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.\n9. `STAGED_PUBLICATION_PROTOCOL.md` — canonical transport from ChatGPT/scheduled agents to the GitHub Action; use this instead of embedding the full edition in an issue.
+2. `VISUAL_REFLECTION_PROTOCOL.md` — canonical Daily Wonder and Something to Sit With sourcing, rights, schema and layout rules.
+3. `PHILOSOPHY_READER_PROTOCOL.md` — canonical supplemental protocol for deep Continue Reading treatments of philosophy, ethics, political thought, social theory, intellectual history, and argument-driven essays.
+4. `HUMAN_SCALE_NEWS_PROTOCOL.md` — canonical supplemental protocol for the recurring low-temperature local-news lane that restores a sense of ordinary scale to the paper.
+5. `index.html` — current GitHub Pages reader UI.
+6. `data/latest.json` — most recently published edition and the current live data shape.
+7. Recent files in `data/archive/` — recent topic/source history and editorial reviews.
+8. `README.md` — project overview and file layout.
+9. `OPERATIONS_RUNBOOK.md` — publication contract, reader-pack schema, validation gates, troubleshooting, recovery, and known incidents.
+10. `STAGED_PUBLICATION_PROTOCOL.md` — canonical transport from ChatGPT/scheduled agents to the GitHub Action; use this instead of embedding the full edition in an issue.
 
 Email delivery lives in `BigCatMellow/Notes`:
 
@@ -29,7 +32,7 @@ Do not expose or modify SMTP secrets.
 
 For a manual or scheduled Morning Edition run:
 
-1. Read `EDITORIAL_GUIDE.md` first. Also read `PHILOSOPHY_READER_PROTOCOL.md` before generating reader packs for philosophy/Ideas selections, and read `HUMAN_SCALE_NEWS_PROTOCOL.md` before selecting the daily human-scale item. Treat those repository files as canonical rather than reconstructing rules from old chats or duplicating a large prompt elsewhere.
+1. Read `EDITORIAL_GUIDE.md` first, plus `VISUAL_REFLECTION_PROTOCOL.md` when selecting daily photography and reflections. Also read `PHILOSOPHY_READER_PROTOCOL.md` before generating reader packs for philosophy/Ideas selections, and read `HUMAN_SCALE_NEWS_PROTOCOL.md` before selecting the daily human-scale item. Treat those repository files as canonical rather than reconstructing rules from old chats or duplicating a large prompt elsewhere.
 2. Inspect the most recent 7–14 archived editions when available, including `editorial_review`, to detect topic repetition, source concentration, neglected areas, and opportunities for deliberate exploration.
 3. Research in four distinct lanes before selecting stories:
    - **Current news:** mainly the last 24–72 hours.
@@ -51,6 +54,10 @@ For a manual or scheduled Morning Edition run:
 12. The GitHub Action applies the publication gates in `OPERATIONS_RUNBOOK.md`. A reader pack is invalid unless it has a top-level `readers` object containing the URL-keyed treatments; those keys must exactly match final published story URLs; and every populated `published_date` must be an exact `YYYY-MM-DD` value. Re-read the persisted JSON after writing it.
 13. Only after all Morning Edition files and validation gates succeed, update `BigCatMellow/Notes/data/morning-edition-trigger.txt` with the Eastern Time date and the edition's `generated_at` timestamp. That commit triggers the existing SMTP email workflow.
 14. Never update the email trigger when publication failed, `data/latest.json` is incomplete, the reader-pack schema/linkage check fails, a publication date is invalid, or an applicable triangulation gate fails.
+
+## Daily visual and reflective discovery
+
+Normally curate one **Daily Wonder** image and one **Something to Sit With** passage, following `VISUAL_REFLECTION_PROTOCOL.md`. Treat these as deliberate visual/reflective pauses, distinct from article cards. Verify provenance, exact quotation, display rights, attribution and source links. Put them in optional top-level `daily_wonder` and `reflection` objects; historical editions remain compatible. If no qualifying selection is found, omit it and explain the omission in `editorial_review`. Never fabricate a license, photograph or quote to meet a quota.
 
 ## Recurring balance requirements
 

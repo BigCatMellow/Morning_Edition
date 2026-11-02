@@ -1,5 +1,7 @@
 # Morning Edition — Editorial Guide
 
+> **Visual and reflective daily features:** See [VISUAL_REFLECTION_PROTOCOL.md](VISUAL_REFLECTION_PROTOCOL.md) for the Daily Wonder photograph/artwork and Something to Sit With passage: primary sourcing, rights, attribution, selection rotation, schema, and editorial review. These are short, separate features; do not weaken the existing news, Ideas, or Human Scale research lanes.
+
 ## Purpose
 
 Morning Edition is a personal daily newspaper assembled for one thoughtful reader. It is not an RSS dump, a generic AI news summary, or a list of whatever is trending.
@@ -240,6 +242,9 @@ Long reads do **not** need to be recent unless their usefulness depends on curre
 - Always show the publication date so archive selections are clearly intentional.
 
 ## Newspaper structure
+
+**Reading rhythm:** Keep the Front Page news-first; insert the optional Daily Wonder after it as a full-width visual pause; follow the catch-up, discovery, human-scale, and Ideas lanes with the optional Something to Sit With passage before Worth Your Time. Historical editions without these features must remain readable.
+
 
 The exact mix should vary with the material. Recommended sections follow.
 
