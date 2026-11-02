@@ -25,7 +25,7 @@ The actual tokens live in `assets/editorial-color-system.css`, loaded **after** 
 | Muted ink | `#545c55` | Secondary text |
 | Reporting rust | `#853e36` | Front Page, World, urgent reporting |
 | Discovery teal | `#205b57` | Science, Daily Wonder, Outside the Bubble, At Human Scale |
-| Reflective ochre | `#86601e` | Ideas, history/culture, reflective editorial lanes |
+| Reflective ochre | `#7a541a` | Ideas, history/culture, reflective editorial lanes |
 
 **Large-scale color is intentional.** The previous palette left most of the screen as uninterrupted ivory; section-specific surfaces now occupy the article regions as well as their headings. Keep these backgrounds quiet enough for reading, with dark ink and clear rules. The gallery is the one substantial dark-color feature, alongside the existing Long Read. Do not compensate with individual colored cards or colored body text.
 
