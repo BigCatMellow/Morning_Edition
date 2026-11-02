@@ -1,0 +1,150 @@
+/*
+ * Morning Edition — editorial color system (Playskool principle, not toy styling)
+ *
+ * One quiet paper base, one readable ink, and three meaningful accents:
+ * rust = consequential reporting, teal = discovery / human-scale perspective,
+ * ochre = ideas / sustained reading. Color helps readers navigate; it never
+ * replaces headings, links, labels, or other semantic cues.
+ *
+ * Loaded after legacy inline CSS so the palette stays in one editable place.
+ */
+:root{
+  --paper:#f7f3e9;
+  --paper-2:#f2ecdf;
+  --paper-3:#e5eee8;
+  --header-surface:#fffdf7;
+  --ink:#222823;
+  --muted:#545c55;
+  --rule:#b2b0a2;
+  --accent:#853e36;       /* reporting rust */
+  --accent-2:#205b57;     /* discovery teal */
+  --me-ochre:#86601e;     /* essays ochre */
+  --me-rust-wash:#f6ebe4;
+  --me-teal-wash:#e5eee8;
+  --me-ochre-wash:#f5edd8;
+}
+
+/* Keep the paper recognizable, not rainbow-colored. */
+.masthead{
+  border-top:4px solid var(--accent-2);
+  background:var(--header-surface);
+}
+.masthead .sub{color:var(--muted);letter-spacing:.095em}
+.datebar{border-bottom:2px solid var(--ink)}
+.datebar .center{color:var(--accent-2)}
+.edition-route{
+  border-bottom:1px solid var(--rule);
+  gap:8px 26px;
+  font-size:.72rem;
+}
+.edition-route a{padding:3px 0;border-bottom:2px solid transparent}
+.edition-route a:hover,.edition-route a:focus-visible{border-bottom-color:var(--accent-2)}
+.archive-button{border-color:var(--ink);font-weight:700}
+.archive-button:hover{background:var(--me-teal-wash)}
+:where(a,button):focus-visible{outline:3px solid var(--accent-2);outline-offset:3px}
+.worth :where(a,button):focus-visible{outline-color:#e8c581}
+.read-link,.reader-button{font-size:.8rem;line-height:1.6}
+
+/* A colored editorial rule means more than a colored card. */
+.news-section{
+  --me-section-ink:var(--accent-2);
+  --me-section-wash:var(--header-surface);
+}
+.news-section .section-head{
+  background:var(--me-section-wash);
+  border:1px solid var(--rule);
+  border-left:5px solid var(--me-section-ink);
+  padding-left:20px;
+}
+.news-section .section-head h2{color:var(--ink)}
+.news-section .section-head .count{color:var(--me-section-ink);font-weight:700}
+.section--front-page,
+.section--world,
+.section--society-human-behavior,
+.section--technology{
+  --me-section-ink:var(--accent);
+  --me-section-wash:var(--me-rust-wash);
+}
+.section--science,
+.section--outside-the-bubble,
+.section--small-things,
+.section--at-human-scale{
+  --me-section-ink:var(--accent-2);
+  --me-section-wash:var(--me-teal-wash);
+}
+.section--history-culture,
+.section--ideas,
+.section--one-thing-to-think-about{
+  --me-section-ink:var(--me-ochre);
+  --me-section-wash:var(--me-ochre-wash);
+}
+.section--in-case-you-missed-it{
+  --me-section-ink:var(--accent);
+  --me-section-wash:var(--me-rust-wash);
+  background:transparent;
+}
+.section--ideas .section-head,
+.section--in-case-you-missed-it .section-head,
+.section--one-thing-to-think-about .section-head,
+.section--outside-the-bubble .section-head,
+.section--at-human-scale .section-head{
+  background:var(--me-section-wash);
+  border-top:1px solid var(--rule);
+}
+.section--at-human-scale{background:rgba(229,238,232,.24)}
+.section--at-human-scale .story{background:transparent}
+.story:nth-child(even){background:rgba(255,253,247,.36)}
+.story-why{
+  border-top-color:var(--me-section-ink);
+  background:var(--me-section-wash);
+}
+.story-why-label{color:var(--me-section-ink)}
+.story .story-meta{border-top-color:var(--rule)}
+.story-context-cue{color:var(--muted)}
+
+/* Photograph is the color event. Give it a restrained dark mat and real credit. */
+.daily-wonder{
+  background:#eeece3;
+  border-top:4px solid var(--accent-2);
+  border-bottom:1px solid var(--rule);
+  padding-top:28px;
+}
+.daily-wonder .feature-kicker{color:var(--accent-2)}
+.wonder-photo a{background:var(--ink);padding:10px}
+.wonder-photo figcaption{
+  padding:12px 0 0 13px;
+  border-left:3px solid var(--accent-2);
+  color:var(--muted);
+}
+.wonder-photo figcaption a{color:var(--accent-2);background:none;padding:0}
+.wonder-text{gap:36px}
+.wonder-text h2{color:var(--ink)}
+.wonder-copy a{color:var(--accent-2)}
+
+/* Calm, distinct reading surfaces; never a motivational poster. */
+.reflection-feature{
+  background:var(--me-teal-wash);
+  border-top:4px solid var(--accent-2);
+  border-bottom:1px solid var(--rule);
+}
+.reflection-feature .feature-kicker,
+.reflection-question strong,
+.reflection-source a{color:var(--accent-2)}
+.reflection-question{border-left-color:var(--accent-2)}
+.worth{
+  background:var(--ink);
+  border-top:5px solid #c49b56;
+  box-shadow:none;
+}
+.worth .section-kicker{color:#e8c581}
+.preview-notice{border-left:5px solid var(--accent-2)}
+
+/* A single-column edition should be just as clear on a phone. */
+@media(max-width:560px){
+  .news-section .section-head{padding:15px 16px}
+  .masthead{border-top-width:3px}
+  .edition-route{gap:6px 17px;font-size:.7rem}
+  .wonder-photo a{padding:5px}
+  .daily-wonder{padding-top:20px}
+  .wonder-text{gap:15px}
+}
