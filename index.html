@@ -312,7 +312,7 @@
 
   <script src="assets/editorial-features.js"></script>
   <script>
-    const REPO='BigCatMellow/Morning_Edition',latestPath='data/latest.json',el=id=>document.getElementById(id);
+    const REPO='BigCatMellow/Morning_Edition',previewMode=typeof URLSearchParams!=='undefined'&&new URLSearchParams(window.location.search||'').get('preview')==='visual-reflection',latestPath=previewMode?'data/previews/2026-11-02-visual.json':'data/latest.json',el=id=>document.getElementById(id);
     let readerStories=new Map(),readerCounter=0;
     const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     const prettyDate=value=>{if(!value)return'—';const raw=String(value),d=new Date(raw+(raw.length===10?'T12:00:00':''));if(Number.isNaN(d.getTime()))return raw;return new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(d)};
@@ -367,9 +367,9 @@
 
     function render(edition){
       const extras=window.MorningEditionFeatures||{renderWonder:()=>'',renderReflection:()=>'',renderRoute:()=>''};
-      readerStories=new Map();readerCounter=0;document.title=`${edition.title||'Morning Edition'} — ${edition.date||''}`;el('editionDate').textContent=prettyDate(edition.date);el('status').textContent=edition.date?`Edition · ${edition.date}`:'Current edition';
-      const lead=edition.lead_story||{};let html=extras.renderRoute(edition,esc);
-      if(lead.headline)html+=`<section class="lede" id="front-page"><article><div class="eyebrow">The Big Story</div><h2>${esc(lead.headline)}</h2>${lead.summary?`<p class="lede-summary">${esc(lead.summary)}</p>`:''}${why(lead)}</article><aside class="source-card"><div class="label">Source</div><div class="source">${esc(lead.source||'—')}</div><div class="meta">${leadMetaHtml(lead)}</div>${actions(lead)}</aside></section>`;
+      readerStories=new Map();readerCounter=0;const isPreview=edition.preview===true;document.title=`${edition.title||'Morning Edition'} — ${isPreview?'Design Preview · ':''}${edition.date||''}`;el('editionDate').textContent=prettyDate(edition.date);el('editionLabel').textContent=isPreview?'Design Preview':'Daily Edition';el('status').textContent=edition.date?`${isPreview?'Preview':'Edition'} · ${edition.date}`:'Current edition';
+      const lead=edition.lead_story||{};let html=(isPreview?`<aside class="preview-notice"><strong>Design preview · Not a new publication</strong><p>${esc(edition.preview_note||'A demonstration of the updated layout, not a newly researched or emailed edition.')}</p><a href="./">Return to published edition →</a></aside>`:'')+extras.renderRoute(edition,esc);
+      if(lead.headline)html+=`<section class="lede" id="lead-story"><article><div class="eyebrow">The Big Story</div><h2>${esc(lead.headline)}</h2>${lead.summary?`<p class="lede-summary">${esc(lead.summary)}</p>`:''}${why(lead)}</article><aside class="source-card"><div class="label">Source</div><div class="source">${esc(lead.source||'—')}</div><div class="meta">${leadMetaHtml(lead)}</div>${actions(lead)}</aside></section>`;
       html+='<div class="sections">';
       let wonderPlaced=false,reflectionPlaced=false;
       for(const section of(edition.sections||[])){const items=section.items||[];if(!items.length)continue;if(!wonderPlaced&&section.id!=='front-page'){html+=extras.renderWonder(edition.daily_wonder,esc,safeHttpUrl);wonderPlaced=true}const dek=sectionDek(section);html+=`<section id="${esc(section.id||'section')}" class="${sectionClass(section)}"><div class="section-head"><div class="section-title-block"><h2>${esc(section.title||'Section')}</h2>${dek?`<p class="section-dek">${esc(dek)}</p>`:''}</div><span class="count">${items.length} ${items.length===1?'story':'stories'}</span></div><div class="${gridClass(items)}">${items.map(storyCard).join('')}</div></section>`;if(section.id==='front-page'&&!wonderPlaced){html+=extras.renderWonder(edition.daily_wonder,esc,safeHttpUrl);wonderPlaced=true}if(section.id==='ideas'&&!reflectionPlaced){html+=extras.renderReflection(edition.reflection,esc,safeHttpUrl);reflectionPlaced=true}}

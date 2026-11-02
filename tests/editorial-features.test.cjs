@@ -37,7 +37,7 @@ assert.ok(page.includes('extras.renderReflection(edition.reflection'));
 console.log('Editorial feature and inline script checks passed.');
 
 
-function renderFixture(edition) {
+function renderFixture(edition, query='') {
   const nodes = new Map();
   const node = id => {
     if (!nodes.has(id)) nodes.set(id, {
@@ -53,9 +53,9 @@ function renderFixture(edition) {
     addEventListener() {}, body: {classList: {add() {}, remove() {}}}
   };
   const context = {
-    document, URL, Date, Intl,
-    window: {MorningEditionFeatures:features, location:{href:'https://example.org/'}, scrollTo() {}},
-    fetch: async path => ({ok:true,json:async () => path.includes('latest.json') ? edition : {readers:{}}}),
+    document, URL, URLSearchParams, Date, Intl,
+    window: {MorningEditionFeatures:features, location:{href:'https://example.org/',search:query}, scrollTo() {}},
+    fetch: async path => ({ok:true,json:async () => path.startsWith('data/readers/') ? {readers:{}} : edition}),
     alert() {}
   };
   vm.runInNewContext(inline[1], context);
@@ -81,6 +81,11 @@ function renderFixture(edition) {
   const old = {...edition};
   delete old.daily_wonder;
   delete old.reflection;
+  const preview = await renderFixture({...edition,preview:true,preview_note:'Preview fixture; no email sent.'},'?preview=visual-reflection');
+  assert.ok(preview.includes('Design preview · Not a new publication'));
+  assert.ok(preview.includes('Preview fixture; no email sent.'));
+  assert.equal((preview.match(/id="front-page"/g)||[]).length,1,'Front Page navigation anchor must not be duplicated');
+  assert.equal((preview.match(/id="lead-story"/g)||[]).length,1,'Lead story anchor must be unique');
   const legacy = await renderFixture(old);
   assert.ok(!legacy.includes('id="daily-wonder"'));
   assert.ok(!legacy.includes('id="reflection"'));
