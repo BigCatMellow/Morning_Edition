@@ -4,6 +4,8 @@ on:
     paths:
       - 'index.html'
       - 'assets/editorial-features.*'
+      - 'assets/editorial-color-system.css'
+      - 'DESIGN_SYSTEM.md'
       - 'scripts/publish_request.py'
       - 'tests/**'
       - '.github/workflows/check-editorial-features.yml'
@@ -25,3 +27,5 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Check browser scripts and features
         run: node tests/editorial-features.test.cjs
+      - name: Check accessible editorial palette
+        run: node tests/editorial-color-system.test.cjs

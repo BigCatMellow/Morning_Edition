@@ -183,7 +183,7 @@ A story with substantial reader content gets a `Continue reading` option. A stor
 
 For philosophy/Ideas readers, the loaded `assets/section-icons.js` adapts generic reader headings into more appropriate labels such as `The question & argument`, `Argument map`, `Strongest objections & limits`, and `Questions to carry forward` when the story metadata identifies it as philosophy, ethics, political theory/thought, social theory, intellectual history, a book review, or an essay.
 
-The current visual direction is a restrained newspaper aesthetic: warm paper colors, serif editorial typography, subtle alternating article backgrounds, off-white section headers, and a dark long-read block. Avoid turning it into a generic card-heavy app.
+The current visual direction is a restrained newspaper aesthetic with a deliberately limited, semantic color system. For layout or color changes, read `DESIGN_SYSTEM.md`. Apply the user's "Playskool" principle as clarity and obvious hierarchy, **never** as childlike imagery or a rainbow UI. Preserve the warm paper, readable serif editorial typography, photography-first Daily Wonder, and dark Long Read. Avoid generic card-heavy app styling.
 
 Current logo files:
 
