@@ -6,7 +6,8 @@
     const image=safeUrl(value.image_url),original=safeUrl(value.source_url);
     if(!image || !original || !value.title || !value.caption || !value.credit || !value.alt)return '';
     const rights=String(value.rights||'').trim();
-    const credit=[value.credit,rights].filter(Boolean).map(esc).join(' · ');
+    const rightsUrl=safeUrl(value.rights_url);
+    const credit=esc(value.credit)+(rights?(rightsUrl?' · <a href="'+esc(rightsUrl)+'" target="_blank" rel="noopener noreferrer">'+esc(rights)+'</a>':' · '+esc(rights)):'');
     const imageHtml='<a href="'+esc(original)+'" target="_blank" rel="noopener noreferrer" aria-label="View original image and attribution"><img loading="lazy" decoding="async" src="'+esc(image)+'" alt="'+esc(value.alt)+'"></a>';
     return '<section class="daily-wonder" id="daily-wonder" aria-labelledby="wonder-heading">'+
       '<div class="feature-kicker">The Daily Wonder · A visual discovery</div>'+
@@ -18,7 +19,7 @@
     if(!value || typeof value!=='object' || !value.passage || !value.author)return '';
     const original=safeUrl(value.source_url);
     if(!original)return '';
-    const attribution=[value.author,value.work].filter(Boolean).map(esc).join(' · ');
+    const attribution=[value.author,value.work,value.translator?'translated by '+value.translator:''].filter(Boolean).map(esc).join(' · ');
     return '<section class="reflection-feature" id="reflection" aria-labelledby="reflection-heading">'+
       '<div class="feature-kicker" id="reflection-heading">Something to Sit With · A daily reflection</div>'+
       '<div class="reflection-content"><blockquote>“'+esc(value.passage)+'”</blockquote>'+
@@ -30,10 +31,10 @@
   function renderRoute(edition,esc){
     const ids=new Set((edition.sections||[]).map(s=>s.id));
     const parts=['<span class="route-label">Today’s paper</span>','<a href="#front-page">Know</a>'];
-    if(edition.daily_wonder && ids.has('front-page'))parts.push('<a href="#daily-wonder">Discover</a>');
+    if(edition.daily_wonder)parts.push('<a href="#daily-wonder">Discover</a>');
     if(ids.has('ideas'))parts.push('<a href="#ideas">Understand</a>');
-    if(edition.reflection && ids.has('ideas'))parts.push('<a href="#reflection">Reflect</a>');
-    parts.push('<a href="#long-reads">Read deeper</a>');
+    if(edition.reflection)parts.push('<a href="#reflection">Reflect</a>');
+    if((edition.worth_your_time||[]).length)parts.push('<a href="#long-reads">Read deeper</a>');
     return '<nav class="edition-route" aria-label="Sections of this edition">'+parts.join('')+'</nav>';
   }
   global.MorningEditionFeatures=Object.freeze({renderWonder,renderReflection,renderRoute});
